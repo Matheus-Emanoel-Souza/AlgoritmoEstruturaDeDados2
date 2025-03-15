@@ -15,7 +15,10 @@ public class leitura {
 	          
 	        //Array que vão separar as inf. dos alunos.
 	        String[] NomesDosAlunos = new String[linhas];
-    		Float[]	NotasDosAlunos = new Float[linhas];
+	        String[] Curso = new String[linhas];
+	        String[] Disciplina = new String[linhas];
+    		Float[]	Nota1 = new Float[linhas];
+    		Float[]	Nota2 = new Float[linhas];
     		
     		
     		int contador = 0;
@@ -27,7 +30,10 @@ public class leitura {
 	            	String[] partes = linha.split(";");
 	            	if(partes.length == 2) {
 	            		NomesDosAlunos[contador] = partes[0].trim();
-	            		NotasDosAlunos[contador] = Float.parseFloat(partes[1].trim());	            	
+	            		Curso[contador] = partes[1].trim();
+	            		Disciplina[contador] = partes[2].trim();
+	            		Nota1[contador] = Float.parseFloat(partes[3].trim());
+	            		Nota2[contador] = Float.parseFloat(partes[4].trim());	            		
 	            	}
 	            	else{
 	            	System.out.println("Algo no arquivo deu errado.");
