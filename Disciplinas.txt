@@ -1,0 +1,40 @@
+Álgebra Linear
+Cálculo Diferencial e Integral
+Física Geral
+Física Experimental
+Estruturas de Dados
+Programação Orientada a Objetos
+Sistemas Operacionais
+Redes de Computadores
+Banco de Dados
+Análise de Circuitos Elétricos
+Sistemas Digitais
+Teoria de Controle
+Eletrônica Analógica
+Eletrônica Digital
+Comunicação de Dados
+Inteligência Artificial
+Arquitetura de Computadores
+Engenharia de Software
+Engenharia de Requisitos
+Metodologia de Projetos
+Processamento de Sinais
+Máquinas Elétricas
+Sistemas de Controle Digital
+Redes de Sensores
+Segurança da Informação
+Fundamentos de Redes de Computadores
+Cibersegurança
+Estruturas e Materiais
+Termodinâmica
+Dinâmica dos Fluidos
+Mecânica dos Sólidos
+Análise e Projeto de Algoritmos
+Programação de Baixo Nível
+Física Moderna
+Instrumentação e Medidas
+Eletrônica de Potência
+Projetos de Sistemas Elétricos
+Tecnologia de Materiais
+Introdução à Inteligência Computacional
+Design de Circuitos Digitais
