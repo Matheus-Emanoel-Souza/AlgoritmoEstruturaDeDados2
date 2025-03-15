@@ -51,7 +51,7 @@ public class leitura {
 	        }
 	        //teste para ver se array está funcionando.
 	        for(int i = 0; i<contador ;i++) {
-            	System.out.println(NomesDosAlunos[i]);	        	
+            	System.out.println(NomesDosAlunos[i]+" "+Curso[i]+" "+Disciplina[i]+" "+Nota1[i]+" "+Nota2[i]);	        	
             }
 	 }
 }
