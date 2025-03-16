@@ -1,40 +1,40 @@
-Álgebra Linear
-Cálculo Diferencial e Integral
-Física Geral
-Física Experimental
-Estruturas de Dados
-Programação Orientada a Objetos
-Sistemas Operacionais
-Redes de Computadores
-Banco de Dados
-Análise de Circuitos Elétricos
-Sistemas Digitais
-Teoria de Controle
-Eletrônica Analógica
-Eletrônica Digital
-Comunicação de Dados
-Inteligência Artificial
-Arquitetura de Computadores
-Engenharia de Software
-Engenharia de Requisitos
-Metodologia de Projetos
-Processamento de Sinais
-Máquinas Elétricas
-Sistemas de Controle Digital
-Redes de Sensores
-Segurança da Informação
-Fundamentos de Redes de Computadores
-Cibersegurança
-Estruturas e Materiais
-Termodinâmica
-Dinâmica dos Fluidos
-Mecânica dos Sólidos
-Análise e Projeto de Algoritmos
-Programação de Baixo Nível
-Física Moderna
-Instrumentação e Medidas
-Eletrônica de Potência
-Projetos de Sistemas Elétricos
-Tecnologia de Materiais
-Introdução à Inteligência Computacional
-Design de Circuitos Digitais
+MAT101;Álgebra Linear;5.0
+MAT102;Cálculo Diferencial e Integral;5.0
+FIS101;Física Geral;5.0
+FIS102;Física Experimental;5.0
+COMP201;Estruturas de Dados;6.0
+COMP202;Programação Orientada a Objetos;6.0
+COMP203;Sistemas Operacionais;6.0
+COMP204;Redes de Computadores;6.0
+COMP205;Banco de Dados;6.0
+ELEC301;Análise de Circuitos Elétricos;5.5
+ELEC302;Sistemas Digitais;5.5
+ELEC303;Teoria de Controle;5.5
+ELEC304;Eletrônica Analógica;5.5
+ELEC305;Eletrônica Digital;5.5
+COMP206;Comunicação de Dados;6.0
+COMP207;Inteligência Artificial;7.0
+COMP208;Arquitetura de Computadores;6.0
+SOFT401;Engenharia de Software;6.0
+SOFT402;Engenharia de Requisitos;6.0
+PROJ501;Metodologia de Projetos;5.5
+ELEC306;Processamento de Sinais;5.5
+ELEC307;Máquinas Elétricas;5.5
+ELEC308;Sistemas de Controle Digital;5.5
+COMP209;Redes de Sensores;6.0
+SEC601;Segurança da Informação;7.0
+SEC602;Fundamentos de Redes de Computadores;6.0
+SEC603;Cibersegurança;7.0
+ENG701;Estruturas e Materiais;5.0
+ENG702;Termodinâmica;5.0
+ENG703;Dinâmica dos Fluidos;5.0
+ENG704;Mecânica dos Sólidos;5.0
+COMP210;Análise e Projeto de Algoritmos;6.0
+COMP211;Programação de Baixo Nível;6.0
+FIS103;Física Moderna;5.0
+FIS104;Instrumentação e Medidas;5.0
+ELEC309;Eletrônica de Potência;5.5
+ELEC310;Projetos de Sistemas Elétricos;5.5
+MAT103;Tecnologia de Materiais;5.0
+COMP212;Introdução à Inteligência Computacional;6.0
+ELEC311;Design de Circuitos Digitais;5.5
