@@ -12,13 +12,11 @@ public class Auxiliar {
 	int Contador =0;
 	Curso[] ArrayCurso;
 	Aluno[] ArrayAluno;
-	
-	
-	
-	
+	Disciplina[] ArrayDisciplina;
 	
 	public void MontaCursos() throws IOException {
 		Qtdlinhas=0;
+		Contador=0;
 		//Rodar o txt para contar e criar a lista. Jeito feio de fazer.
 		try (BufferedReader br = new BufferedReader(new FileReader(Caminho2))) {
 	        while ((linhas = br.readLine()) != null) {
@@ -41,9 +39,10 @@ public class Auxiliar {
                 Contador++;
 	        }}}}
 
-	@SuppressWarnings({ "unused", "unused" })
-	public void MotaAluno() throws IOException {
+	@SuppressWarnings({ "unused" })
+	public void MontaAluno() throws IOException {
 		Qtdlinhas=0;
+		Contador=0;
 		//Rodar o txt para contar e criar a lista. Jeito feio de fazer.
 		try (BufferedReader br = new BufferedReader(new FileReader(Caminho1))) {
 	        while ((linhas = br.readLine()) != null) {
@@ -66,21 +65,53 @@ public class Auxiliar {
                 Contador++;
 	        }}}}
 			
+	public void MontaDisciplina() throws FileNotFoundException, IOException {
+		Qtdlinhas=0;
+		Contador=0;
+		//Rodar o txt para contar e criar a lista. Jeito feio de fazer.
+		try (BufferedReader br = new BufferedReader(new FileReader(Caminho3))) {
+	        while ((linhas = br.readLine()) != null) {
+	        	Qtdlinhas++;	        	
+	        }
+	    } catch (FileNotFoundException e) {System.out.println("Arquivo não encontrado!");
+	    
+	    ArrayDisciplina = new Disciplina[Qtdlinhas];
+	    
+	    try (BufferedReader br = new BufferedReader(new FileReader(Caminho3))) {
+	        while ((linhas = br.readLine()) != null) {
+	        	String[] partes = linhas.split(";");	        	
+	        	int CodigoDisciplina = Integer.parseInt(partes[0]);
+	        	String NomeDisciplina = partes[1];
+    			Float NotaMinima = Float.parseFloat(partes[2]);
+    			
+                Disciplina NovaDisciplina= new Disciplina(CodigoDisciplina,NomeDisciplina,NotaMinima);
+                
+                ArrayDisciplina[Contador]=NovaDisciplina;
+                Contador++;
+	        }}}
 		
-	
-		
-	
-	
+	}
+			
 	public void BuscarAluno() {
 		System.out.println("Digite o nome ou a matricula do aluno:");
 		Scanner scanner = new Scanner(System.in);
 		String busca = scanner.nextLine();
 		scanner.close();
-		
-		
+		for(int i=0; i<ArrayAluno.length;i++) {
+			if(busca == ArrayAluno[i].getNome()||Integer.parseInt(busca) ==ArrayAluno[i].getMatriculaAluno()) {
+			System.out.println("Aluno encontrado!!");
+			System.out.println(ArrayAluno[i].getNome());
+			System.out.println(ArrayAluno[i].getMatriculaAluno());
+			System.out.println("Pressione qualquer tecla para voltar ao Menu Inicial!!");
+			scanner.nextLine();
+			break;
+			}else
+			{
+				System.out.println("Aluno não encontrado");
+				System.out.println("Tente novamente!");
+				BuscarAluno();
+			}
+			}
+		}
 	}
 	
-	public void lerarquivos() {
-		
-	}
-}

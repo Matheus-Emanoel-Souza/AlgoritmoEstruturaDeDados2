@@ -6,6 +6,9 @@ public class Curso {
 	private float Nota1;
 	private float Nota2;
 	
+	public Curso() { 
+	}
+	
 	public int getMatricCurso() {
 		return MatricCurso;
 	}
