@@ -1,148 +1,155 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) throws IOException{
-		
-		int posicao;
-		//scanner para ler o que digitar no console
-	
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Bem Vindo!");
-		System.out.println("Digite 0 para sair");
-		System.out.println("Digite 1 para Bucar");
-		posicao = scanner.nextInt();
-		scanner.close();
-		
-		Auxiliar ComeçoDeCodigo = new Auxiliar();
-		ComeçoDeCodigo.MontaCursos();
-		ComeçoDeCodigo.MontaAluno();
-		ComeçoDeCodigo.MontaDisciplina();
-		Auxiliar CodAuxiliar = new Auxiliar();
-		
-		
-		switch(posicao){
-	case 1:BuscarAluno();			
-			break;
-		case 2:
-			System.exit(0);			
-		}
-		
-	}
-	
-	String Caminho1 = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Alunos.txt";
-	String Caminho2 = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Curso.txt";
-	String Caminho3 = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Disciplina.txt";
-	int Qtdlinhas;
-	String linhas;
-	int Contador =0;
-	Curso[] ArrayCurso;
-	Aluno[] ArrayAluno;
-	Disciplina[] ArrayDisciplina;
+    private static final String CAMINHO_ALUNOS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Alunos.txt";
+    private static final String CAMINHO_CURSOS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Curso.txt";
+    private static final String CAMINHO_DISCIPLINAS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Disciplina.txt";
 
-public void MontaCursos() throws IOException {
-	Qtdlinhas=0;
-	Contador=0;
-	//Rodar o txt para contar e criar a lista. Jeito feio de fazer.
-	try (BufferedReader br = new BufferedReader(new FileReader(Caminho2))) {
-        while ((linhas = br.readLine()) != null) {
-        	Qtdlinhas++;	        	
+    private static Curso[] arrayCurso;
+    private static Aluno[] arrayAluno;
+    private static Disciplina[] arrayDisciplina;
+
+    public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        carregarDados();
+
+        while (true) {
+            System.out.println("\nBem-vindo!");
+            System.out.println("1 - Buscar Aluno");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha uma opção: ");
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida. Tente novamente.");
+                scanner.next(); // Limpa entrada inválida
+                continue;
+            }
+
+            int escolha = scanner.nextInt();
+            scanner.nextLine(); // Consome quebra de linha
+
+            switch (escolha) {
+                case 1:
+                	Opcoes(scanner);
+                    buscarAluno(scanner);
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Opção inválida, tente novamente.");
+            }
         }
-    } catch (FileNotFoundException e) {System.out.println("Arquivo não encontrado!");
-    
-     ArrayCurso = new Curso[Qtdlinhas];
-    
-    try (BufferedReader br = new BufferedReader(new FileReader(Caminho2))) {
-        while ((linhas = br.readLine()) != null) {
-        	String[] partes = linhas.split(";");
-        	int matricula = Integer.parseInt(partes[0]);
+    }
+
+    private static void carregarDados() throws IOException {
+        arrayCurso = lerCursos(CAMINHO_CURSOS);
+        arrayAluno = lerAlunos(CAMINHO_ALUNOS);
+        arrayDisciplina = lerDisciplinas(CAMINHO_DISCIPLINAS);
+    }
+    private static void Opcoes(Scanner scanner) {	
+    System.out.println("Como deseja buscar ?");
+    System.out.println("1 - Por Aluno.");
+    System.out.println("2 - Por Disciplina.");
+    String Resposta = scanner.nextLine();
+    if(Integer.parseInt(Resposta)== 1) {
+    	System.out.println("Buscando Pelo Aluno!");
+    	buscarAluno(scanner);
+    }
+    if(Integer.parseInt(Resposta)==2) {
+    	System.out.println("Buscando por disciplina!");
+    	buscarDisciplina(scanner);
+    }
+    }
+    private static Curso[] lerCursos(String caminho) throws IOException {
+        String[] linhas = lerArquivo(caminho);
+        Curso[] cursos = new Curso[linhas.length];
+
+        for (int i = 0; i < linhas.length; i++) {
+            String[] partes = linhas[i].split(";");
+            int matricula = Integer.parseInt(partes[0]);
             int codDisciplina = Integer.parseInt(partes[1]);
             float nota1 = Float.parseFloat(partes[2]);
             float nota2 = Float.parseFloat(partes[3]);
-            
-            Curso novoCurso = new Curso(matricula,codDisciplina,nota1,nota2);
-            ArrayCurso[Contador]=novoCurso;
-            Contador++;
-        }}}}
 
-@SuppressWarnings({ "unused" })
-public void MontaAluno() throws IOException {
-	Qtdlinhas=0;
-	Contador=0;
-	//Rodar o txt para contar e criar a lista. Jeito feio de fazer.
-	try (BufferedReader br = new BufferedReader(new FileReader(Caminho1))) {
-        while ((linhas = br.readLine()) != null) {
-        	Qtdlinhas++;	        	
+            cursos[i] = new Curso(matricula, codDisciplina, nota1, nota2);
         }
-    } catch (FileNotFoundException e) {System.out.println("Arquivo não encontrado!");
-    
-    ArrayAluno = new Aluno[Qtdlinhas];
-    
-    try (BufferedReader br = new BufferedReader(new FileReader(Caminho1))) {
-        while ((linhas = br.readLine()) != null) {
-        	String[] partes = linhas.split(";");	        	
-        	int Matricula = Integer.parseInt(partes[0]);
-        	String Nome = partes[1];
-			int idade = Integer.parseInt(partes[2]);
-			
-            Aluno NovoAluno= new Aluno(Matricula,Nome,idade);
-            
-            ArrayAluno[Contador]=NovoAluno;
-            Contador++;
-        }}}}
-		
-public void MontaDisciplina() throws FileNotFoundException, IOException {
-	Qtdlinhas=0;
-	Contador=0;
-	//Rodar o txt para contar e criar a lista. Jeito feio de fazer.
-	try (BufferedReader br = new BufferedReader(new FileReader(Caminho3))) {
-        while ((linhas = br.readLine()) != null) {
-        	Qtdlinhas++;	        	
+        return cursos;
+    }
+
+    private static Aluno[] lerAlunos(String caminho) throws IOException {
+        String[] linhas = lerArquivo(caminho);
+        Aluno[] alunos = new Aluno[linhas.length];
+
+        for (int i = 0; i < linhas.length; i++) {
+            String[] partes = linhas[i].split(";");
+            int matricula = Integer.parseInt(partes[0]);
+            String nome = partes[1];
+            int idade = Integer.parseInt(partes[2]);
+
+            alunos[i] = new Aluno(matricula, nome, idade);
         }
-    } catch (FileNotFoundException e) {System.out.println("Arquivo não encontrado!");
-    
-    ArrayDisciplina = new Disciplina[Qtdlinhas];
-    
-    try (BufferedReader br = new BufferedReader(new FileReader(Caminho3))) {
-        while ((linhas = br.readLine()) != null) {
-        	String[] partes = linhas.split(";");	        	
-        	int CodigoDisciplina = Integer.parseInt(partes[0]);
-        	String NomeDisciplina = partes[1];
-			Float NotaMinima = Float.parseFloat(partes[2]);
-			
-            Disciplina NovaDisciplina= new Disciplina(CodigoDisciplina,NomeDisciplina,NotaMinima);
-            
-            ArrayDisciplina[Contador]=NovaDisciplina;
-            Contador++;
-        }}}
-	
-}
-		
-public void BuscarAluno() {
-	System.out.println("Digite o nome ou a matricula do aluno:");
-	Scanner scanner = new Scanner(System.in);
-	String busca = scanner.nextLine();
-	scanner.close();
-	for(int i=0; i<ArrayAluno.length;i++) {
-		if(busca == ArrayAluno[i].getNome()||Integer.parseInt(busca) ==ArrayAluno[i].getMatriculaAluno()) {
-		System.out.println("Aluno encontrado!!");
-		System.out.println(ArrayAluno[i].getNome());
-		System.out.println(ArrayAluno[i].getMatriculaAluno());
-		System.out.println("Pressione qualquer tecla para voltar ao Menu Inicial!!");
-		scanner.nextLine();
-		break;
-		}else
-		{
-			System.out.println("Aluno não encontrado");
-			System.out.println("Tente novamente!");
-			BuscarAluno();
-		}
-		}
-	}
-}
+        return alunos;
+    }
 
-	
+    private static Disciplina[] lerDisciplinas(String caminho) throws IOException {
+        String[] linhas = lerArquivo(caminho);
+        Disciplina[] disciplinas = new Disciplina[linhas.length];
 
+        for (int i = 0; i < linhas.length; i++) {
+            String[] partes = linhas[i].split(";");
+            int codigo = Integer.parseInt(partes[0]);
+            String nome = partes[1];
+            float notaMinima = Float.parseFloat(partes[2]);
+
+            disciplinas[i] = new Disciplina(codigo, nome, notaMinima);
+        }
+        return disciplinas;
+    }
+
+    private static String[] lerArquivo(String caminho) throws IOException {
+        File arquivo = new File(caminho);
+        if (!arquivo.exists()) {
+            System.out.println("Arquivo não encontrado: " + caminho);
+            return new String[0];
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(caminho))) {
+            return br.lines().toArray(String[]::new);
+        }
+    }
+
+    private static void buscarAluno(Scanner scanner) {
+
+        System.out.println("Digite o nome ou a matrícula do aluno:");
+        String busca = scanner.nextLine();
+
+        for (Aluno aluno : arrayAluno) {
+            if (busca.equalsIgnoreCase(aluno.getNome()) || busca.equals(String.valueOf(aluno.getMatriculaAluno()))) {
+                System.out.println("Aluno encontrado:");
+                System.out.println("Nome: " + aluno.getNome());
+                System.out.println("Matrícula: " + aluno.getMatriculaAluno());
+                System.out.println("Pressione Enter para voltar ao menu...");
+                scanner.nextLine();
+                return;
+            }
+        }
+
+        System.out.println("Aluno não encontrado.");
+    }
+    private static void buscarDisciplina(Scanner scanner) {
+    	System.out.println("Digite o código da disciplina ou o nome dela!");
+    	String busca = scanner.nextLine();
+    	
+    	for(Disciplina disciplina : arrayDisciplina) {
+    		if(busca.equalsIgnoreCase(disciplina.getNomeDisciplina())||busca.equals(String.valueOf(disciplina.getCodDisciplina()))) {
+    			System.out.println("Disciplina encontrada:");
+    			System.out.println("Código: " + disciplina.getCodDisciplina());
+    			System.out.println("Nome: " + disciplina.getNomeDisciplina());
+    			System.out.println("Nota Mínima: " + disciplina.getNotaMinima());
+    		}
+    	}
+    }
+}
