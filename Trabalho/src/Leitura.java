@@ -1,61 +1,60 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 
-public class leitura {
-	 public static void main(String[] args) throws IOException {
-		 
-		 int linhas = 80;
-		 //estou colocando um tamanho fixo para não precisar repetir o processo de leitura do arquivo.
-		 //Há alguma forma de saber o tamanho do arquivo sem precisar percorre-lo ?
-		 //Scanner só é util se for informar pasta pelo console ?
-		 
-	        //Scanner scanner = new Scanner(System.in);
-	       // System.out.print("Digite o caminho do arquivo: ");
-	        //String caminhoArquivo = scanner.nextLine();
-	       String caminhoArquivo = "C:\\Users\\mathe\\Desktop\\Trabalho.txt";
-	       
-	          
-	        //Array que vão separar as inf. dos alunos.
-	        String[] NomesDosAlunos = new String[linhas];
-	        String[] Curso = new String[linhas];
-	        String[] Disciplina = new String[linhas];
-    		Float[]	Nota1 = new Float[linhas];
-    		Float[]	Nota2 = new Float[linhas];
-    		
-    		
-    		int contador = 0;
-	        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
-	            String linha;
-	            while ((linha = br.readLine()) != null) {
-	                //System.out.println(linha);
-	            	//Array que vai dividir as linhas.
-	            	String[] partes = linha.split(";");
-	            	if(partes.length == 5) {
-	            		NomesDosAlunos[contador] = partes[0].trim();
-	            		Curso[contador] = partes[1].trim();
-	            		Disciplina[contador] = partes[2].trim();
-	            		Nota1[contador] = Float.parseFloat(partes[3].trim());
-	            		Nota2[contador] = Float.parseFloat(partes[4].trim());	            		
-	            	}
-	            	else{
-	            	System.out.println("Algo no arquivo deu errado.");
-	            	}
-	            	contador++;
-	            	//System.out.println(contador +"a "+ "Aluno registrado!");
-	            	}	            	            		            		            	
-	            }
-	        catch (NumberFormatException e) {
-            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
-	        }
-	        //teste para ver se array está funcionando.
-	        for(int i = 0; i<contador ;i++) {
-            	System.out.println(NomesDosAlunos[i]+" "+Curso[i]+" "+Disciplina[i]+" "+Nota1[i]+" "+Nota2[i]);	        	
+public class Leitura { // Corrigido nome da classe para iniciar com maiúscula (boa prática)
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        int linhas = 0;
+        String caminhoArquivo = "C:\\Users\\mathe\\Desktop\\Trabalho.txt";
+        String linha;
+
+        // Contar quantas linhas tem no arquivo
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+            while ((linha = br.readLine()) != null) {
+                linhas++;
             }
-	 }
-}
+        }
 
-//1a parte ->Ler arquivos.
-//escrever -> C:\Users\mathe\Desktop\Trabalho.txt
-//2a parte ->alocar informações em vetores agora.
+        // Arrays para armazenar os dados dos alunos
+        String[] nomesDosAlunos = new String[linhas];
+        String[] curso = new String[linhas];
+        String[] disciplina = new String[linhas];
+        Float[] nota1 = new Float[linhas];
+        Float[] nota2 = new Float[linhas];
+
+        int contador = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+            while ((linha = br.readLine()) != null) {
+                String[] partes = linha.split(";");
+
+                if (partes.length == 5) { // Verifica se há exatamente 5 elementos
+                    try {
+                        nomesDosAlunos[contador] = partes[0].trim();
+                        curso[contador] = partes[1].trim();
+                        disciplina[contador] = partes[2].trim();
+                        nota1[contador] = Float.parseFloat(partes[3].trim());
+                        nota2[contador] = Float.parseFloat(partes[4].trim());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Erro ao converter notas na linha " + (contador + 1) + ": " + linha);
+                    }
+                } else {
+                    System.out.println("Linha " + (contador + 1) + " com formato incorreto: " + linha);
+                }
+                contador++;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+        }
+
+        // Exemplo de impressão para testar os valores lidos
+        System.out.println("Dados lidos do arquivo:");
+        for (int i = 0; i < linhas; i++) {
+            if (nomesDosAlunos[i] != null) { // Evita imprimir valores nulos
+                System.out.println("Aluno: " + nomesDosAlunos[i] + ", Curso: " + curso[i] + 
+                                   ", Disciplina: " + disciplina[i] + ", Nota 1: " + nota1[i] + 
+                                   ", Nota 2: " + nota2[i]);
+            }
+        }
+    }
+}
