@@ -2,9 +2,10 @@
 public class Curso {
 	
 	private int MatricCurso;
-	private int CodDisciplina;
+	private int CodCurso;
 	private float Nota1;
 	private float Nota2;
+	
 	public int getMatricCurso() {
 		return MatricCurso;
 	}
@@ -12,10 +13,10 @@ public class Curso {
 		MatricCurso = matricCurso;
 	}
 	public int getCodDisciplina() {
-		return CodDisciplina;
+		return CodCurso;
 	}
 	public void setCodDisciplina(int codDisciplina) {
-		CodDisciplina = codDisciplina;
+		CodCurso = codDisciplina;
 	}
 	public float getNota1() {
 		return Nota1;
@@ -29,4 +30,12 @@ public class Curso {
 	public void setNota2(float nota2) {
 		Nota2 = nota2;
 	}
-}
+	
+	Curso(int matriCurso, int coddisciplina, float nota1, float nota2) {
+		setMatricCurso(matriCurso);
+		setCodDisciplina(coddisciplina);
+		setNota1(nota1);
+		setNota2(nota2);
+	}
+	}
+

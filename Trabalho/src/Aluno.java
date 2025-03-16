@@ -1,63 +1,48 @@
-
-public class Aluno {
-	
-	private int Matricula;
+public class Aluno extends Curso{
+	//Variáveis primárias
+	private int MatriculaAluno;
 	private String Nome;
-	private String Disciplina;
-	private String Curso;
+	private int Idade;
 	
-	public String getDisciplina() {
-		return Disciplina;
+	public Aluno(int matriCurso, int coddisciplina, float nota1, float nota2) {
+		super(matriCurso, coddisciplina, nota1, nota2);
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setDisciplina(String disciplina) {
-		Disciplina = disciplina;
+
+	public Aluno(int matricula, String nome2, int idade2) {
+		MatriculaAluno=matricula;
+		Nome=nome2;
+		Idade=idade2;
 	}
 
-	public String getCurso() {
-		return Curso;
+	public int getMatriculaAluno() {
+		return MatriculaAluno;
 	}
 
-	public void setCurso(String curso) {
-		Curso = curso;
+
+	public void setMatriculaAluno(int matriculaAluno) {
+		MatriculaAluno = matriculaAluno;
 	}
 
-	public float getNota1() {
-		return Nota1;
+
+	public int getIdade() {
+		return Idade;
 	}
 
-	public void setNota1(float nota1) {
-		Nota1 = nota1;
+
+	public void setIdade(int Idade) {
+		this.Idade = Idade;
 	}
 
-	public float getNota2() {
-		return Nota2;
-	}
 
-	public void setNota2(float nota2) {
-		Nota2 = nota2;
-	}
-
-	private float Nota1;
-	private float Nota2;
-	
-	
 	public String getNome() {
 		return Nome;
 	}
 
-	public void setNome(String nome) {
-		Nome = nome;
-	}
-
-	public int getMatricula() {
-		return Matricula;
-	}
-
-	public void setMatricula(int matricula) {
-		Matricula = matricula;
+	public void setNome(String Nome) {
+		this.Nome = Nome;
 	}
 
 	
-
 }
