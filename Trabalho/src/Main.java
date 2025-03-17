@@ -16,7 +16,7 @@ public class Main {
 
         while (true) {
             System.out.println("\nBem-vindo!");
-            System.out.println("1 - Buscar Aluno");
+            System.out.println("1 - Buscar Resultados");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -54,7 +54,7 @@ public class Main {
     System.out.println("1 - Por Aluno.");
     System.out.println("2 - Por Disciplina.");
     String Resposta = scanner.nextLine();
-    if(Integer.parseInt(Resposta)== 1) {
+    if(Integer.parseInt(Resposta)==1) {
     	System.out.println("Buscando Pelo Aluno!");
     	buscarAluno(scanner);
     }
@@ -62,6 +62,10 @@ public class Main {
     	System.out.println("Buscando por disciplina!");
     	buscarDisciplina(scanner);
     }
+    else{
+    	System.out.println("Resposta Inválida!!!!!");
+    	Opcoes(scanner);
+    	}
     }
     private static Curso[] lerCursos(String caminho) throws IOException {
         String[] linhas = lerArquivo(caminho);
@@ -121,19 +125,20 @@ public class Main {
         }
     }
 
-    private static void buscarAluno(Scanner scanner) {
-
+    private static void buscarAluno(Scanner scanner){
         System.out.println("Digite o nome ou a matrícula do aluno:");
         String busca = scanner.nextLine();
 
         for (Aluno aluno : arrayAluno) {
+    		
             if (busca.equalsIgnoreCase(aluno.getNome()) || busca.equals(String.valueOf(aluno.getMatriculaAluno()))) {
                 System.out.println("Aluno encontrado:");
                 System.out.println("Nome: " + aluno.getNome());
                 System.out.println("Matrícula: " + aluno.getMatriculaAluno());
                 System.out.println("Pressione Enter para voltar ao menu...");
                 scanner.nextLine();
-                return;
+                //return; -> Voltar ao menu, mas está voltando pra buscarPorAluno.
+
             }
         }
 
@@ -145,11 +150,11 @@ public class Main {
     	
     	for(Disciplina disciplina : arrayDisciplina) {
     		if(busca.equalsIgnoreCase(disciplina.getNomeDisciplina())||busca.equals(String.valueOf(disciplina.getCodDisciplina()))) {
-    			System.out.println("Disciplina encontrada:");
     			System.out.println("Código: " + disciplina.getCodDisciplina());
     			System.out.println("Nome: " + disciplina.getNomeDisciplina());
     			System.out.println("Nota Mínima: " + disciplina.getNotaMinima());
     		}
+    		else {System.out.println("Disciplina não encontrada!");}
     	}
     }
 }
