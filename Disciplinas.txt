@@ -1,3 +1,0 @@
-201;Estruturas de Dados;6.0  
-304;Eletrônica Analógica;5.5  
-601;Segurança da Informação;7.0  

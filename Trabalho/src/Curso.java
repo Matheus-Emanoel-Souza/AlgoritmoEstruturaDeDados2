@@ -5,7 +5,11 @@ public class Curso {
 	private float Nota1;
 	private float Nota2;
 	
-	
+	public float calculaMedia() {
+		Float media = (float) 0;
+		media = (Nota1+Nota2)/2;
+		return media;
+	}
 	public int getMatricCurso() {
 		return MatricCurso;
 	}

@@ -9,10 +9,6 @@ public class Sistema {
 	private static final String CAMINHO_CURSOS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Trabalho\\Cursos.txt";
 	private static final String CAMINHO_DISCIPLINAS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Trabalho\\Disciplinas.txt";
 
-
-
-
-
     private Aluno[] arrayAluno;
     private Disciplina[] arrayDisciplina;
     private Curso[] arrayCurso;
@@ -44,4 +40,15 @@ public class Sistema {
             buscar(); // Recurssão caso resposta inválida
         }
     }
+    public static void situacao(Curso curso, Disciplina disciplina) {
+        float notaMinima = disciplina.getNotaMinima();
+        float media = (curso.getNota1() + curso.getNota2()) / 2;
+
+        if (media >= notaMinima) {
+            System.out.print("Aprovado");
+        } else {
+            System.out.print("Reprovado");
+        }
+    }
+
 }
