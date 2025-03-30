@@ -1,8 +1,11 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class LeitorDeArquivos {
 
-    public static Curso[] lerCursos(String caminho, Curso[] cursos,Disciplina[] arrayDisciplina, Aluno[] arrayAluno) throws IOException {
+    public static Curso[] lerCursos(String caminho, Curso[] cursos, Disciplina[] arrayDisciplina, Aluno[] arrayAluno) throws IOException {
         String[] linhas = lerArquivo(caminho);
         cursos = new Curso[linhas.length];
 

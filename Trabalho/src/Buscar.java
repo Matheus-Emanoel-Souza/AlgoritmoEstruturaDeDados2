@@ -31,7 +31,7 @@ public class Buscar {
 	            // Se não encontrou cursos, não adiciona nada no conteúdo
 
 	            // Salvar as informações no arquivo com a matrícula do aluno
-	            Util.salvarEmArquivo(conteudo, "resultado_busca_" + aluno.getMatriculaAluno() + ".txt");
+	            Util.salvarEmArquivo(conteudo);
 	            return;
 	        }
 	    }
@@ -39,41 +39,45 @@ public class Buscar {
 	    System.out.println("Aluno não encontrado.");
 	}
 
-
-	 public static void buscarDisciplina(Scanner scanner, Disciplina[] arrayDisciplina, Aluno[] arrayAluno,Curso[] arrayCurso) {
+	 public static void buscarDisciplina(Scanner scanner, Disciplina[] arrayDisciplina, Aluno[] arrayAluno, Curso[] arrayCurso) {
 		    System.out.println("Digite o código ou o nome da disciplina:");
 		    String busca = scanner.nextLine();
-		    String conteudo = "";
 
 		    for (Disciplina disciplina : arrayDisciplina) {
 		        if (busca.equalsIgnoreCase(disciplina.getNomeDisciplina()) || busca.equals(String.valueOf(disciplina.getCodDisciplina()))) {
-		            Exibir.exibirInformacoesDisciplina(disciplina);  // Classe Exibir para exibir os detalhes
-		            conteudo = "Disciplina encontrada:\nCódigo: " + disciplina.getCodDisciplina() + 
-		                       "\nNome: " + disciplina.getNomeDisciplina() + 
-		                       "\nNota Mínima: " + disciplina.getNotaMinima() + "\n";
+		            Exibir.exibirInformacoesDisciplina(disciplina);
+		            String conteudo1 = "Disciplina encontrada:\nCódigo: " + disciplina.getCodDisciplina() + 
+		                               "\nNome: " + disciplina.getNomeDisciplina() + 
+		                               "\nNota Mínima: " + disciplina.getNotaMinima() + "\n\n";
 
-		            // Percorrer o array de cursos e buscar os alunos matriculados na disciplina
+		            boolean encontrouAlunos = false;
+
 		            for (Curso curso : arrayCurso) {
 		                if (curso.getCodDisciplina() == disciplina.getCodDisciplina()) {
-		                    // Aqui, você deve procurar o aluno pelo código do curso
+		                    System.out.println("Curso encontrado para a disciplina: " + disciplina.getNomeDisciplina());
+
 		                    for (Aluno aluno : arrayAluno) {
 		                        if (aluno.getMatriculaAluno() == curso.getMatricCurso()) {
-		                            // Exibir o aluno e as notas associadas a ele
-		                            conteudo += "Aluno: " + aluno.getNome() + 
-		                                        "\nMatrícula: " + aluno.getMatriculaAluno() + 
-		                                        "\nNota 1: " + curso.getNota1() + 
-		                                        "\nNota 2: " + curso.getNota2() + "\n";
+		                            encontrouAlunos = true;
+		                            conteudo1 += "Aluno: " + aluno.getNome() + 
+		                                         "\nMatrícula: " + aluno.getMatriculaAluno() + 
+		                                         "\nNota 1: " + curso.getNota1() + 
+		                                         "\nNota 2: " + curso.getNota2() + "\n\n";
+		                            
+		                            System.out.println("Aluno encontrado: " + aluno.getNome() + " | Matrícula: " + aluno.getMatriculaAluno());
 		                        }
 		                    }
 		                }
 		            }
 
-		            // Salvar as informações no arquivo de resultados
-		            Util.salvarEmArquivo(conteudo, "resultado_busca_disciplina.txt");
+		            if (!encontrouAlunos) {
+		                conteudo1 += "Nenhum aluno matriculado nesta disciplina.\n";
+		                System.out.println("Nenhum aluno encontrado para esta disciplina.");
+		            }
+
+		            Util.salvarEmArquivo(conteudo1);
 		            return;
 		        }
 		    }
 		    System.out.println("Disciplina não encontrada.");
-		}
-
-}
+		}}

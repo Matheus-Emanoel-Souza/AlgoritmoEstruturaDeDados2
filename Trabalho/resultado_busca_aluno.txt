@@ -1,9 +1,0 @@
-Aluno encontrado:
-Nome: João Silva
-Matrícula: 10001
-Aluno encontrado:
-Nome: João Silva
-Matrícula: 10001
-Aluno encontrado:
-Nome: João Silva
-Matrícula: 10001

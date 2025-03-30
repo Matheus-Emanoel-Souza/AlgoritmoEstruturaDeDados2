@@ -2,9 +2,16 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Sistema {
-    private static final String CAMINHO_ALUNOS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Alunos.txt";
-    private static final String CAMINHO_CURSOS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Curso.txt";
-    private static final String CAMINHO_DISCIPLINAS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Disciplina.txt";
+    //private static final String CAMINHO_ALUNOS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Alunos.txt";
+    //private static final String CAMINHO_CURSOS = "\"C:\\Users\\mathe\\Desktop\\Cursos.txt\"";
+    //private static final String CAMINHO_DISCIPLINAS = "\"C:\\Users\\mathe\\Desktop\\Disciplinas.txt\"";
+	private static final String CAMINHO_ALUNOS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Trabalho\\Alunos.txt";
+	private static final String CAMINHO_CURSOS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Trabalho\\Cursos.txt";
+	private static final String CAMINHO_DISCIPLINAS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Trabalho\\Disciplinas.txt";
+
+
+
+
 
     private Aluno[] arrayAluno;
     private Disciplina[] arrayDisciplina;
