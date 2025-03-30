@@ -1,4 +1,3 @@
-
 public class Curso {
 	
 	private int MatricCurso;
@@ -6,8 +5,6 @@ public class Curso {
 	private float Nota1;
 	private float Nota2;
 	
-	public Curso() { 
-	}
 	
 	public int getMatricCurso() {
 		return MatricCurso;
@@ -39,6 +36,6 @@ public class Curso {
 		setCodDisciplina(coddisciplina);
 		setNota1(nota1);
 		setNota2(nota2);
-	}
-	}
+}
+}
 

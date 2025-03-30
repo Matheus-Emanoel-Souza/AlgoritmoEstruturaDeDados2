@@ -1,48 +1,37 @@
-public class Aluno extends Curso{
-	//Variáveis primárias
-	private int MatriculaAluno;
-	private String Nome;
-	private int Idade;
-	
-	public Aluno(int matriCurso, int coddisciplina, float nota1, float nota2) {
-		super(matriCurso, coddisciplina, nota1, nota2);
-		// TODO Auto-generated constructor stub
-	}
+public class Aluno {
+    private int MatriculaAluno;
+    private String Nome;
+    private int Idade;
 
+    public Aluno(int matricula, String nome, int idade) {
+        this.MatriculaAluno = matricula;
+        this.Nome = nome;
+        this.Idade = idade;
+    }
 
-	public Aluno(int matricula, String nome2, int idade2) {
-		MatriculaAluno=matricula;
-		Nome=nome2;
-		Idade=idade2;
-	}
+    public int getMatriculaAluno() {
+        return MatriculaAluno;
+    }
 
-	public int getMatriculaAluno() {
-		return MatriculaAluno;
-	}
+    public void setMatriculaAluno(int matriculaAluno) {
+        MatriculaAluno = matriculaAluno;
+    }
 
+    public int getIdade() {
+        return Idade;
+    }
 
-	public void setMatriculaAluno(int matriculaAluno) {
-		MatriculaAluno = matriculaAluno;
-	}
+    public void setIdade(int idade) {
+        this.Idade = idade;
+    }
 
+    public String getNome() {
+        return Nome;
+    }
 
-	public int getIdade() {
-		return Idade;
-	}
-
-
-	public void setIdade(int Idade) {
-		this.Idade = Idade;
-	}
-
-
-	public String getNome() {
-		return Nome;
-	}
-
-	public void setNome(String Nome) {
-		this.Nome = Nome;
-	}
-
-	
+    public void setNome(String nome) {
+        this.Nome = nome;
+    }
 }
+
+

@@ -15,7 +15,7 @@ public class Main {
         carregarDados();
 
         while (true) {
-            System.out.println("\nBem-vindo!");
+            System.out.println("\n====Bem-vindo!====");
             System.out.println("1 - Buscar Resultados");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
@@ -44,42 +44,68 @@ public class Main {
     }
 
     private static void carregarDados() throws IOException {
-        arrayCurso = lerCursos(CAMINHO_CURSOS);
+        arrayCurso = lerCursos(CAMINHO_CURSOS,arrayCurso);
         arrayAluno = lerAlunos(CAMINHO_ALUNOS);
         arrayDisciplina = lerDisciplinas(CAMINHO_DISCIPLINAS);
     }
     
     private static void Opcoes() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Como deseja buscar ?");
-        System.out.println("1 - Por Aluno.");
-        System.out.println("2 - Por Disciplina.");
-        String Resposta = scanner.nextLine();
-        
-        if(Integer.parseInt(Resposta) == 1) {
-            System.out.println("Buscando Pelo Aluno!");
-            buscarAluno();
-        } else if(Integer.parseInt(Resposta) == 2) {
-            System.out.println("Buscando por disciplina!");
-            buscarDisciplina();
-        } else {
-            System.out.println("Resposta Inválida!!!!!");
-            Opcoes();
-        }
+        try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Como deseja buscar ?");
+			System.out.println("1 - Por Aluno.");
+			System.out.println("2 - Por Disciplina.");
+			String Resposta = scanner.nextLine();
+			
+			if(Integer.parseInt(Resposta) == 1) {
+			    System.out.println("Buscando Pelo Aluno!");
+			    buscarAluno();
+			} else if(Integer.parseInt(Resposta) == 2) {
+			    System.out.println("Buscando por disciplina!");
+			    buscarDisciplina();
+			} else {
+			    System.out.println("Resposta Inválida!!!!!");
+			    Opcoes();
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
-    private static Curso[] lerCursos(String caminho) throws IOException {
+    
+    private static Curso[] lerCursos(String caminho, Curso[] cursos) throws IOException { 
         String[] linhas = lerArquivo(caminho);
-        Curso[] cursos = new Curso[linhas.length];
+        cursos = new Curso[linhas.length];
 
         for (int i = 0; i < linhas.length; i++) {
             String[] partes = linhas[i].split(";");
-            int matricula = Integer.parseInt(partes[0]);
-            int codDisciplina = Integer.parseInt(partes[1]);
+            String matricula = partes[0];  // Usando String para a matrícula
+            String codDisciplina = partes[1];  // Usando String para o código da disciplina
             float nota1 = Float.parseFloat(partes[2]);
             float nota2 = Float.parseFloat(partes[3]);
 
-            cursos[i] = new Curso(matricula, codDisciplina, nota1, nota2);
+            // Verificando se a matrícula existe no array de alunos
+            boolean matriculaEncontrada = false;
+            for (Aluno aluno : arrayAluno) {
+                if (Integer.toString(aluno.getMatriculaAluno()).equals(matricula)) {
+                    matriculaEncontrada = true;
+                    break;
+                }
+            }
+
+            // Verificando se a disciplina existe no array de disciplinas
+            boolean disciplinaEncontrada = false;
+            for (Disciplina disciplina : arrayDisciplina) {
+                if (Integer.toString(disciplina.getCodDisciplina()).equals(codDisciplina)) {
+                    disciplinaEncontrada = true;
+                    break;
+                }
+            }
+
+            // Se ambas as condições forem verdadeiras, cria o curso
+            if (matriculaEncontrada && disciplinaEncontrada) {
+                cursos[i] = new Curso(Integer.parseInt(matricula), Integer.parseInt(codDisciplina), nota1, nota2);
+            }
         }
         return cursos;
     }
@@ -127,38 +153,39 @@ public class Main {
     }
 
     private static void buscarAluno() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite o nome ou a matrícula do aluno:");
-        String busca = scanner.nextLine();
+        try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Digite o nome ou a matrícula do aluno:");
+			String busca = scanner.nextLine();
 
-        for (Aluno aluno : arrayAluno) {
-            if (busca.equalsIgnoreCase(aluno.getNome()) || busca.equals(String.valueOf(aluno.getMatriculaAluno()))) {
-                System.out.println("Aluno encontrado:");
-                System.out.println("Nome: " + aluno.getNome());
-                System.out.println("Matrícula: " + aluno.getMatriculaAluno());
-                System.out.println("Pressione Enter para voltar ao menu...");
-                scanner.nextLine();
-                return; // Interrompe a execução da função após encontrar o aluno
-            }
-        }
-
+			for (Aluno aluno : arrayAluno) {
+			    if (busca.equalsIgnoreCase(aluno.getNome()) || busca.equals(String.valueOf(aluno.getMatriculaAluno()))) {
+			        System.out.println("Aluno encontrado:");
+			        System.out.println("Nome: " + aluno.getNome());
+			        System.out.println("Matrícula: " + aluno.getMatriculaAluno());
+			        System.out.println("Pressione Enter para voltar ao menu...");
+			        scanner.nextLine();
+			        return; // Interrompe a execução da função após encontrar o aluno
+			    }
+			}
+		}
         System.out.println("Aluno não encontrado.");
     }
 
 
     private static void buscarDisciplina() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite o código da disciplina ou o nome dela!");
-        String busca = scanner.nextLine();
-        
-        for(Disciplina disciplina : arrayDisciplina) {
-            if(busca.equalsIgnoreCase(disciplina.getNomeDisciplina()) || busca.equals(String.valueOf(disciplina.getCodDisciplina()))) {
-                System.out.println("Código: " + disciplina.getCodDisciplina());
-                System.out.println("Nome: " + disciplina.getNomeDisciplina());
-                System.out.println("Nota Mínima: " + disciplina.getNotaMinima());
-            } else {
-                System.out.println("Disciplina não encontrada!");
-            }
-        }
+        try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Digite o código da disciplina ou o nome dela!");
+			String busca = scanner.nextLine();
+			
+			for(Disciplina disciplina : arrayDisciplina) {
+			    if(busca.equalsIgnoreCase(disciplina.getNomeDisciplina()) || busca.equals(String.valueOf(disciplina.getCodDisciplina()))) {
+			        System.out.println("Código: " + disciplina.getCodDisciplina());
+			        System.out.println("Nome: " + disciplina.getNomeDisciplina());
+			        System.out.println("Nota Mínima: " + disciplina.getNotaMinima());
+			    } else {
+			        System.out.println("Disciplina não encontrada!");
+			    }
+			}
+		}
     }
 }
