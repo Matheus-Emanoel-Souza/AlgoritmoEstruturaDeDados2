@@ -138,11 +138,13 @@ public class Main {
                 System.out.println("Matrícula: " + aluno.getMatriculaAluno());
                 System.out.println("Pressione Enter para voltar ao menu...");
                 scanner.nextLine();
+                return; // Interrompe a execução da função após encontrar o aluno
             }
         }
 
         System.out.println("Aluno não encontrado.");
     }
+
 
     private static void buscarDisciplina() {
         Scanner scanner = new Scanner(System.in);
