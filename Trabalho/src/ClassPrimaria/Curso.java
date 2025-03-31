@@ -1,3 +1,5 @@
+package ClassPrimaria;
+
 public class Curso {
 	
 	private int MatricCurso;
@@ -35,7 +37,7 @@ public class Curso {
 		Nota2 = nota2;
 	}
 	
-	Curso(int matriCurso, int coddisciplina, float nota1, float nota2) {
+	public Curso(int matriCurso, int coddisciplina, float nota1, float nota2) {
 		setMatricCurso(matriCurso);
 		setCodDisciplina(coddisciplina);
 		setNota1(nota1);

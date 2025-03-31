@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+import ClassPrimaria.Aluno;
+import ClassPrimaria.Curso;
+import ClassPrimaria.Disciplina;
+
 public class Sistema {
     //private static final String CAMINHO_ALUNOS = "C:\\Users\\mathe\\Desktop\\AlgoritmoEstruturaDeDados2\\Alunos.txt";
     //private static final String CAMINHO_CURSOS = "\"C:\\Users\\mathe\\Desktop\\Cursos.txt\"";

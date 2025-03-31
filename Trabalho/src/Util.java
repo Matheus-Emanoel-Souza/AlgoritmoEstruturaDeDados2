@@ -1,5 +1,9 @@
 import java.io.*;
 
+import ClassPrimaria.Aluno;
+import ClassPrimaria.Curso;
+import ClassPrimaria.Disciplina;
+
 public class Util {
 
     public static void salvarEmArquivo(String conteudo) {

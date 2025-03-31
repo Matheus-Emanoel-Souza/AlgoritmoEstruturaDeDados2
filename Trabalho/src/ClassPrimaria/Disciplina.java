@@ -1,3 +1,5 @@
+package ClassPrimaria;
+
 public class Disciplina {
  
     private int CodDisciplina;

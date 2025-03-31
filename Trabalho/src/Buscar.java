@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+import ClassPrimaria.Aluno;
+import ClassPrimaria.Curso;
+import ClassPrimaria.Disciplina;
+
 public class Buscar {
     static void buscarAluno(Scanner scanner, Aluno[] arrayAluno, Curso[] arrayCurso) {
         System.out.println("Digite o nome ou a matrícula do aluno:");
@@ -61,7 +65,8 @@ public class Buscar {
                                 conteudo1 += "Aluno: " + aluno.getNome() + 
                                              "\nMatrícula: " + aluno.getMatriculaAluno() + 
                                              "\nNota 1: " + curso.getNota1() + 
-                                             "\nNota 2: " + curso.getNota2() + "\n\n";
+                                             "\nNota 2: " + curso.getNota2() +
+                                             "\nMédia: "+ curso.calculaMedia()+"\n\n";
                                 
                                 System.out.print("Aluno encontrado: " + aluno.getNome() + " | Matrícula: " + aluno.getMatriculaAluno() + " | Média:"+curso.calculaMedia()
                                 +" | Situação: ");

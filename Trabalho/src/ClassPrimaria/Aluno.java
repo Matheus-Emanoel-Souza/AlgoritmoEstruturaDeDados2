@@ -1,3 +1,5 @@
+package ClassPrimaria;
+
 public class Aluno {
     private int MatriculaAluno;
     private String Nome;

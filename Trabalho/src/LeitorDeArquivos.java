@@ -3,6 +3,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import ClassPrimaria.Aluno;
+import ClassPrimaria.Curso;
+import ClassPrimaria.Disciplina;
+
 public class LeitorDeArquivos {
 
     public static Curso[] lerCursos(String caminho, Curso[] cursos, Disciplina[] arrayDisciplina, Aluno[] arrayAluno) throws IOException {

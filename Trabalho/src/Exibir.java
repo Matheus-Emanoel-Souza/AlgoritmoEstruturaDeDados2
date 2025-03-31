@@ -1,3 +1,7 @@
+import ClassPrimaria.Aluno;
+import ClassPrimaria.Curso;
+import ClassPrimaria.Disciplina;
+
 public class Exibir {
     public static void exibirInformacoesAluno(Aluno aluno) {
         System.out.println("==== Detalhes do Aluno ====");
