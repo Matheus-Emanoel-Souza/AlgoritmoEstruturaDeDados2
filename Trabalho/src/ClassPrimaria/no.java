@@ -6,7 +6,7 @@ public class no<t> {
 	
 	public no(t dado) {
 		this.setDado(dado);
-		this.prox = null;
+		this.setProx(null);
 	}
 
 	public t getDado() {
@@ -22,8 +22,16 @@ public class no<t> {
 	}
 
 	public void setProx(no<t> prox) {
+		if(dado.getClass() == prox.getDado().getClass()) {
 		this.prox = prox;
-	}
-	
-	
+		}else 
+		{
+			throw new IllegalArgumentException("Tipo do próximo nó é diferente! Esperado:"+
+					dado.getClass().getSimpleName() +
+		            ", mas foi: " + (prox != null ? prox.getDado().getClass().getSimpleName() : "null"));
+			//this.prox = null;
+			//ideal é tratavar e retornar erro.
+		}
+		
+	}		
 }
