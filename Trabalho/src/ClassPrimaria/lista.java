@@ -6,6 +6,36 @@ public class lista<t> {
 	private Class<?> tipopermitido;
 	
 	
+	public no<t> getPrimeiro() {
+		return primeiro;
+	}
+
+	public void setPrimeiro(no<t> primeiro) {
+		this.primeiro = primeiro;
+	}
+
+	public int getContador() {
+		return contador;
+	}
+
+	public void setContador(int contador) {
+		this.contador = contador;
+	}
+
+	public Class<?> getTipopermitido() {
+		return tipopermitido;
+	}
+
+	public void setTipopermitido(Class<?> tipopermitido) {
+		this.tipopermitido = tipopermitido;
+	}
+
+	public lista() {
+	    this.primeiro = null;
+	    this.contador = 0;
+	    this.tipopermitido = null;
+	}
+
 	public lista(no<t> primeiro) {
 		this.primeiro = primeiro;
 		this.contador = 1;
@@ -13,7 +43,7 @@ public class lista<t> {
 			this.tipopermitido = primeiro.getDado().getClass();
 		}
 		else {
-			//Como é o nó que vai criar a lista, impossível entrar nessa exceção.
+			//Como ja criei uma metodo nulo, impossível cair aqui.
 		}
 	}
 	
