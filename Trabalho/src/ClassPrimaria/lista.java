@@ -57,12 +57,17 @@ public class lista<t> {
 		}
 	}
 	public void AdicionarNoFinal(no<t> noadicionado) {
-		no<t> aux = this.primeiro;
-		
-		while(aux.getProx() != null) {
-			aux = aux.getProx();
+		if(this.primeiro == null) {
+			this.primeiro = noadicionado;
 		}
-		aux.setProx(noadicionado);
+		else {
+			no<t> aux = this.primeiro;
+			
+			while(aux.getProx() != null) {
+				aux = aux.getProx();
+			}
+					aux.setProx(noadicionado);
+		}
 		this.contador++;
 	}
 	
