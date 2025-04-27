@@ -22,16 +22,15 @@ public class no<t> {
 	}
 
 	public void setProx(no<t> prox) {
-		if(dado.getClass() == prox.getDado().getClass()) {
-		this.prox = prox;
-		}else 
-		{
-			throw new IllegalArgumentException("Tipo do próximo nó é diferente! Esperado:"+
-					dado.getClass().getSimpleName() +
-		            ", mas foi: " + (prox != null ? prox.getDado().getClass().getSimpleName() : "null"));
-			//this.prox = null;
-			//ideal é tratavar e retornar erro.
-		}
-		
+	    if (prox != null && dado.getClass() == prox.getDado().getClass()) {
+	        this.prox = prox;
+	    } else if (prox != null) {
+	        throw new IllegalArgumentException("Tipo do próximo nó é diferente! Esperado:" +
+	                dado.getClass().getSimpleName() +
+	                ", mas foi: " + prox.getDado().getClass().getSimpleName());
+	    } else {
+	        // Caso o prox seja null, podemos atribuir null
+	        this.prox = null;
+	    }
 	}		
 }
