@@ -1,6 +1,6 @@
 package ClassPrimaria;
 
-public class lista<t> {
+public class listaEncadeada<t> {
 	private no<t> primeiro;
 	private int contador;
 	private Class<?> tipopermitido;
@@ -30,13 +30,13 @@ public class lista<t> {
 		this.tipopermitido = tipopermitido;
 	}
 
-	public lista() {
+	public listaEncadeada() {
 	    this.primeiro = null;
 	    this.contador = 0;
 	    this.tipopermitido = null;
 	}
 
-	public lista(no<t> primeiro) {
+	public listaEncadeada(no<t> primeiro) {
 		this.primeiro = primeiro;
 		this.contador = 1;
 		if(primeiro != null && primeiro.getDado() != null) {
