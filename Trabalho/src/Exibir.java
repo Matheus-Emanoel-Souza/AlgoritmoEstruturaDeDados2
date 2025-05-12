@@ -1,29 +1,53 @@
+
+
 import ClassPrimaria.Aluno;
 import ClassPrimaria.Curso;
 import ClassPrimaria.Disciplina;
+import ClassPrimaria.ListaDuplamenteEncadeada;
+import ClassPrimaria.No;
 
 public class Exibir {
-    public static void exibirInformacoesAluno(Aluno aluno) {
-        System.out.println("==== Detalhes do Aluno ====");
-        System.out.println("Nome: " + aluno.getNome());
-        System.out.println("Matrícula: " + aluno.getMatriculaAluno());
-        System.out.println("Idade: " + aluno.getIdade());
-        System.out.println("===========================");
-    }
+	//Exibi aluno individualmente.
+	public void exibirAluno(Aluno aluno) {
+	    System.out.println(aluno.getNome());
+	}
+	//Exibi o conjuntto de alunos na lista;
+	public void exibirNomeAlunosDeLista(ListaDuplamenteEncadeada<Aluno> listaDeAlunos) {
+	    No<Aluno> aux = listaDeAlunos.getHead();
+	    while (aux != null) {
+	        exibirAluno(aux.getConteudo());
+	        aux = aux.getProximo();
+	    }
+	}
+	 //Exibi disciplina
+	public void exibirDisciplina(Disciplina disciplina) {
+	    System.out.println(disciplina.getNomeDisciplina());
+	}
 
-    public static void exibirInformacoesDisciplina(Disciplina disciplina) {
-        System.out.println("==== Detalhes da Disciplina ====");
-        System.out.println("Código: " + disciplina.getCodDisciplina());
-        System.out.println("Nome: " + disciplina.getNomeDisciplina());
-        System.out.println("Nota Mínima: " + disciplina.getNotaMinima());
-        System.out.println("===============================");
-    }
-    public static void exibirInformacoesCurso(Curso curso) {
-        System.out.println("==== Detalhes do Curso ====");
-        System.out.println("Matrícula do Curso: " + curso.getMatricCurso());
-        System.out.println("Código da Disciplina: " + curso.getCodDisciplina());
-        System.out.println("Nota 1: " + curso.getNota1());
-        System.out.println("Nota 2: " + curso.getNota2());
-        System.out.println("=============================");
-    }
+	public void exibirNomeDisciplinaDaLista(ListaDuplamenteEncadeada<Disciplina> listaDeDisciplinas) {
+	    No<Disciplina> aux = listaDeDisciplinas.getHead();
+	    while (aux != null) {
+	        exibirDisciplina(aux.getConteudo());
+	        aux = aux.getProximo();
+	    }
+	}
+
+    
+	public void exibirCurso(Curso curso) {
+	    System.out.println(
+	        "Matrícula: " + curso.getMatricCurso() +
+	        " | Cod. Disciplina: " + curso.getCodDisciplina() +
+	        " | Média: " + curso.calculaMedia()
+	    );
+	}
+
+	public void exibirCursos(ListaDuplamenteEncadeada<Curso> listaDeCursos) {
+	    No<Curso> aux = listaDeCursos.getHead();
+	    while (aux != null) {
+	        exibirCurso(aux.getConteudo());
+	        aux = aux.getProximo();
+	    }
+	}
+
 }
+

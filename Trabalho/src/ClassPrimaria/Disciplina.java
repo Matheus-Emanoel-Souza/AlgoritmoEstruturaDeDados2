@@ -35,4 +35,21 @@ public class Disciplina {
     public void setNotaMinima(float notaMinima) {
         NotaMinima = notaMinima;
     }
+
+    /**
+     * Verifica se a disciplina já existe na lista com base no código da disciplina.
+     * @param listaDisciplinas Lista de disciplinas
+     * @return true se já existir, false caso contrário
+     */
+    public boolean validaDisciplinaNaLista(ListaDuplamenteEncadeada<Disciplina> listaDisciplinas) {
+        No<Disciplina> atual = listaDisciplinas.getHead();
+        while (atual != null) {
+            Disciplina existente = atual.getConteudo();
+            if (existente.getCodDisciplina() == this.getCodDisciplina()) {
+                return true;
+            }
+            atual = atual.getProximo();
+        }
+        return false;
+    }
 }

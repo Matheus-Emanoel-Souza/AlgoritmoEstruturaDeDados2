@@ -24,7 +24,7 @@ public class Aluno {
     }
 
     public void setIdade(int idade) {
-        this.Idade = idade;
+        Idade = idade;
     }
 
     public String getNome() {
@@ -32,8 +32,23 @@ public class Aluno {
     }
 
     public void setNome(String nome) {
-        this.Nome = nome;
+        Nome = nome;
+    }
+
+    // Fun. para validar objeto na lista;
+    public boolean validaAlunoNaLista(Aluno aluno, ListaDuplamenteEncadeada<Aluno> listaDeAlunos) {
+        No<Aluno> atual = listaDeAlunos.getHead();
+
+        while (atual != null) {
+            if (atual.getConteudo().getMatriculaAluno() == aluno.getMatriculaAluno()) {
+                return true;
+            }
+            atual = atual.getProximo();
+        }
+
+        return false; 
     }
 }
+
 
 
