@@ -36,20 +36,14 @@ public class Disciplina {
         NotaMinima = notaMinima;
     }
 
-    /**
-     * Verifica se a disciplina já existe na lista com base no código da disciplina.
-     * @param listaDisciplinas Lista de disciplinas
-     * @return true se já existir, false caso contrário
-     */
-    public boolean validaDisciplinaNaLista(ListaDuplamenteEncadeada<Disciplina> listaDisciplinas) {
-        No<Disciplina> atual = listaDisciplinas.getHead();
-        while (atual != null) {
-            Disciplina existente = atual.getConteudo();
-            if (existente.getCodDisciplina() == this.getCodDisciplina()) {
-                return true;
-            }
-            atual = atual.getProximo();
-        }
-        return false;
+  //validação de objeto para lista.
+    public int getIndice(int cod, ListaDuplamenteEncadeada<Disciplina> listaDisciplina) {
+    	int indice =0;
+    	No<Disciplina> percorre = listaDisciplina.getHead();
+    	while(cod != percorre.getConteudo().getCodDisciplina()) {
+    		indice ++;
+    		percorre = percorre.getProximo();
+    	}
+    	return indice;
     }
 }

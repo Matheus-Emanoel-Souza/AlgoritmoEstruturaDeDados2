@@ -39,7 +39,7 @@ public final class No<T> {
     }
 	
 	//contrutor caso eu tenha que inserir no meio da lista
-	public No(T conteudo, No<T> anterior, No<T> proximo) {
+	public No() {
     this.conteudo = conteudo;
     this.anterior = anterior;
     this.proximo = proximo;

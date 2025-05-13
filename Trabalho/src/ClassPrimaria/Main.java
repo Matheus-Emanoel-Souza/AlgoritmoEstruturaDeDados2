@@ -1,8 +1,8 @@
+package ClassPrimaria;
 import java.io.IOException;
-import ClassPrimaria.Aluno;
-import ClassPrimaria.Curso;
-import ClassPrimaria.Disciplina;
-import ClassPrimaria.ListaDuplamenteEncadeada;
+
+import metodosAuxiliares.Exibir;
+import metodosAuxiliares.PreencheLista;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
@@ -26,7 +26,7 @@ public class Main {
 		
 		//Funções de exibição
 		Exibir exibicao = new Exibir();
-		//exibicao.exibirNomeAlunosDeLista(ListaAlunos);
+		exibicao.exibirNomeAlunosDeLista(ListaAlunos);
 		//exibicao.exibirNomeDisciplinaDaLista(ListaDisciplinas);
 		//exibicao.exibircurso(ListaCursos);
 		

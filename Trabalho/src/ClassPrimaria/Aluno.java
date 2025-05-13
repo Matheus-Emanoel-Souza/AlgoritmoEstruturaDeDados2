@@ -35,18 +35,15 @@ public class Aluno {
         Nome = nome;
     }
 
-    // Fun. para validar objeto na lista;
-    public boolean validaAlunoNaLista(Aluno aluno, ListaDuplamenteEncadeada<Aluno> listaDeAlunos) {
-        No<Aluno> atual = listaDeAlunos.getHead();
-
-        while (atual != null) {
-            if (atual.getConteudo().getMatriculaAluno() == aluno.getMatriculaAluno()) {
-                return true;
-            }
-            atual = atual.getProximo();
-        }
-
-        return false; 
+    // Fun. para validar objeto na lista;        
+    public int IndiceAluno(Aluno aluno, ListaDuplamenteEncadeada<Aluno> listaDeAlunos) {
+    	int indice =0;
+    	No<Aluno> percorre = listaDeAlunos.getHead();
+    	while(aluno.getMatriculaAluno() != percorre.getConteudo().getMatriculaAluno()) {
+    		indice ++;
+    		percorre = percorre.getProximo();
+    	}
+    	return indice;
     }
 }
 

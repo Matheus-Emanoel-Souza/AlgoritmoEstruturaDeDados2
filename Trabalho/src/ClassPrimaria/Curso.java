@@ -51,18 +51,14 @@ public class Curso {
     }
 
     //validação de objeto para lista.
-    public boolean validaCursoNaLista(Curso curso, ListaDuplamenteEncadeada<Curso> listaDeCursos) {
-        No<Curso> atual = listaDeCursos.getHead();
-
-        while (atual != null) {
-            Curso cursoAtual = atual.getConteudo();
-            if (cursoAtual.getMatricCurso() == curso.getMatricCurso() &&
-                cursoAtual.getCodDisciplina() == curso.getCodDisciplina()) {
-                return true;
-            }
-            atual = atual.getProximo();
-        }
-
-        return false;
+    public int IndiceCurso(Curso curso, ListaDuplamenteEncadeada<Curso> listaDeCursos) {
+    	int indice =0;
+    	No<Curso> percorre = listaDeCursos.getHead();
+    	while((curso.getCodDisciplina() != percorre.getConteudo().getMatricCurso() && 
+    			curso.getMatricCurso() != percorre.getConteudo().getMatricCurso())) {
+    		indice ++;
+    		percorre = percorre.getProximo();
+    	}
+    	return indice;
     }
 }

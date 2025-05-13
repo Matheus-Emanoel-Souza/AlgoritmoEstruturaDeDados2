@@ -1,3 +1,4 @@
+package metodosAuxiliares;
 
 public class Relatorio {
 	public void Criar() {

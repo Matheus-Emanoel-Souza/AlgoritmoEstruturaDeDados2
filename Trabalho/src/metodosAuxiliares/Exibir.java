@@ -1,3 +1,4 @@
+package metodosAuxiliares;
 
 
 import ClassPrimaria.Aluno;
