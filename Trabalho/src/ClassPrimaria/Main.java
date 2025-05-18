@@ -24,16 +24,20 @@ public class Main {
 		iniciodocodigo.MontaListaCurso(ListaDisciplinas, ListaAlunos, ListaCursos, CaminhoCursos);
 		//Posso colocar tudo o que está em cima em uma classe.
 		
+		
 		//Funções de exibição
 		Exibir exibicao = new Exibir();
 		//exibicao.exibirNomeAlunosDeLista(ListaAlunos);
-		//exibicao.exibirNomeDisciplinaDaLista(ListaDisciplinas);
+		exibicao.exibirNomeDisciplinaDaLista(ListaDisciplinas);
 		//exibicao.exibircurso(ListaCursos);
 		//Exibir relatório.
 		//Manipular o relatório.
 		
 		//Função Montar Relatório
-		Relatorio relatorionovo = new Relatorio();
-		relatorionovo.Checarelatorio();
+		Relatorio relat = new Relatorio();
+		//relat.Criar();
+		//relat.LimpaRelatorio();
+		relat.AdcDisciplina(ListaAlunos, ListaDisciplinas, ListaCursos, 601);
+		//relat.AdcAluno(ListaAlunos, ListaDisciplinas, ListaCursos, 10001);
 	}
 }

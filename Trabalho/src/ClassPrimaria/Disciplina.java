@@ -11,6 +11,9 @@ public class Disciplina {
         this.NomeDisciplina = NomeDisciplina;
         this.NotaMinima = NotaMinima;
     }
+    public Disciplina(int CodDisciplina) {
+        this.CodDisciplina = CodDisciplina;
+    }
 
     public int getCodDisciplina() {
         return CodDisciplina;
@@ -40,10 +43,25 @@ public class Disciplina {
     public int getIndice(int cod, ListaDuplamenteEncadeada<Disciplina> listaDisciplina) {
     	int indice =0;
     	No<Disciplina> percorre = listaDisciplina.getHead();
-    	while(cod != percorre.getConteudo().getCodDisciplina()) {
+    	while(percorre.getProximo()!=null) {
+    		if(cod == percorre.getConteudo().getCodDisciplina()) {
+    			return indice;
+    		}
     		indice ++;
     		percorre = percorre.getProximo();
     	}
     	return indice;
+    }
+    
+    public String nomeDisciplina(int CodDisciplina, ListaDuplamenteEncadeada<Disciplina> listaDisciplina) {
+    	String nomeDisciplina = null;
+    	No<Disciplina> per = listaDisciplina.getHead();
+    	while(per != null) {
+    		if(per.getConteudo().getCodDisciplina() == CodDisciplina) {
+    			nomeDisciplina = per.getConteudo().getNomeDisciplina();
+    		}
+    		per = per.getProximo();
+    	}
+    	return nomeDisciplina;
     }
 }

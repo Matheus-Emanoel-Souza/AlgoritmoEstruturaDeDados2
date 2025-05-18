@@ -10,8 +10,15 @@ public class Aluno {
         this.Nome = nome;
         this.Idade = idade;
     }
+    public Aluno(int matricula) {
+        this.MatriculaAluno = matricula;
+    }
 
-    public int getMatriculaAluno() {
+    public Aluno() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getMatriculaAluno() {
         return MatriculaAluno;
     }
 
@@ -44,6 +51,18 @@ public class Aluno {
     		percorre = percorre.getProximo();
     	}
     	return indice;
+    }
+    //Função para buscar o nome do aluno pela matricula
+    public String nomeAluno(int matricula,ListaDuplamenteEncadeada<Aluno> listaDeAlunos) {
+    	String nomeAluno=null;
+    	No<Aluno> per = listaDeAlunos.getHead();
+    	while(per != null) {
+    		if(per.getConteudo().getMatriculaAluno() == matricula) {
+    			nomeAluno = per.getConteudo().getNome();
+    		}
+    		per = per.getProximo();
+    	}
+    	return nomeAluno;
     }
 }
 
