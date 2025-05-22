@@ -1,0 +1,150 @@
+@charset "UTF-8";
+:root {
+  --cor-primaria: #74ebd5;
+  --cor-secundaria: #ACB6E5;
+  --cor3:#4B0082;/*indigo(Roxo Escuro)*/
+  --cor4:#00008B;/*(Azul escuro)*/
+  
+}
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cor-primaria);
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  text-align: center;
+}
+
+.botao1 {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+   cursor: pointer;
+}
+
+.botao1:hover {
+  background-color: #45a049;
+}
+
+img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+  color: white;
+}
+
+h1 {
+  color: white;
+  text-shadow: 1px 1px 3px black;
+}
+.voltar {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.voltar:hover {
+  background-color: #cc0000;
+}
+
+.menu {
+  display: block;
+  margin-bottom: 10px;
+  background-color: #4da6ff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  width: fit-content;
+  transition: background-color 0.3s;
+}
+
+.menu:hover {
+  background-color: #0059b3;
+}
+
+.cadastro {
+  display: block;
+  margin-bottom: 10px;
+  background-color: #28a745; /* Verde sucesso */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  width: fit-content;
+  transition: background-color 0.3s;
+}
+
+.cadastro:hover {
+  background-color: #1e7e34;
+}
+
+.caixa {
+  border: 1px solid #333; /* borda cinza escura */
+  padding: 16px;          /* espaçamento interno */
+  margin: 10px 0;         /* espaço em cima e embaixo */
+  background-color: #f0f0f0; /* fundo clarinho */
+  border-radius: 5px;     /* cantos arredondados */
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* sombra leve */
+  max-width: 400px;       /* largura máxima */
+}
+
+.caixa2 {
+  border: 1px solid #333;
+  padding: 8px 12px;       /* menos espaço, mais compacto */
+  margin: 8px 0;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  max-width: 120px;        /* menor largura */
+  font-family: monospace; /* melhor pra dígitos */
+  text-align: center;
+  letter-spacing: 2px;     /* espaçamento pra dígito respirar */
+}
+
+input.caixa2 {
+  width: 100%;
+  box-sizing: border-box;
+}
+.container_cantoesquerdo {
+  margin: 0 auto; /* se tiver, tira ou ajuste */
+  padding: 0;
+  max-width: 600px; /* se quiser limitar largura */
+}
+.container img {
+  display: flex;
+  margin-left: 1000;
+}
+input {
+  text-align: left;
+}
+.rodape {
+  display: flex;
+  justify-content: space-between; /* separa os botões: um vai pra esquerda, outro pra direita */
+  align-items: center;            /* alinha verticalmente */
+  padding: 10px;
+  background-color: #f9f9f9;      /* opcional, só pra visual */
+  border-top: 1px solid #ccc;     /* separador opcional */
+}
