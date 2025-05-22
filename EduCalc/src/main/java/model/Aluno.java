@@ -103,7 +103,7 @@ public class Aluno {
                 cursos.append("Nota 1: ").append(no.getConteudo().getNota1()).append(" | ");
                 cursos.append("Nota 2: ").append(no.getConteudo().getNota2()).append(" | ");
                 cursos.append("Média: ").append(no.getConteudo().calculaMedia()).append("\n");
-                cursos.append("---------------------------------\n");
+                cursos.append("---------------------------------------------------------------------------------\n");
                
     		
     		}
@@ -125,6 +125,43 @@ public class Aluno {
         System.out.println("Aluno+constroi_alunoCompleto: Erro!");
         return null; 
     }
+    
+    public void RemoverAluno(int matricula, ListaDuplamenteEncadeada<Aluno> listaDeAlunos) {
+        No<Aluno> no = listaDeAlunos.getHead();
+
+        while (no != null) {
+            if (no.getConteudo().getMatriculaAluno() == matricula) {
+                
+                if (no == listaDeAlunos.getHead()) {
+                    listaDeAlunos.setHead(no.getProximo());
+                    if (listaDeAlunos.getHead() != null) {
+                        listaDeAlunos.getHead().setAnterior(null);
+                    } else {
+                        
+                        listaDeAlunos.setTail(null);
+                    }
+                }
+                
+                else if (no == listaDeAlunos.getTail()) {
+                    listaDeAlunos.setTail(no.getAnterior());
+                    if (listaDeAlunos.getTail() != null) {
+                        listaDeAlunos.getTail().setProximo(null);
+                    }
+                }
+                
+                else {
+                    no.getAnterior().setProximo(no.getProximo());
+                    no.getProximo().setAnterior(no.getAnterior());
+                }
+
+                listaDeAlunos.setTamanho(listaDeAlunos.getTamanho()-1);
+                return;
+            }
+
+            no = no.getProximo();
+        }
+    }
+
 
 }
 

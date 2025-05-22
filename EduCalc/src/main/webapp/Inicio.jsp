@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Inicio do programa!</title>
 <link rel="icon" href="imagens/home.png">
-<link rel="stylesheet" href="stylei.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>

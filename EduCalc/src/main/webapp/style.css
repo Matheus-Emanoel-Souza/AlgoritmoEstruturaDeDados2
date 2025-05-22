@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+:root {
+  --cor-primaria: #74ebd5;
+  --cor-secundaria: #ACB6E5;
+  --cor3: #4B0082;
+  --cor4: rgb(107, 29, 109);
+  --cor5: #00008B;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cor-primaria);
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  text-align: center;
+}
+
+h1 {
+  color: var(--cor3);
+  text-shadow: 1px 1px 3px black;
+}
+
+img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+input {
+  text-align: left;
+}
+
+input.caixa2 {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.caixa {
+  border: 1px solid #333;
+  padding: 16px;
+  margin: 10px 0;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+}
+
+.caixa2 {
+  border: 1px solid #333;
+  padding: 8px 12px;
+  margin: 8px 0;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 120px;
+  font-family: monospace;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.container_cantoesquerdo {
+  padding: 0;
+  max-width: 600px;
+}
+
+.container img {
+  display: flex;
+  margin-left: 1000;
+}
+
+.rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ccc;
+}
+
+.botao1 {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  width: 200px;
+  transition: background-color 0.3s;
+  color: var(--cor3);
+  border: none;
+}
+
+.botao.menu {
+  background-color: #4da6ff;
+}
+
+.botao.menu:hover {
+  background-color: #0059b3;
+}
+
+.botao.cadastro {
+  background-color: #28a745;
+}
+
+.botao.cadastro:hover {
+  background-color: #1e7e34;
+}
+
+.botao.voltar {
+  background-color: #ff4d4d;
+}
+
+.botao.voltar:hover {
+  background-color: #cc0000;
+}
+
+.botao.padrao {
+  background-color: #4CAF50;
+}
+
+.botao.padrao:hover {
+  background-color: #45a049;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

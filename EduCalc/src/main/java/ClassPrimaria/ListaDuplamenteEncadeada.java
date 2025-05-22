@@ -2,7 +2,11 @@ package ClassPrimaria;
 public class ListaDuplamenteEncadeada<T> {
     private No<T> head;
     private No<T> tail;
-    private int tamanho;
+    public void setTamanho(int tamanho) {
+		this.tamanho = tamanho;
+	}
+
+	private int tamanho;
 
     //Construtor para nulo
     public ListaDuplamenteEncadeada() {

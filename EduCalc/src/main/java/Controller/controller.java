@@ -154,7 +154,7 @@ public class controller extends HttpServlet {
 		//System.out.println(excluido.IndiceAluno(excluido, ListaAlunos));
 		
 		if(excluido.IndiceAluno(excluido, ListaAlunos) != -1) {
-			ListaAlunos.remove(excluido);
+			excluido.RemoverAluno(mat, ListaAlunos);
 			System.out.println("Aluno Removido com sucesso!");
 			request.setAttribute("mensagem", "Aluno Removido com sucesso!");
 			response.sendRedirect("aluno/exc_aluno.jsp?sucesso=1");
@@ -163,8 +163,7 @@ public class controller extends HttpServlet {
 			System.out.println("Erro! Matricula Não cadastrada!");
 			request.setAttribute("erro", "Matrícula Não cadastrada!");
 			response.sendRedirect("aluno/exc_aluno.jsp?erro=1");
-		}
-		
+		}	
 	}
 	
 	protected void Visualiza_aluno(HttpServletRequest request, HttpServletResponse response) throws ServletException,
