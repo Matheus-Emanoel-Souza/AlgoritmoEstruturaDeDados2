@@ -18,7 +18,9 @@ public class Disciplina {
         this.CodDisciplina = CodDisciplina;
     }
 
-    public int getCodDisciplina() {
+    public Disciplina() {
+	}
+	public int getCodDisciplina() {
         return CodDisciplina;
     }
 

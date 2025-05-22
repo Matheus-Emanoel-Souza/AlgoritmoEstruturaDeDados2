@@ -2,6 +2,7 @@ package model;
 
 import ClassPrimaria.ListaDuplamenteEncadeada;
 import ClassPrimaria.No;
+import util.Exibir;
 
 public class Aluno {
     private int MatriculaAluno;
@@ -49,24 +50,82 @@ public class Aluno {
     public int IndiceAluno(Aluno aluno, ListaDuplamenteEncadeada<Aluno> listaDeAlunos) {
     	int indice =0;
     	No<Aluno> percorre = listaDeAlunos.getHead();
-    	while(aluno.getMatriculaAluno() != percorre.getConteudo().getMatriculaAluno()) {
+    	
+    	while(percorre != null && aluno.getMatriculaAluno() != percorre.getConteudo().getMatriculaAluno()) {
     		indice ++;
     		percorre = percorre.getProximo();
     	}
-    	return indice;
+    	if (percorre == null) {
+            return -1;
+        }else {
+        	return indice;
+        }
+
     }
-    //Função para buscar o nome do aluno pela matricula
-    public String nomeAluno(int matricula,ListaDuplamenteEncadeada<Aluno> listaDeAlunos) {
-    	String nomeAluno=null;
-    	No<Aluno> per = listaDeAlunos.getHead();
-    	while(per != null) {
-    		if(per.getConteudo().getMatriculaAluno() == matricula) {
-    			nomeAluno = per.getConteudo().getNome();
+    //Função para buscar o nome do aluno pela matricula, Não lembro pra que criei isso
+	
+	  public String nomeAluno(int matricula,ListaDuplamenteEncadeada<Aluno>
+	  listaDeAlunos) { String nomeAluno=null; No<Aluno> per =
+	  listaDeAlunos.getHead(); while(per != null) {
+	  if(per.getConteudo().getMatriculaAluno() == matricula) { nomeAluno =
+	  per.getConteudo().getNome(); } per = per.getProximo(); } return nomeAluno; }   
+
+    //Aluno apenas com matricula vai passar a ser aluno com todos os dados que está na lista!!!
+    public void constroi_aluno_indice(Aluno aluno, ListaDuplamenteEncadeada<Aluno> listaDeAlunos) {
+    	int a = IndiceAluno(aluno,listaDeAlunos);
+    	
+    	if(a != -1){
+    		No<Aluno> no = listaDeAlunos.getHead();
+    		for(int i = 0; i<a; i++) {
+    			no = no.getProximo();
     		}
-    		per = per.getProximo();
+    		System.out.println("Indice na função interna é:"+a);
+    		
+    		aluno = no.getConteudo();
+    		//Teste para ver se é o mesmo aluno!
+    		Exibir.exibirAluno(aluno);
     	}
-    	return nomeAluno;
+    		
     }
+    
+    //Constroi a string de cursos do aluno.
+    public String constroi_cursos_aluno(Aluno aluno,ListaDuplamenteEncadeada<Curso> ListaCursos,
+    		ListaDuplamenteEncadeada<Disciplina> ListaDisciplinas) {
+    	StringBuilder cursos = new StringBuilder();
+    	No<Curso> no = ListaCursos.getHead();
+    	Disciplina disc = new Disciplina();
+    	//andar a lista toda, independente do no
+    	while(no !=null) {
+    		
+    		if(no.getConteudo().getMatricCurso() == aluno.getMatriculaAluno()) {
+    			cursos.append("Código: ").append(no.getConteudo().getCodDisciplina()).append(" | ");
+    			cursos.append("Nome:"+disc.nomeDisciplina(no.getConteudo().getCodDisciplina(), ListaDisciplinas));
+                cursos.append("Nota 1: ").append(no.getConteudo().getNota1()).append(" | ");
+                cursos.append("Nota 2: ").append(no.getConteudo().getNota2()).append(" | ");
+                cursos.append("Média: ").append(no.getConteudo().calculaMedia()).append("\n");
+                cursos.append("---------------------------------\n");
+               
+    		
+    		}
+    		no = no.getProximo();
+    	}
+    	
+		return cursos.toString();   	
+    }
+    //Funcao parar aluno(apenas matricula) -> aluno(completo);
+    public Aluno constroi_alunoCompleto(int matricula, ListaDuplamenteEncadeada<Aluno> listaDeAlunos) {
+        No<Aluno> no = listaDeAlunos.getHead();
+        while (no != null) {
+            if (no.getConteudo().getMatriculaAluno() == matricula) {
+                return no.getConteudo();  
+            }
+            no = no.getProximo();
+        }
+        //caso nao achar.
+        System.out.println("Aluno+constroi_alunoCompleto: Erro!");
+        return null; 
+    }
+
 }
 
 

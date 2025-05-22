@@ -12,6 +12,9 @@ public class Exibir {
 	
     public static void exibirAluno(Aluno aluno) {
         System.out.println(aluno.getNome());
+        System.out.println(aluno.getMatriculaAluno());
+        System.out.println(aluno.getIdade());
+        
     }
 
     public static void exibirNomeAlunosDeLista(ListaDuplamenteEncadeada<Aluno> listaDeAlunos) {

@@ -11,9 +11,9 @@
 <body>
 <div  class="container">
 <h2>Alunos</h2>
-<a href="cad_aluno.html" class="cadastro">Cadastrar</a><br>
-<a href="exc_aluno.html" class="cadastro">Excluir</a><br>
-<a href="visu_aluno.html" class="cadastro">Visualizar</a><br>
+<a href="cad_aluno.jsp" class="cadastro">Cadastrar</a><br>
+<a href="exc_aluno.jsp" class="cadastro">Excluir</a><br>
+<a href="visu_aluno.jsp" class="cadastro">Visualizar</a><br>
 <a href="main" class="menu">Voltar ao menu</a>
 </div>
 

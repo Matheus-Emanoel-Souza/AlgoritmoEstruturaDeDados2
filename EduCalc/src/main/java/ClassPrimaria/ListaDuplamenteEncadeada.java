@@ -4,12 +4,14 @@ public class ListaDuplamenteEncadeada<T> {
     private No<T> tail;
     private int tamanho;
 
+    //Construtor para nulo
     public ListaDuplamenteEncadeada() {
         this.head = null;
         this.tail = null;
         this.tamanho = 0;
     }
 
+    	//Criarção de um elemento generico, pode ser aluno,disciplina ou curso
     public void add(T elemento) {
         No<T> novo = new No<>(elemento);
 
@@ -23,7 +25,8 @@ public class ListaDuplamenteEncadeada<T> {
 
         tamanho++;
     }
-
+    
+    //Adiciona na frente, igual a função de cima, posso usar para reescrever a lista
     public void addFirst(T elemento) {
         No<T> novo = new No<>(elemento);
 
@@ -38,6 +41,7 @@ public class ListaDuplamenteEncadeada<T> {
         tamanho++;
     }
 
+    
     public boolean remove(T elemento) {
         No<T> atual = head;
 
