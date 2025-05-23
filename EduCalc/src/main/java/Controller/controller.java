@@ -31,6 +31,7 @@ import ClassPrimaria.ListaDuplamenteEncadeada;
     //Camadas de criação
     "/cria_aluno",
     "/cria_disciplina",
+    "/criar_curso",
     //camadas de exclusão
     "/excluir_aluno",
     "/excluir_disciplina",
@@ -79,9 +80,6 @@ public class controller extends HttpServlet {
 		if(action.equals("/curso")){
 			aba_curso(request, response);
 		}
-		if(action.equals("/relatorio")){
-			aba_relatorio(request, response);
-		}
 		if(action.equals("/aluno/buscar_aluno")){
 			Visualiza_aluno(request, response);
 		}
@@ -105,6 +103,9 @@ public class controller extends HttpServlet {
 	    }
 	    if (action.equals("/cria_disciplina")) {
 	        cria_disciplina(request, response);
+	    }
+	    if(action.equals("/cria_curso")){
+	    	cria_curso(request,response);
 	    }
 	}
 
@@ -139,9 +140,6 @@ public class controller extends HttpServlet {
 	}
 	protected void aba_curso(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.sendRedirect("curso/curso.jsp");
-	}
-	protected void aba_relatorio(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.sendRedirect("relatorio.jsp");
 	}
 	//ABAS DE CRUD
 	protected void cria_aluno(HttpServletRequest request, HttpServletResponse response) throws ServletException,
@@ -203,6 +201,35 @@ public class controller extends HttpServlet {
 		}
 		
 	}
+	
+	protected void cria_curso(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+	IOException {
+		
+		//1a passo receber os parametros
+		int matricula_aluno = Integer.parseInt(request.getParameter("mat_aluno"));
+		int	codigo_disciplina = Integer.parseInt(request.getParameter("cod_disciplina"));
+		float Nota1 = Float.parseFloat(request.getParameter("nota1"));
+		float Nota2 = Float.parseFloat(request.getParameter("nota2"));
+		
+		//2a passo criar um objeto com as inormações que tenho.
+		
+		if((ListaAlunos.getIndice(a->a.getMatriculaAluno() == matricula_aluno) != -1) &&
+			(ListaDisciplinas.getIndice(b->b.getCodDisciplina() == codigo_disciplina) != -1)) {
+			Curso curso = new Curso(matricula_aluno,codigo_disciplina,Nota1,Nota2);
+			ListaCursos.add(curso);
+			System.out.println("Curso cadastrado com sucesso!!!");
+			request.setAttribute("mensagem", "Curso Inserida com sucesso!!");
+			response.sendRedirect("curso/cad_curso.jsp?sucesso=1");
+		}else
+		{
+			System.out.println("Falha no cadastro do curso, Matriculade aluno ou Codigo de curso errado!!");
+			request.setAttribute("mensagem","Erro!! Aluno ou curso não cadastrados!!");
+			response.sendRedirect("curso/cad_curso.jsp?erro=1");
+			
+		}			
+		}
+		
+	
 	protected void exclui_aluno(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
 		Aluno excluido = new Aluno();
@@ -313,7 +340,6 @@ public class controller extends HttpServlet {
 		}
 		
 	}
-	
 	//Funcao visualizar disciplina. Vai trazer objeto disciplina + string alunos.
 	protected void Visualiza_Disciplina(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {				
