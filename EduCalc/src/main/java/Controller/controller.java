@@ -19,7 +19,7 @@ import ClassPrimaria.ListaDuplamenteEncadeada;
 
 @SuppressWarnings("unused")
 @WebServlet({ "/controller", "/main","/aluno","/curso","/disciplina","/relatorio","/cria_aluno",
-	"/excluir_aluno", "/aluno/buscar_aluno"})
+	"/excluir_aluno", "/aluno/buscar_aluno","excluir_disciplina"})
 public class controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -78,6 +78,9 @@ public class controller extends HttpServlet {
 	    if(action.equals("/excluir_aluno")) {
 	    	exclui_aluno(request, response);
 	    }
+	    if(action.equals("/excluir_disciplina")) {
+	    	exclui_disciplina(request, response);
+	    }
 	}
 
 
@@ -107,7 +110,7 @@ public class controller extends HttpServlet {
 		response.sendRedirect("aluno/aluno.jsp");
 	}
 	protected void aba_disciplina(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.sendRedirect("disciplina.jsp");
+		response.sendRedirect("disciplina/disciplina.jsp");
 	}
 	protected void aba_curso(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.sendRedirect("curso.jsp");
@@ -165,6 +168,27 @@ public class controller extends HttpServlet {
 			response.sendRedirect("aluno/exc_aluno.jsp?erro=1");
 		}	
 	}
+	protected void exclui_disciplina(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+	IOException {
+		int cod_dici = Integer.parseInt(request.getParameter("cod_disciplina"));
+		Disciplina disci = new Disciplina();
+		
+		//testar impressao do indice
+		//System.out.println(excluido.IndiceAluno(excluido, ListaAlunos));				
+			
+			if(disci.getIndice(cod_dici, ListaDisciplinas) != -1) {
+				disci.RemoverDisciplina(cod_dici, ListaDisciplinas);
+			
+			System.out.println("Disciplina Removido com sucesso!");
+			request.setAttribute("mensagem", "Disciplina Removido com sucesso!");
+			response.sendRedirect("disciplina/exc_disciplina.jsp?sucesso=1");
+			
+		} else {			
+			System.out.println("Erro! Matricula Não cadastrada!");
+			request.setAttribute("erro", "Matrícula Não cadastrada!");
+			response.sendRedirect("disciplina/exc_disciplina.jsp?erro=1");
+		}	
+	}
 	
 	protected void Visualiza_aluno(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
@@ -183,9 +207,7 @@ public class controller extends HttpServlet {
 		//Faço uma validação dentro e fora da função por a validação de aluno poderá ser usada para outra coisa.
 		if(a != -1) {
 			
-			//System.out.println("Valor do indice na função externa é:"+a);
-			
-			
+			//System.out.println("Valor do indice na função externa é:"+a);						
 			
 			  //MontaString de cursos do aluno.
 			  Achado.constroi_aluno_indice(Achado,ListaAlunos);
@@ -212,5 +234,24 @@ public class controller extends HttpServlet {
 		}
 		
 	}
+	
+	//Funcao visualizar disciplina. Vai trazer objeto disciplina + string alunos.
+	protected void Visualiza_Disciplina(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+	IOException {
+
+		//teste da função visualiza aluno
+		System.out.println("Teste da função:Visualiza_Disciplina");
+		
+		int mat = Integer.parseInt(request.getParameter("cod_disciplina"));
+		Disciplina achada = new Disciplina();
+		
+		achada = achada.disciplinaporcodigo(mat, ListaDisciplinas);
+		//teste para teste da disciplina
+		System.out.println(achada.getNomeDisciplina());
+		
+		request.setAttribute("Disciplina", achada);
+		
+		
+}
 
 }

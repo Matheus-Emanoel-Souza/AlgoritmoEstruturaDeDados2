@@ -125,7 +125,7 @@ public class Aluno {
         System.out.println("Aluno+constroi_alunoCompleto: Erro!");
         return null; 
     }
-    
+    //funcao tirar aluno da lista.
     public void RemoverAluno(int matricula, ListaDuplamenteEncadeada<Aluno> listaDeAlunos) {
         No<Aluno> no = listaDeAlunos.getHead();
 

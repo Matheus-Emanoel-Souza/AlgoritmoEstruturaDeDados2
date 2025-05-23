@@ -57,16 +57,58 @@ public class Disciplina {
     	}
     	return indice;
     }
-    
-    public String nomeDisciplina(int CodDisciplina, ListaDuplamenteEncadeada<Disciplina> listaDisciplina) {
-    	String nomeDisciplina = null;
+    //buscar nome da disciplina
+    public Disciplina disciplinaporcodigo( int CodDisciplina, ListaDuplamenteEncadeada<Disciplina> listaDisciplina) {
+    	Disciplina achada = new Disciplina();
     	No<Disciplina> per = listaDisciplina.getHead();
     	while(per != null) {
     		if(per.getConteudo().getCodDisciplina() == CodDisciplina) {
-    			nomeDisciplina = per.getConteudo().getNomeDisciplina();
+    			achada.setNomeDisciplina(per.getConteudo().getNomeDisciplina()); 
+    			achada.setCodDisciplina(CodDisciplina);
+    			achada.setNotaMinima(per.getConteudo().getNotaMinima());
+    			return achada;
     		}
     		per = per.getProximo();
     	}
-    	return nomeDisciplina;
+    	return achada;
     }
+    //funcao remover disciplina da lista.
+    public void RemoverDisciplina(int cod_disciplina, ListaDuplamenteEncadeada<Disciplina> listaDeDisciplina) {
+        No<Disciplina> no = listaDeDisciplina.getHead();
+
+        while (no != null) {
+            if (no.getConteudo().CodDisciplina == cod_disciplina) {
+                
+                if (no == listaDeDisciplina.getHead()) {
+                	listaDeDisciplina.setHead(no.getProximo());
+                    if (listaDeDisciplina.getHead() != null) {
+                    	listaDeDisciplina.getHead().setAnterior(null);
+                    } else {
+                        
+                    	listaDeDisciplina.setTail(null);
+                    }
+                }
+                
+                else if (no == listaDeDisciplina.getTail()) {
+                	listaDeDisciplina.setTail(no.getAnterior());
+                    if (listaDeDisciplina.getTail() != null) {
+                    	listaDeDisciplina.getTail().setProximo(null);
+                    }
+                }
+                
+                else {
+                    no.getAnterior().setProximo(no.getProximo());
+                    no.getProximo().setAnterior(no.getAnterior());
+                }
+
+                listaDeDisciplina.setTamanho(listaDeDisciplina.getTamanho()-1);
+                return;
+            }
+
+            no = no.getProximo();
+        }
+    }
+    //funçao busca alunoporcódigo 
+    
+    
 }

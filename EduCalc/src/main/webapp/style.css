@@ -6,6 +6,7 @@
   --cor3: #4B0082;
   --cor4: rgb(107, 29, 109);
   --cor5: #00008B;
+  --cor6: 
 }
 
 body {
@@ -14,7 +15,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--cor-primaria);
+  background-color: var(--cor-primaria);
   font-family: Arial, sans-serif;
 }
 
@@ -88,15 +89,16 @@ input.caixa2 {
   display: block;
   margin: 10px auto;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 22px;
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   width: 200px;
   transition: background-color 0.3s;
-  color: var(--cor3);
+  color: black;
   border: none;
+  background-color: red;
 }
 
 .botao.menu {
