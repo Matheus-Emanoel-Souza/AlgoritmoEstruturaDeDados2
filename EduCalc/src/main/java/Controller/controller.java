@@ -18,8 +18,27 @@ import ClassPrimaria.ListaDuplamenteEncadeada;
 
 
 @SuppressWarnings("unused")
-@WebServlet({ "/controller", "/main","/aluno","/curso","/disciplina","/relatorio","/cria_aluno",
-	"/excluir_aluno", "/aluno/buscar_aluno","excluir_disciplina"})
+@WebServlet({ 
+	//controladores
+    "/controller", 
+    "/main", 
+    //camadas 1
+    "/aluno",
+    "/disciplina",
+    "/curso", 
+    "/relatorio",
+    
+    //Camadas de criação
+    "/cria_aluno",
+    "/cria_disciplina",
+    //camadas de exclusão
+    "/excluir_aluno",
+    "/excluir_disciplina",
+    //camadas de busca
+    "/aluno/buscar_aluno",
+    "/disciplina/buscar_disciplina"
+})
+
 public class controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -66,6 +85,9 @@ public class controller extends HttpServlet {
 		if(action.equals("/aluno/buscar_aluno")){
 			Visualiza_aluno(request, response);
 		}
+		if(action.equals("/disciplina/buscar_disciplina")) {
+			Visualiza_Disciplina(request, response);
+		}
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -80,6 +102,9 @@ public class controller extends HttpServlet {
 	    }
 	    if(action.equals("/excluir_disciplina")) {
 	    	exclui_disciplina(request, response);
+	    }
+	    if (action.equals("/cria_disciplina")) {
+	        cria_disciplina(request, response);
 	    }
 	}
 
@@ -113,7 +138,7 @@ public class controller extends HttpServlet {
 		response.sendRedirect("disciplina/disciplina.jsp");
 	}
 	protected void aba_curso(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.sendRedirect("curso.jsp");
+		response.sendRedirect("curso/curso.jsp");
 	}
 	protected void aba_relatorio(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.sendRedirect("relatorio.jsp");
@@ -133,31 +158,62 @@ public class controller extends HttpServlet {
 		Aluno novoAluno = new Aluno(mat,nome,idade);
 		
 		//PRINT PARA TESTAR O QUE ESTÁ SENDO IMPRESSO
-		//System.out.println(novoAluno.IndiceAluno(novoAluno, ListaAlunos));
-		
+		System.out.println("Indice:"+ListaAlunos.getIndice( a -> a.getMatriculaAluno() == mat));
 		//SE RETORNAR -1 É PQ NÃO EXISTE NA LISTA E PODE SER CADASTRADO COM ESSA MATRICULA
-		if(novoAluno.IndiceAluno(novoAluno, ListaAlunos) == -1) {
+		
+		if(ListaAlunos.getIndice(a -> a.getMatriculaAluno() == novoAluno.getMatriculaAluno()) == -1) {
 			ListaAlunos.add(novoAluno);
-			System.out.println("Aluno cadastrado com sucesso!");
-			request.setAttribute("mensagem", "Aluno cadastrado com sucesso!");
+			System.out.println(novoAluno.getNome()+" cadastrado com sucesso!");
+			System.out.println("Matricula:"+novoAluno.getMatriculaAluno());
+			request.setAttribute("mensagem", novoAluno.getNome()+"cadastrado com sucesso!");
 			response.sendRedirect("aluno/cad_aluno.jsp?sucesso=1");
 			
 		} else {			
-			System.out.println("Erro! Matricula já cadastrada!");
-			request.setAttribute("erro", "Matrícula já cadastrada!");
+			System.out.println("Erro! Matricula:"+novoAluno.getMatriculaAluno()+" já está cadastrada!");
+			request.setAttribute("erro","Erro! Matricula:"+novoAluno.getMatriculaAluno()+" já está cadastrada!");
 			response.sendRedirect("aluno/cad_aluno.jsp?erro=1");
 		}
 	}
+	protected void cria_disciplina(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+	IOException {
+		
+		String nome_disciplina = request.getParameter("nome");
+		int cdo_disciplina = Integer.parseInt(request.getParameter("cod_disciplina"));
+		float media_necessaria = Float.parseFloat(request.getParameter("media_necessaria"));
+
+		Disciplina novadisciplina = new Disciplina(cdo_disciplina,nome_disciplina,media_necessaria);
+		
+		 
+		
+
+		System.out.println(ListaDisciplinas.getIndice( a -> a.getCodDisciplina() == novadisciplina.getCodDisciplina()));
+		
+		//novadisciplina.getIndice(novadisciplina, ListaDisciplinas) == -1
+		if(ListaDisciplinas.getIndice(a -> a.getCodDisciplina() == novadisciplina.getCodDisciplina()) == -1 ) {
+			ListaDisciplinas.add(novadisciplina);
+			System.out.println("Disciplina:"+novadisciplina.getNomeDisciplina()+" Inserida com sucesso!!");
+			request.setAttribute("mensagem", "Disciplina:"+novadisciplina.getNomeDisciplina()+" Inserida com sucesso!!");
+			response.sendRedirect("disciplina/cad_disciplina.jsp?sucesso=1");
+			
+		}else {
+			
+			System.out.println("Erro!! Disciplina:"+novadisciplina.getNomeDisciplina()+" Já cadastrada!!");
+			request.setAttribute("mensagem","Erro!! Codigo de Disciplina:"+novadisciplina.getCodDisciplina()+" Já cadastrada!!");
+			response.sendRedirect("disciplina/cad_disciplina.jsp?erro=1");
+		}
+		
+	}
 	protected void exclui_aluno(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
-		int mat = Integer.parseInt(request.getParameter("matricula"));
-		Aluno excluido = new Aluno(mat);
+		Aluno excluido = new Aluno();
+		excluido.setMatriculaAluno(Integer.parseInt(request.getParameter("matricula")));
 		
 		//testar impressao do indice
 		//System.out.println(excluido.IndiceAluno(excluido, ListaAlunos));
 		
-		if(excluido.IndiceAluno(excluido, ListaAlunos) != -1) {
-			excluido.RemoverAluno(mat, ListaAlunos);
+		//excluido.IndiceAluno(excluido, ListaAlunos) != -1
+		if(ListaAlunos.getIndice(a->a.getMatriculaAluno() == excluido.getMatriculaAluno()) != -1) {
+			ListaAlunos.remover(a->a.getMatriculaAluno() == excluido.getMatriculaAluno());
 			System.out.println("Aluno Removido com sucesso!");
 			request.setAttribute("mensagem", "Aluno Removido com sucesso!");
 			response.sendRedirect("aluno/exc_aluno.jsp?sucesso=1");
@@ -172,11 +228,13 @@ public class controller extends HttpServlet {
 	IOException {
 		int cod_dici = Integer.parseInt(request.getParameter("cod_disciplina"));
 		Disciplina disci = new Disciplina();
+		disci.setCodDisciplina(cod_dici);
 		
 		//testar impressao do indice
 		//System.out.println(excluido.IndiceAluno(excluido, ListaAlunos));				
 			
-			if(disci.getIndice(cod_dici, ListaDisciplinas) != -1) {
+		//disci.getIndice(disci, ListaDisciplinas) != -1
+			if(ListaDisciplinas.getIndice(a -> a.getCodDisciplina() == disci.getCodDisciplina()) == -1) {
 				disci.RemoverDisciplina(cod_dici, ListaDisciplinas);
 			
 			System.out.println("Disciplina Removido com sucesso!");
@@ -193,36 +251,57 @@ public class controller extends HttpServlet {
 	protected void Visualiza_aluno(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
 
-		//teste da função visualiza aluno
-		System.out.println("Teste da função:Visualiza_aluno");
 		
 		int mat = Integer.parseInt(request.getParameter("matricula"));
-		Aluno Achado = new Aluno(mat);
-		//Colocar aqui para parar de fazer checagens;
-		int a =Achado.IndiceAluno(Achado, ListaAlunos);
-		String cursosdoaluno = Achado.constroi_cursos_aluno(Achado, ListaCursos, ListaDisciplinas);
-		//testar impressao do indice
-		//System.out.println(excluido.IndiceAluno(excluido, ListaAlunos));
 		
-		//Faço uma validação dentro e fora da função por a validação de aluno poderá ser usada para outra coisa.
-		if(a != -1) {
-			
-			//System.out.println("Valor do indice na função externa é:"+a);						
-			
-			  //MontaString de cursos do aluno.
-			  Achado.constroi_aluno_indice(Achado,ListaAlunos);
-			  
-			 
-			
+		Aluno Achado = ListaAlunos.iguala(c -> c.getMatriculaAluno() == mat);
+		//MontaString de cursos do aluno.
+		
+		 //String outra = Achado.constroi_cursos_aluno(Achado, ListaCursos, ListaDisciplinas);
+		 String cursosdoaluno = ListaCursos.gerarRelatorio(
+				ListaCursos,
+			    curso -> (curso.getMatricCurso() == mat),
+			    curso -> {
+			        StringBuilder sb = new StringBuilder();
+			        Disciplina disciplina = ListaDisciplinas.iguala(d -> d.getCodDisciplina() == curso.getCodDisciplina());
+
+			        sb.append("Código: ").append(curso.getCodDisciplina()).append(" | ");
+			        sb.append("Nome: ").append(disciplina != null ? disciplina.getNomeDisciplina() : "Desconhecida").append(" | ");
+			        sb.append("Média Necessária: ").append(disciplina != null ? disciplina.getNotaMinima() : "N/A").append(" | ");
+
+			        double media = curso.calculaMedia();
+			        sb.append("Nota 1: ").append(curso.getNota1()).append(" | ");
+			        sb.append("Nota 2: ").append(curso.getNota2()).append(" | ");
+			        sb.append("Média: ").append(media).append(" | ");
+
+			        if (disciplina != null && media >= disciplina.getNotaMinima()) {
+			            sb.append("Status: APROVADO");
+			        } else {
+			            sb.append("Status: REPROVADO");
+			        }
+
+			        return sb.toString();
+			    }
+			);
+
+		
+
+		if(ListaAlunos.getIndice(c->c.getMatriculaAluno() == mat) != -1) {
+	
 			//antes aluno(so matricula) agora aluno passa ser o aluno da lista de alunos.
-			Achado = Achado.constroi_alunoCompleto(mat, ListaAlunos);
-			System.out.println("Visualização disponível!");
+			//Achado = Achado.constroi_alunoCompleto(mat, ListaAlunos); // Funcao velha, era uma funcao por classe, agora é uma funcao genericao com teste.
+
+			Achado = ListaAlunos.iguala(c -> c.getMatriculaAluno() == mat);
 			
-			
+			//Preciso enviar
 			request.setAttribute("Aluno", Achado);
+			//Será que preciso enviar uma lista de cursos ?????????????
 			request.setAttribute("listaCursos", ListaCursos);
+			//Será que preciso enviar uma lista de cursos ?????????????
 			request.setAttribute("cursosAluno", cursosdoaluno);
+			//Será que preciso enviar uma lista de cursos ?????????????
 			request.setAttribute("ListaAlunos", ListaAlunos);
+			//Precisa ? testar!!!1
 			request.setAttribute("mensagem", "Visualização!");
 			request.getRequestDispatcher("visu_aluno.jsp").forward(request, response);
 
@@ -237,19 +316,61 @@ public class controller extends HttpServlet {
 	
 	//Funcao visualizar disciplina. Vai trazer objeto disciplina + string alunos.
 	protected void Visualiza_Disciplina(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-	IOException {
-
-		//teste da função visualiza aluno
-		System.out.println("Teste da função:Visualiza_Disciplina");
+	IOException {				
 		
 		int mat = Integer.parseInt(request.getParameter("cod_disciplina"));
 		Disciplina achada = new Disciplina();
 		
-		achada = achada.disciplinaporcodigo(mat, ListaDisciplinas);
-		//teste para teste da disciplina
-		System.out.println(achada.getNomeDisciplina());
 		
-		request.setAttribute("Disciplina", achada);
+		
+		
+		if(ListaDisciplinas.getIndice(a->a.getCodDisciplina() == mat) != -1) {
+			achada = ListaDisciplinas.iguala(j -> j.getCodDisciplina()==mat);
+			float notaminima = achada.getNotaMinima();
+			
+			
+			//String outra = Achado.constroi_cursos_aluno(Achado, ListaCursos, ListaDisciplinas);
+			 String alunosnadisciplina = ListaCursos.gerarRelatorio(
+					ListaCursos,
+				    curso -> (curso.getCodDisciplina() == mat),
+				    curso -> {
+				        StringBuilder sb = new StringBuilder();
+				        Aluno alunos = ListaAlunos.iguala(d -> d.getMatriculaAluno() == curso.getMatricCurso());
+
+				        sb.append("Matricula: ").append(curso.getMatricCurso()).append(" | ");
+				        sb.append("Nome: ").append(alunos != null ? alunos.getNome() : "Desconhecida").append(" | ");
+				        sb.append("Média: ").append(curso != null ? curso.calculaMedia() : "N/A").append(" | ");
+
+				        double media = curso.calculaMedia();
+				        sb.append("Nota 1: ").append(curso.getNota1()).append(" | ");
+				        sb.append("Nota 2: ").append(curso.getNota2()).append(" | ");
+
+				        if (alunos != null && media >= notaminima) {
+				            sb.append("Status: APROVADO");
+				        } else {
+				            sb.append("Status: REPROVADO");
+				        }
+
+				        return sb.toString();
+				    }
+				);
+			 
+			request.setAttribute("Disciplina", achada);
+			//Passar string de alunos naquela disciplina
+			request.setAttribute("Alunoscursos", alunosnadisciplina);
+			
+			request.getRequestDispatcher("visu_disciplina.jsp").forward(request, response);
+						
+		}else
+		{
+			System.out.println("Erro! Disciplina Não cadastrada!");
+			request.setAttribute("erro", "Disciplina Não cadastrada!");
+			response.sendRedirect("visu_disciplina.jsp?erro=1");
+		}
+		
+
+		//teste para teste da disciplina
+		
 		
 		
 }

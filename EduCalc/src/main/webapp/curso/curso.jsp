@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CRUD de Alunos</title>
+<title>CRUD de Cursos</title>
 <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
 <div  class="container">
-<h2>Alunos</h2>
-<a href="cad_aluno.jsp" class="botao1">Cadastrar</a><br>
-<a href="exc_aluno.jsp" class="botao1">Excluir</a><br>
+<h2>Cursos</h2>
+<a href="cad_curso.jsp" class="botao1">Cadastrar</a><br>
+<a href="exc_curso.jsp" class="botao1">Excluir</a><br>
 <a href="visu_aluno.jsp" class="botao1">Visualizar</a><br>
 <a href="../Inicio.jsp" class="menu">Voltar ao menu</a>
 </div>

@@ -1,12 +1,18 @@
 package ClassPrimaria;
+
+import java.util.function.Predicate;
+
+import java.util.function.Function;
+
+
 public class ListaDuplamenteEncadeada<T> {
     private No<T> head;
     private No<T> tail;
+	private int tamanho;
+    
     public void setTamanho(int tamanho) {
 		this.tamanho = tamanho;
 	}
-
-	private int tamanho;
 
     //Construtor para nulo
     public ListaDuplamenteEncadeada() {
@@ -115,4 +121,89 @@ public class ListaDuplamenteEncadeada<T> {
 	public void setTail(No<T> tail) {
 		this.tail = tail;
 	}
+	
+	public int getIndice(Predicate<T> condicao) {
+	    int indice = 0;
+	    No<T> percorre = this.getHead();
+	    
+	    while(percorre != null) {
+	        if(condicao.test(percorre.getConteudo())) {
+	            return indice;
+	        }
+	        indice++;
+	        percorre = percorre.getProximo();
+	    }
+	    return -1;
+	}
+	
+	
+	public T iguala(Predicate<T> filtro) {
+		No<T> percorre = this.getHead();
+		
+		while(percorre != null) {
+			if(filtro.test(percorre.getConteudo())) {
+				return percorre.getConteudo();
+			}
+				
+			percorre = percorre.getProximo();
+		}
+		return null;
+	}
+	
+	public void remover(Predicate<T> condicao) {
+	    No<T> no = this.head;
+
+	    while (no != null) {
+	        if (condicao.test(no.getConteudo())) {
+	            
+	            if (no == head) {
+	                head = no.getProximo();
+	                if (head != null) {
+	                    head.setAnterior(null);
+	                } else {
+	                    tail = null;
+	                }
+	            }
+	            else if (no == tail) {
+	                tail = no.getAnterior();
+	                if (tail != null) {
+	                    tail.setProximo(null);
+	                }
+	            }
+	            else {
+	                no.getAnterior().setProximo(no.getProximo());
+	                no.getProximo().setAnterior(no.getAnterior());
+	            }
+
+	            tamanho--;
+	            return;
+	        }
+
+	        no = no.getProximo();
+	    }
+	}
+
+	public String gerarRelatorio(
+	        ListaDuplamenteEncadeada<T> lista,
+	        Predicate<T> filtro,
+	        Function<T, String> formatador) {
+	    
+	    StringBuilder relatorio = new StringBuilder();
+	    No<T> no = lista.getHead();
+
+	    while (no != null) {
+	        T elemento = no.getConteudo();
+	        
+	        if (filtro.test(elemento)) {
+	            relatorio.append(formatador.apply(elemento));
+	            relatorio.append("\n-------------------------------------------------------------\n");
+	        }
+	        
+	        no = no.getProximo();
+	    }
+
+	    return relatorio.toString();
+	}
+
+
 }

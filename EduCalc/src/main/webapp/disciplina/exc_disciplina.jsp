@@ -24,7 +24,7 @@
             <% } %>
         </div>
 
-        <form name="frmDisciplina" action="<%=request.getContextPath()%>/excluir_disciplina" method="post">
+        <form name="frmDisciplina" action="<%=request.getContextPath()%>excluir_disciplina" method="post">
             <div class="form-group">
                 <input 
                     type="text" 

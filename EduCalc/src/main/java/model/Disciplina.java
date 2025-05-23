@@ -44,19 +44,16 @@ public class Disciplina {
         NotaMinima = notaMinima;
     }
 
-  //validação de objeto para lista.
-    public int getIndice(int cod, ListaDuplamenteEncadeada<Disciplina> listaDisciplina) {
-    	int indice =0;
-    	No<Disciplina> percorre = listaDisciplina.getHead();
-    	while(percorre.getProximo()!=null) {
-    		if(cod == percorre.getConteudo().getCodDisciplina()) {
-    			return indice;
-    		}
-    		indice ++;
-    		percorre = percorre.getProximo();
-    	}
-    	return indice;
-    }
+	/*
+	 * //validação de objeto para lista. public int getIndice(Disciplina disc,
+	 * ListaDuplamenteEncadeada<Disciplina> listaDisciplina) {
+	 * 
+	 * int indice =0; No<Disciplina> percorre = listaDisciplina.getHead();
+	 * while(percorre != null) { if(disc.getCodDisciplina() ==
+	 * percorre.getConteudo().getCodDisciplina()) { return indice; } indice ++;
+	 * percorre = percorre.getProximo(); } return -1; }
+	 */
+    
     //buscar nome da disciplina
     public Disciplina disciplinaporcodigo( int CodDisciplina, ListaDuplamenteEncadeada<Disciplina> listaDisciplina) {
     	Disciplina achada = new Disciplina();

@@ -12,19 +12,19 @@
 
     <div class="container_cantoesquerdo">
         <img src="../imagens/9883213.png" alt="Logo">
-        <h1>Cadastrar Novo Aluno</h1>
+        <h1>Cadastrar Nova Disciplina</h1>
 
         <div class="mensagem">
             <% if (request.getParameter("sucesso") != null) { %>
-                <p class="sucesso">✅ Aluno cadastrado com sucesso!</p>
+                <p class="sucesso">✅ Disciplina cadastrado com sucesso!</p>
             <% } %>
 
             <% if (request.getParameter("erro") != null) { %>
-                <p class="erro">❌ Erro: Matrícula já cadastrada!</p>
+                <p class="erro">❌ Erro: Código já cadastrado!</p>
             <% } %>
         </div>
 
-        <form name="frmAluno" action="<%=request.getContextPath()%>/cria_aluno" method="post">
+        <form name="frmAluno" action="<%=request.getContextPath()%>/cria_disciplina" method="post">
 
             <div class="form-group">
                 <input 
@@ -39,8 +39,8 @@
             <div class="form-group">
                 <input 
                     type="text" 
-                    name="matricula" 
-                    placeholder="Matrícula" 
+                    name="cod_disciplina" 
+                    placeholder="cod_disciplina" 
                     class="caixa2" 
                     maxlength="6" 
                     required 
@@ -52,10 +52,10 @@
             <div class="form-group">
                 <input 
                     type="text" 
-                    name="idade" 
-                    placeholder="Idade" 
+                    name="media_necessaria" 
+                    placeholder="Media Necessaria" 
                     class="caixa2" 
-                    maxlength="3" 
+                    maxlength="2" 
                     required 
                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                     inputmode="numeric"
@@ -64,7 +64,7 @@
 
             <div class="rodape">
                 <input type="submit" value="Adicionar" class="botao1">
-                <a href="aluno.jsp" class="voltar">Voltar</a>
+                <a href="disciplina.jsp" class="voltar">Voltar</a>
             </div>
 
         </form>
@@ -75,7 +75,7 @@
 
     if (params.has("erro")) {
       const erro = document.createElement("p");
-      erro.textContent = "❌ Erro: Matrícula já cadastrada!";
+      erro.textContent = "❌ Erro: Codigo de Disciplian já cadastrada!";
       erro.style.color = "red";
       erro.style.fontWeight = "bold";
       document.querySelector(".container_cantoesquerdo").prepend(erro);
@@ -83,14 +83,12 @@
 
     if (params.has("sucesso")) {
       const sucesso = document.createElement("p");
-      sucesso.textContent = "✅ Aluno cadastrado com sucesso!";
+      sucesso.textContent = "✅ DISCIPLINA cadastrado com sucesso!";
       sucesso.style.color = "green";
       sucesso.style.fontWeight = "bold";
       document.querySelector(".container_cantoesquerdo").prepend(sucesso);
     }
   });
 </script>
-
 </body>
-
 </html>

@@ -1,21 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="model.Aluno, model.Curso, ClassPrimaria.ListaDuplamenteEncadeada" %>
+<%@ page import="model.Aluno, model.Curso,model.Disciplina, ClassPrimaria.ListaDuplamenteEncadeada" %>
 
 <%
-    @SuppressWarnings("unchecked")
-    ListaDuplamenteEncadeada<Curso> listaCursos = 
-        (ListaDuplamenteEncadeada<Curso>) request.getAttribute("listaCursos");
-
-@SuppressWarnings("unchecked")
-ListaDuplamenteEncadeada<Aluno> ListaAlunos = (ListaDuplamenteEncadeada<Aluno>) request.getAttribute("ListaAlunos");
-    Aluno aluno = (Aluno) request.getAttribute("Aluno");
+    Disciplina disciplina = (Disciplina) request.getAttribute("Disciplina");
+    
+    
 %>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Buscar Aluno</title>
+    <title>Buscar Disciplina</title>
     
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -31,34 +27,34 @@ ListaDuplamenteEncadeada<Aluno> ListaAlunos = (ListaDuplamenteEncadeada<Aluno>) 
                 <p class="erro">❌ Erro: Matrícula não encontrada!</p>
             <% } %>
         </div>
-        <h1>Buscar Aluno</h1>
+        <h1>Buscar Disciplina</h1>
 
-        <form action="buscar_aluno" method="get">
+        <form action="buscar_disciplina" method="get">
             <input 
                 type="text" 
-                name="matricula" 
-                placeholder="Digite a matrícula" 
+                name="cod_disciplina" 
+                placeholder="Digite o Codigo da disciplina" 
                 required
             >
             <input type="submit" value="Buscar">
-            <a href="aluno.jsp" class="voltar">Voltar</a>
+            <a href="disciplina.jsp" class="voltar">Voltar</a>
         </form>
 
-        <% if (aluno != null) { %>
+        <% if (disciplina != null) { %>
         
-            <div class="dados-aluno">
-                <h2>Dados do Aluno</h2>
-                <p><strong>Matrícula:</strong> <%= aluno.getMatriculaAluno() %></p>
-                <p><strong>Nome:</strong> <%= aluno.getNome() %></p>
-                <p><strong>Idade:</strong> <%= aluno.getIdade() %></p>
+            <div class="dados-disciplina">
+                <h2>Informações da Disciplina</h2>
+                <p><strong>Código:</strong> <%= disciplina.getCodDisciplina() %></p>
+                <p><strong>Nome:</strong> <%= disciplina.getNomeDisciplina() %></p>
+                <p><strong>Média:</strong> <%= disciplina.getNotaMinima() %></p>
 
                 <p><strong>Cursos:</strong></p>
-				<pre><%= request.getAttribute("cursosAluno") %></pre>
+				<pre><%= request.getAttribute("Alunoscursos") %></pre>
             </div>
 
-        <% } else if (request.getParameter("matricula") != null) { %>
+        <% } else if (request.getParameter("Cod_disciplina") != null) { %>
 
-            <p style="color:red;">❌ Aluno não encontrado!</p>
+            <p style="color:red;">❌ Disciplina não encontrado!</p>
 
         <% } %>
 

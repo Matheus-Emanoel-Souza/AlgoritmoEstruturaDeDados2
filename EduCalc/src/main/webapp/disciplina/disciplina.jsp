@@ -16,6 +16,5 @@
 <a href="visu_disciplina.jsp" class="botao1">Visualizar</a><br>
 <a href="../Inicio.jsp" class="menu">Voltar ao menu</a>
 </div>
-
 </body>
 </html>
