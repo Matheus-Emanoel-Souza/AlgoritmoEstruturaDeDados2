@@ -12,11 +12,14 @@
 <body>
 
 <div class="container">
-<h1>Inicio do programa!</h1><br>
-  <a href="aluno" class="botao1">Aluno</a><br>
-  <a href="disciplina" class="botao1">Disciplina</a><br>
-  <a href="curso" class="botao1">Curso</a><br>
-  <a href="relatorio" class="botao1">Montar Relatório</a>
+
+	<div class="centraliza"><h1>Inicio do programa!</h1><br></div>
+  	<a href="aluno" class="botao1">Aluno</a><br>
+  	<a href="disciplina" class="botao1">Disciplina</a><br>
+  	<a href="curso" class="botao1">Curso</a><br>
+  	<a href="relatorio" class="botao1">Montar Relatório</a>
+    <a href="Salvar" class="botao salvar">SALVAR!!</a>
+    
 </div>
 
 </body>

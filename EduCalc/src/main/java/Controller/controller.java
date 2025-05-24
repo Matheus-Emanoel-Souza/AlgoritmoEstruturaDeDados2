@@ -214,12 +214,15 @@ public class controller extends HttpServlet {
 		//2a passo criar um objeto com as inormações que tenho.
 		
 		if((ListaAlunos.getIndice(a->a.getMatriculaAluno() == matricula_aluno) != -1) &&
-			(ListaDisciplinas.getIndice(b->b.getCodDisciplina() == codigo_disciplina) != -1)) {
+			(ListaDisciplinas.getIndice(b->b.getCodDisciplina() == codigo_disciplina) != -1) &&
+			(ListaCursos.getIndice(a->a.getCodDisciplina() == codigo_disciplina && a.getMatricCurso() == codigo_disciplina) != -1)){
+			
 			Curso curso = new Curso(matricula_aluno,codigo_disciplina,Nota1,Nota2);
 			ListaCursos.add(curso);
 			System.out.println("Curso cadastrado com sucesso!!!");
 			request.setAttribute("mensagem", "Curso Inserida com sucesso!!");
 			response.sendRedirect("curso/cad_curso.jsp?sucesso=1");
+		
 		}else
 		{
 			System.out.println("Falha no cadastro do curso, Matriculade aluno ou Codigo de curso errado!!");

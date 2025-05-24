@@ -37,7 +37,7 @@
                 required
             >
             <input type="submit" value="Buscar">
-            <a href="disciplina.jsp" class="voltar">Voltar</a>
+            <a href="disciplina.jsp" class="botao voltar">Voltar</a>
         </form>
 
         <% if (disciplina != null) { %>
@@ -46,7 +46,7 @@
                 <h2>Informações da Disciplina</h2>
                 <p><strong>Código:</strong> <%= disciplina.getCodDisciplina() %></p>
                 <p><strong>Nome:</strong> <%= disciplina.getNomeDisciplina() %></p>
-                <p><strong>Média:</strong> <%= disciplina.getNotaMinima() %></p>
+                <p><strong>Média necessária:</strong> <%= disciplina.getNotaMinima() %></p>
 
                 <p><strong>Cursos:</strong></p>
 				<pre><%= request.getAttribute("Alunoscursos") %></pre>

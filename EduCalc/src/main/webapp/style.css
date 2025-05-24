@@ -1,31 +1,44 @@
 @charset "UTF-8";
 
 :root {
-  --cor-primaria: #74ebd5;
-  --cor-secundaria: #ACB6E5;
-  --cor3: #4B0082;
-  --cor4: rgb(107, 29, 109);
-  --cor5: #00008B;
-  --cor6: 
+	/*É horrível ser daltônico pqp*/
+  --cor-fundo: #3366ff;
+
+  --cor-voltar: #FF6B6B;
+  --cor-voltar-hover: #C0392B;
+
+  --cor-opcao: #4D96FF;
+  --cor-opcao-hover: #256DCA;
+
+  --cor-salvar: #28A745;
+  --cor-salvar-hover: #1E7E34;
+
+  --cor-titulo: #000000;
 }
 
 body {
   margin: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--cor-primaria);
+  padding: 0;
+  background-color: var(--cor-fundo);
   font-family: Arial, sans-serif;
+  overflow-y: auto;
 }
 
 .container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.centraliza {
   text-align: center;
 }
 
 h1 {
-  color: var(--cor3);
-  text-shadow: 1px 1px 3px black;
+  color: var(--cor-titulo);
 }
 
 img {
@@ -66,25 +79,15 @@ input.caixa2 {
   letter-spacing: 2px;
 }
 
-.container_cantoesquerdo {
-  padding: 0;
-  max-width: 600px;
-}
-
-.container img {
-  display: flex;
-  margin-left: 1000;
-}
-
 .rodape {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #f9f9f9;
-  border-top: 1px solid #ccc;
+  background-color: var(--cor-fundo);
 }
 
+/* Botões de Opções */
 .botao1 {
   display: block;
   margin: 10px auto;
@@ -96,49 +99,60 @@ input.caixa2 {
   text-decoration: none;
   width: 200px;
   transition: background-color 0.3s;
-  color: black;
+  color: white;
   border: none;
-  background-color: red;
+  background-color: var(--cor-opcao);
 }
 
-.botao.menu {
-  background-color: #4da6ff;
+.botao1:hover {
+  background-color: var(--cor-opcao-hover);
 }
 
-.botao.menu:hover {
-  background-color: #0059b3;
+/* Botão de Salvar */
+.botao.salvar {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  width: 200px;
+  transition: background-color 0.3s;
+  color: white;
+  border: none;
+  background-color: var(--cor-salvar);
 }
 
-.botao.cadastro {
-  background-color: #28a745;
+.botao.salvar:hover {
+  background-color: var(--cor-salvar-hover);
 }
 
-.botao.cadastro:hover {
-  background-color: #1e7e34;
-}
-
+/* Botão de Voltar */
 .botao.voltar {
-  background-color: #ff4d4d;
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  width: 200px;
+  transition: background-color 0.3s;
+  color: white;
+  border: none;
+  background-color: var(--cor-voltar);
 }
 
 .botao.voltar:hover {
-  background-color: #cc0000;
+  background-color: var(--cor-voltar-hover);
 }
 
-.botao.padrao {
-  background-color: #4CAF50;
-}
-
-.botao.padrao:hover {
-  background-color: #45a049;
-}
-
+/* Remove setas dos inputs numéricos */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-input[type=number] {
-  -moz-appearance: textfield;
 }

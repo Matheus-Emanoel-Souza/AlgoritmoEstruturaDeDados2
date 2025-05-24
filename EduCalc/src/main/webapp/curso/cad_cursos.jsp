@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+<div class="centraliza">
     <div class="container_cantoesquerdo">
         <img src="../imagens/9883213.png" alt="Logo">
         <h1>Cadastrar Aluno na disciplina</h1>
@@ -71,10 +71,11 @@
 
     <div class="rodape">
         <input type="submit" value="Adicionar" class="botao1">
-        <a href="curso.jsp" class="voltar">Voltar</a>
+        <a href="curso.jsp" class="botao voltar">Voltar</a>
     </div>
 </form>
 </div> 
+</div>
 
 <script>
   window.addEventListener("DOMContentLoaded", () => {
