@@ -1,3 +1,4 @@
+12;teste;0
 10001;João Silva;20
 10002;Maria Oliveira;22
 10003;Pedro Santos;21

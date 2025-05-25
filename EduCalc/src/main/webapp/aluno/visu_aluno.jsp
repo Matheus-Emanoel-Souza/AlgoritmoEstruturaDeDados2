@@ -37,12 +37,16 @@ ListaDuplamenteEncadeada<Aluno> ListaAlunos = (ListaDuplamenteEncadeada<Aluno>) 
             <input 
                 type="text" 
                 name="matricula" 
-                placeholder="Digite a matrícula" 
+                placeholder="Digite a matrícula"
+                class="caixa1" 
                 required
             >
-            <input type="submit" value="Buscar">
-            <a href="aluno.jsp" class="voltar">Voltar</a>
+   		<div class="rodape">
+	        <a href="aluno.jsp" class="botao voltar">Voltar</a>
+	        <input type="submit" value="Buscar" class="botao salvar">        
+        </div>            
         </form>
+        
 
         <% if (aluno != null) { %>
         

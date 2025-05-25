@@ -1,7 +1,10 @@
 package ClassPrimaria;
 
 import java.util.function.Predicate;
-
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.function.Function;
 
 
@@ -51,32 +54,23 @@ public class ListaDuplamenteEncadeada<T> {
         tamanho++;
     }
 
-    
-    public boolean remove(T elemento) {
-        No<T> atual = head;
-
-        while (atual != null) {
-            if (atual.getConteudo().equals(elemento)) {
-                if (atual == head) {
-                    head = head.getProximo();
-                    if (head != null) head.setAnterior(null);
-                } else if (atual == tail) {
-                    tail = tail.getAnterior();
-                    if (tail != null) tail.setProximo(null);
-                } else {
-                    atual.getAnterior().setProximo(atual.getProximo());
-                    atual.getProximo().setAnterior(atual.getAnterior());
-                }
-
-                tamanho--;
-                return true;
-            }
-
-            atual = atual.getProximo();
-        }
-
-        return false;
-    }
+    //Metodo generico mas acho inviavel a implementação, vou deixar aqui caso precise de algo semelhante futuramente.
+	/*
+	 * public boolean remove(T elemento) { No<T> atual = head;
+	 * 
+	 * while (atual != null) { if (atual.getConteudo().equals(elemento)) { if (atual
+	 * == head) { head = head.getProximo(); if (head != null)
+	 * head.setAnterior(null); } else if (atual == tail) { tail =
+	 * tail.getAnterior(); if (tail != null) tail.setProximo(null); } else {
+	 * atual.getAnterior().setProximo(atual.getProximo());
+	 * atual.getProximo().setAnterior(atual.getAnterior()); }
+	 * 
+	 * tamanho--; return true; }
+	 * 
+	 * atual = atual.getProximo(); }
+	 * 
+	 * return false; }
+	 */
 
     public void printForward() {
         No<T> atual = head;
@@ -136,7 +130,6 @@ public class ListaDuplamenteEncadeada<T> {
 	    return -1;
 	}
 	
-	
 	public T iguala(Predicate<T> filtro) {
 		No<T> percorre = this.getHead();
 		
@@ -186,7 +179,7 @@ public class ListaDuplamenteEncadeada<T> {
 	public String gerarRelatorio(
 	        ListaDuplamenteEncadeada<T> lista,
 	        Predicate<T> filtro,
-	        Function<T, String> formatador) {
+	        Function<T, String> formato) {
 	    
 	    StringBuilder relatorio = new StringBuilder();
 	    No<T> no = lista.getHead();
@@ -195,7 +188,7 @@ public class ListaDuplamenteEncadeada<T> {
 	        T elemento = no.getConteudo();
 	        
 	        if (filtro.test(elemento)) {
-	            relatorio.append(formatador.apply(elemento));
+	            relatorio.append(formato.apply(elemento));
 	            relatorio.append("\n-------------------------------------------------------------\n");
 	        }
 	        
@@ -204,6 +197,61 @@ public class ListaDuplamenteEncadeada<T> {
 
 	    return relatorio.toString();
 	}
-
-
+	
+	public void SALVA(
+			String nomeArquivo,
+			String caminho,
+			Predicate<T> filtro,
+			Function<T,String> formatador){
+		
+		StringBuilder relatorio = new StringBuilder();
+		No<T> no = head;
+		
+		while(no!=null) {
+			T elemento = no.getConteudo();
+			
+			if(filtro.test(elemento)) {
+				relatorio.append(formatador.apply(elemento));
+				relatorio.append("\n");
+			}
+			no = no.getProximo();	
+		}
+		
+		File diretorio = new File(caminho);
+		if(!diretorio.exists()) {
+			diretorio.mkdirs();
+		}
+		
+		String caminhoCompleto = caminho.endsWith("/") || caminho.endsWith("\\")
+		        ? caminho + nomeArquivo + ".txt"
+		        : caminho + "/" + nomeArquivo + ".txt";
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoCompleto, false))) {
+	        writer.write(relatorio.toString());
+	        System.out.println("✅ Arquivo salvo em: " + caminhoCompleto);
+	    } catch (IOException e) {
+	        System.out.println("❌ Erro ao salvar o arquivo: " + e.getMessage());
+	    }
+		
+	}
+	
+	public T getElementoIndice(int indice) {
+		
+		if(indice < 0 || indice >= tamanho) {
+			
+		throw new IndexOutOfBoundsException("Índice inválido: " + indice);
+		
+		}
+		No<T> atual = head;
+		int cot = 0;
+		
+		while(atual != null) {
+			if(cot == indice) {
+				return atual.getConteudo();
+			}
+			atual = atual.getProximo();
+			cot++;
+			
+		}
+		return null;
+	}
 }

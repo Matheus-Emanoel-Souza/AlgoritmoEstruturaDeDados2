@@ -8,13 +8,13 @@
 <link rel="stylesheet" href="../style.css">
 </head>
 
-<body>
-<div  class="container">
-<h2>Alunos</h2>
-<a href="cad_aluno.jsp" class="botao1">Cadastrar</a><br>
-<a href="exc_aluno.jsp" class="botao1">Excluir</a><br>
-<a href="visu_aluno.jsp" class="botao1">Visualizar</a><br>
-<a href="../Inicio.jsp" class="menu">Voltar ao menu</a>
-</div>
-</body>
+	<body>
+		<div  class="container">		
+			<h2>Alunos</h2>
+			<a href="cad_aluno.jsp" class="botao1">Cadastrar</a><br>
+			<a href="exc_aluno.jsp" class="botao1">Excluir</a><br>
+			<a href="visu_aluno.jsp" class="botao1">Visualizar</a><br>
+			<a href="../Inicio.jsp" class="botao voltar">Voltar</a>		
+		</div>	
+	</body>
 </html>

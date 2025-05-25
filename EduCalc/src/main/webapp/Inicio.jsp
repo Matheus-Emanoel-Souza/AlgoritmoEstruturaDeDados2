@@ -18,8 +18,8 @@
   	<a href="disciplina" class="botao1">Disciplina</a><br>
   	<a href="curso" class="botao1">Curso</a><br>
   	<a href="relatorio" class="botao1">Montar Relatório</a>
-    <a href="Salvar" class="botao salvar">SALVAR!!</a>
-    
+	<a href="salvar" class="botao1">SALVAR!!</a>
+
 </div>
 
 </body>

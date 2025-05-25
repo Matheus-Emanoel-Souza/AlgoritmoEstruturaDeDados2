@@ -10,11 +10,11 @@
 
 <body>
 <div  class="container">
-<h2>Disciplinas</h2>
+<div  class="titulo"><h2>Disciplinas</h2></div>
 <a href="cad_disciplina.jsp" class="botao1">Cadastrar</a><br>
 <a href="exc_disciplina.jsp" class="botao1">Excluir</a><br>
 <a href="visu_disciplina.jsp" class="botao1">Visualizar</a><br>
-<a href="../Inicio.jsp" class="menu">Voltar ao menu</a>
+<a href="../Inicio.jsp" class="botao voltar">Voltar ao menu</a>
 </div>
 </body>
 </html>

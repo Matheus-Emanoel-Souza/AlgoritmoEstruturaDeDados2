@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Aluno;
 import model.Curso;
 import model.Disciplina;
@@ -27,17 +28,19 @@ import ClassPrimaria.ListaDuplamenteEncadeada;
     "/disciplina",
     "/curso", 
     "/relatorio",
-    
+    "/salvar",  
     //Camadas de criação
     "/cria_aluno",
     "/cria_disciplina",
-    "/criar_curso",
+    "/cria_curso",
     //camadas de exclusão
     "/excluir_aluno",
     "/excluir_disciplina",
+    "/excluir_curso",
     //camadas de busca
     "/aluno/buscar_aluno",
-    "/disciplina/buscar_disciplina"
+    "/disciplina/buscar_disciplina",
+    "/curso/buscar_curso"
 })
 
 public class controller extends HttpServlet {
@@ -86,20 +89,21 @@ public class controller extends HttpServlet {
 		if(action.equals("/disciplina/buscar_disciplina")) {
 			Visualiza_Disciplina(request, response);
 		}
+		if(action.equals("/curso/buscar_curso")) {
+			Visualiza_curso(request, response);
+		}
+		if(action.equals("/salvar")) {
+	    	salvar_listas(request,response);
+	    }
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    String action = request.getServletPath();
 	    System.out.println("POST action: " + action);
 
+	    //Criar
 	    if (action.equals("/cria_aluno")) {
 	        cria_aluno(request, response);
-	    }
-	    if(action.equals("/excluir_aluno")) {
-	    	exclui_aluno(request, response);
-	    }
-	    if(action.equals("/excluir_disciplina")) {
-	    	exclui_disciplina(request, response);
 	    }
 	    if (action.equals("/cria_disciplina")) {
 	        cria_disciplina(request, response);
@@ -107,13 +111,23 @@ public class controller extends HttpServlet {
 	    if(action.equals("/cria_curso")){
 	    	cria_curso(request,response);
 	    }
+	    //Excluir
+	    if(action.equals("/excluir_aluno")) {
+	    	exclui_aluno(request, response);
+	    }
+	    if(action.equals("/excluir_disciplina")) {
+	    	exclui_disciplina(request, response);
+	    }
+	    if(action.equals("/excluir_curso")) {
+	    	exclui_curso(request, response);
+	    }
+	    
 	}
 
-
-	// Rodar o main
 	@SuppressWarnings({ "static-access" })
 	protected void inicio(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {		
+		System.out.println("Entrou no metodo inicio!!");
 		//Carregar as listas.
 		if(ListaAlunos.getTamanho() == 0 && ListaDisciplinas.getTamanho() ==0 && ListaCursos.getTamanho() == 0) {
 			PreencheLista.MontaListaAluno(ListaAlunos, CaminhoAlunos);
@@ -144,11 +158,8 @@ public class controller extends HttpServlet {
 	//ABAS DE CRUD
 	protected void cria_aluno(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
-		//PRINT TESTE PARA VER SE REALMENTE ESTÁ FUNCIONANDO
-		//System.out.println(request.getParameter("nome"));
-		//System.out.println(request.getParameter("matricula"));
-		//System.out.println(request.getParameter("idade"));
 		
+		System.out.println("Função:cria_aluno");
 		String nome = request.getParameter("nome");
 		int mat = Integer.parseInt(request.getParameter("matricula"));
 		int idade = Integer.parseInt(request.getParameter("idade"));
@@ -201,9 +212,10 @@ public class controller extends HttpServlet {
 		}
 		
 	}
-	
 	protected void cria_curso(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
+		
+		System.out.println("Entrou em cria_curso");
 		
 		//1a passo receber os parametros
 		int matricula_aluno = Integer.parseInt(request.getParameter("mat_aluno"));
@@ -211,28 +223,46 @@ public class controller extends HttpServlet {
 		float Nota1 = Float.parseFloat(request.getParameter("nota1"));
 		float Nota2 = Float.parseFloat(request.getParameter("nota2"));
 		
+		System.out.println("Indice do Aluno:"+ListaAlunos.getIndice(a->a.getMatriculaAluno() == matricula_aluno));
+		System.out.println("Indice da disciplina:"+ListaDisciplinas.getIndice(a->a.getCodDisciplina() == codigo_disciplina));
+		System.out.println(ListaCursos.getIndice(a->a.getCodDisciplina()==codigo_disciplina && a.getMatricCurso()== matricula_aluno));
 		//2a passo criar um objeto com as inormações que tenho.
 		
 		if((ListaAlunos.getIndice(a->a.getMatriculaAluno() == matricula_aluno) != -1) &&
-			(ListaDisciplinas.getIndice(b->b.getCodDisciplina() == codigo_disciplina) != -1) &&
-			(ListaCursos.getIndice(a->a.getCodDisciplina() == codigo_disciplina && a.getMatricCurso() == codigo_disciplina) != -1)){
+			(ListaDisciplinas.getIndice(b->b.getCodDisciplina() == codigo_disciplina) != -1) && 
+			(ListaCursos.getIndice(a->a.getCodDisciplina()==codigo_disciplina && a.getMatricCurso()== matricula_aluno)== -1)){
 			
 			Curso curso = new Curso(matricula_aluno,codigo_disciplina,Nota1,Nota2);
 			ListaCursos.add(curso);
 			System.out.println("Curso cadastrado com sucesso!!!");
 			request.setAttribute("mensagem", "Curso Inserida com sucesso!!");
-			response.sendRedirect("curso/cad_curso.jsp?sucesso=1");
+			response.sendRedirect("curso/cad_cursos.jsp?sucesso=1");
 		
 		}else
 		{
-			System.out.println("Falha no cadastro do curso, Matriculade aluno ou Codigo de curso errado!!");
-			request.setAttribute("mensagem","Erro!! Aluno ou curso não cadastrados!!");
-			response.sendRedirect("curso/cad_curso.jsp?erro=1");
+			if(ListaAlunos.getIndice(a->a.getMatriculaAluno() == matricula_aluno)!= -1) {
+				
+
+				request.setAttribute("mensagem","Erro!! Aluno não cadastrados!!");
+				response.sendRedirect("curso/cad_cursos.jsp?erro=1");
+				
+			}else if(ListaDisciplinas.getIndice(b->b.getCodDisciplina() == codigo_disciplina) != -1) {
+				System.out.println("Disciplina não existe na lista de disciplinas");
+				request.setAttribute("mensagem","Erro!! Disciplina não cadastrados!!");
+				response.sendRedirect("curso/cad_cursos.jsp?erro=1");
+			}else {
+				
+				HttpSession sessao = request.getSession();
+				sessao.setAttribute("mensagem","Erro!! Aluno já cadastrado nesta disciplina!!");
+				
+				System.out.println("Aluno já cadastrado nesta disciplina");
+				request.setAttribute("mensagem","Erro!! Aluno já cadastrado nesta disciplina!!");
+				response.sendRedirect("curso/cad_cursos.jsp?erro=1");
+			}
+			
 			
 		}			
-		}
-		
-	
+	}		
 	protected void exclui_aluno(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
 		Aluno excluido = new Aluno();
@@ -257,15 +287,19 @@ public class controller extends HttpServlet {
 	protected void exclui_disciplina(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
 		int cod_dici = Integer.parseInt(request.getParameter("cod_disciplina"));
-		Disciplina disci = new Disciplina();
-		disci.setCodDisciplina(cod_dici);
 		
+//		
+//		Disciplina disci = new Disciplina();
+//		disci.setCodDisciplina(cod_dici);
+//		
+//		
 		//testar impressao do indice
 		//System.out.println(excluido.IndiceAluno(excluido, ListaAlunos));				
 			
 		//disci.getIndice(disci, ListaDisciplinas) != -1
-			if(ListaDisciplinas.getIndice(a -> a.getCodDisciplina() == disci.getCodDisciplina()) == -1) {
-				disci.RemoverDisciplina(cod_dici, ListaDisciplinas);
+			if(ListaDisciplinas.getIndice(a -> a.getCodDisciplina() == cod_dici) == -1) {
+				//disci.RemoverDisciplina(cod_dici, ListaDisciplinas);
+				ListaDisciplinas.remover(a->a.getCodDisciplina() == cod_dici);
 			
 			System.out.println("Disciplina Removido com sucesso!");
 			request.setAttribute("mensagem", "Disciplina Removido com sucesso!");
@@ -277,7 +311,25 @@ public class controller extends HttpServlet {
 			response.sendRedirect("disciplina/exc_disciplina.jsp?erro=1");
 		}	
 	}
-	
+	protected void exclui_curso(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+	IOException {
+		System.out.println("Entrou no metodo de excluir curso");
+		int cod_dic = Integer.parseInt(request.getParameter("cod_disciplina"));
+		int cod_mat = Integer.parseInt(request.getParameter("matricula"));
+		int indice = ListaCursos.getIndice(a->a.getCodDisciplina()==cod_dic && a.getMatricCurso()==cod_mat);
+		
+		if(indice != -1) {
+			ListaCursos.remover(a->a.getCodDisciplina()==cod_dic && a.getMatricCurso()==cod_mat);
+			response.sendRedirect("curso/exc_cursos.jsp?sucesso=1");
+		}else
+		{
+			request.setAttribute("mensagem", "Curso não existe!!!");
+			System.out.println("CURSO NÃO EXISTE!");
+			response.sendRedirect("curso/exc_cursos.jsp?erro=1");			
+		}
+			
+		
+	}
 	protected void Visualiza_aluno(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
 
@@ -396,12 +448,41 @@ public class controller extends HttpServlet {
 			request.setAttribute("erro", "Disciplina Não cadastrada!");
 			response.sendRedirect("visu_disciplina.jsp?erro=1");
 		}
+	}
+	protected void Visualiza_curso(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+	IOException {				
 		
+		System.out.println("Entrou no metodo!");
+		//mat
+		int cod = Integer.parseInt(request.getParameter("cod_disciplina"));
+		int mat = Integer.parseInt(request.getParameter("mat"));
+		int indice = ListaCursos.getIndice(a->a.getCodDisciplina()==cod && a.getMatricCurso()==mat);
+		int indice_aluno = ListaAlunos.getIndice(a->a.getMatriculaAluno()==mat);
+		int indice_disciplina = ListaDisciplinas.getIndice(a->a.getCodDisciplina()==cod);
+		
+		if( indice != -1) {
+			request.setAttribute("Aluno", ListaAlunos.getElementoIndice(indice_aluno));
+			request.setAttribute("Disciplina", ListaDisciplinas.getElementoIndice(indice_disciplina));
+			request.setAttribute("Curso", ListaCursos.getElementoIndice(indice));
+			
+			request.getRequestDispatcher("visu_curso.jsp").forward(request, response);
+		}else
+		{
+			System.out.println("Erro, curso não existe!!");
+			request.setAttribute("erro", "Curso Não cadastrada!");
+			response.sendRedirect("visu_disciplina.jsp?erro=1");
+		}
+		
+		
+	}
+	//salvar_listas
+	protected void salvar_listas(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+	IOException {				
+		System.out.println("Entrou no metodo salvar listas!!!");
+		ListaAlunos.SALVA("Alunos", caminhoBase, a->true, a->a.getMatriculaAluno()+";"+a.getNome()+";"+a.getIdade());
+		ListaDisciplinas.SALVA("Disciplinas", caminhoBase, a->true, a->a.getCodDisciplina()+";"+a.getNomeDisciplina()+";"+a.getNotaMinima());
+		ListaCursos.SALVA("Cursos", caminhoBase, a->true, a->a.getMatricCurso()+";"+a.getCodDisciplina()+";"+a.getNota1()+";"+a.getNota2());
+		response.sendRedirect("Inicio.jsp");					 
 
-		//teste para teste da disciplina
-		
-		
-		
-}
-
-}
+	}
+	}

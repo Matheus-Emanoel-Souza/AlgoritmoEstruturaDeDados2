@@ -9,11 +9,9 @@
 </head>
 
 <body>
-
-    <div class="container_cantoesquerdo">
-        <img src="../imagens/9883213.png" alt="Logo">
+    <div class="container">    
+        <img src="../imagens/9883213.png" alt="Logo">      
         <h1>Cadastrar Novo Aluno</h1>
-
         <div class="mensagem">
             <% if (request.getParameter("sucesso") != null) { %>
                 <p class="sucesso">✅ Aluno cadastrado com sucesso!</p>
@@ -25,50 +23,45 @@
         </div>
 
         <form name="frmAluno" action="<%=request.getContextPath()%>/cria_aluno" method="post">
+           <div class="form-group">
+    <input 
+        type="text" 
+        name="nome" 
+        placeholder="Nome" 
+        class="caixa1" 
+        required
+    >
 
-            <div class="form-group">
-                <input 
-                    type="text" 
-                    name="nome" 
-                    placeholder="Nome" 
-                    class="caixa" 
-                    required
-                >
-            </div>
+    <input 
+        type="text" 
+        name="matricula" 
+        placeholder="Matrícula" 
+        class="caixa2" 
+        maxlength="6" 
+        required 
+        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+        inputmode="numeric"
+    >
 
-            <div class="form-group">
-                <input 
-                    type="text" 
-                    name="matricula" 
-                    placeholder="Matrícula" 
-                    class="caixa2" 
-                    maxlength="6" 
-                    required 
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                    inputmode="numeric"
-                >
-            </div>
-
-            <div class="form-group">
-                <input 
-                    type="text" 
-                    name="idade" 
-                    placeholder="Idade" 
-                    class="caixa2" 
-                    maxlength="3" 
-                    required 
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                    inputmode="numeric"
-                >
-            </div>
-
-            <div class="rodape">
-                <input type="submit" value="Adicionar" class="botao1">
-                <a href="aluno.jsp" class="voltar">Voltar</a>
-            </div>
-
+    <input 
+        type="text" 
+        name="idade" 
+        placeholder="Idade" 
+        class="caixa2" 
+        maxlength="3" 
+        required 
+        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+        inputmode="numeric"
+    >
+</div>
+		<div class="rodape">
+			<a href="aluno.jsp" class="botao voltar">Voltar</a>
+			<input type="submit" value="Adicionar" class="botao salvar">
+		</div>          
         </form>
+        
     </div>
+    		
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);

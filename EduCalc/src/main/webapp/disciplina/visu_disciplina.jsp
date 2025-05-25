@@ -33,11 +33,15 @@
             <input 
                 type="text" 
                 name="cod_disciplina" 
-                placeholder="Digite o Codigo da disciplina" 
+                placeholder="Código da disciplina"
+                class="caixa1" 
                 required
             >
-            <input type="submit" value="Buscar">
+            <div class="rodape">
             <a href="disciplina.jsp" class="botao voltar">Voltar</a>
+            <input type="submit" value="Buscar" class="botao salvar">
+            
+            </div>            
         </form>
 
         <% if (disciplina != null) { %>

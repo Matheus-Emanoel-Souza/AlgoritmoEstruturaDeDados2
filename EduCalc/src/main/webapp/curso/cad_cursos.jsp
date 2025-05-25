@@ -9,73 +9,86 @@
 </head>
 
 <body>
-<div class="centraliza">
-    <div class="container_cantoesquerdo">
+
+<div class="container">
         <img src="../imagens/9883213.png" alt="Logo">
         <h1>Cadastrar Aluno na disciplina</h1>
 
         <div class="mensagem">
-            <% if (request.getParameter("sucesso") != null) { %>
-                <p class="sucesso">✅ Curso cadastrado com sucesso!</p>
-            <% } %>
+        <%
+    String msgErro = (String) session.getAttribute("mensagemErro");
+    String msgSucesso = (String) session.getAttribute("mensagemSucesso");
+		%>
+		
+    <% if (msgSucesso != null) { %>
+        <p class="sucesso">✅ <%= msgSucesso %></p>
+        <% session.removeAttribute("mensagemSucesso"); %>
+    <% } %>
 
-            <% if (request.getParameter("erro") != null) { %>
-                <p class="erro">❌ Erro: Aluno ou disciplina não cadastrados!</p>
-            <% } %>
-        </div>
+    <% if (msgErro != null) { %>
+        <p class="erro">❌ <%= msgErro %></p>
+        <% session.removeAttribute("mensagemErro"); %>
+    <% } %>
+	</div>
 
 <form name="frmCurso" action="<%=request.getContextPath()%>/cria_curso" method="post">
-    <input 
-        type="text" 
-        name="mat_aluno" 
-        placeholder="Matricula do Aluno" 
-        maxlength="5" 
-        class="caixa2" 
-        required 
-        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-        inputmode="numeric"
-    />
-
-    <input 
-        type="text" 
-        name="cod_disciplina" 
-        placeholder="Código da disciplina" 
-        maxlength="3" 
-        class="caixa2" 
-        required 
-        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-        inputmode="numeric"
-    />
-
-    <input 
-        type="text" 
-        name="nota1" 
-        placeholder="Nota 1" 
-        class="caixa2"
-        maxlength="2"  
-        min="0" 
-        max="10" 
-        required
-    />
-
-    <input 
-        type="text" 
-        name="nota2" 
-        placeholder="Nota 2" 
-        class="caixa2"
-        maxlength="2"  
-        min="0" 
-        max="10" 
-        required
-    />
-
-    <div class="rodape">
-        <input type="submit" value="Adicionar" class="botao1">
-        <a href="curso.jsp" class="botao voltar">Voltar</a>
+	<div class="form-group">
+	    <input 
+	        type="text" 
+	        name="mat_aluno" 
+	        placeholder="Matricula do Aluno" 
+	        maxlength="5" 
+	        class="caixa1" 
+	        required 
+	        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+	        inputmode="numeric"
+	    />
+	
+	    <input 
+	        type="text" 
+	        name="cod_disciplina" 
+	        placeholder="Código da disciplina" 
+	        maxlength="3" 
+	        class="caixa2" 
+	        required 
+	        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+	        inputmode="numeric"
+	    />
+	
+	    <input 
+	        type="text" 
+	        name="nota1" 
+	        placeholder="Nota 1" 
+	        class="caixa2"
+	        maxlength="2"  
+	        min="0" 
+	        max="10" 
+	        required
+	    />
+	
+	    <input 
+	        type="text" 
+	        name="nota2" 
+	        placeholder="Nota 2" 
+	        class="caixa2"
+	        maxlength="2"  
+	        min="0" 
+	        max="10" 
+	        required
+	    />
     </div>
 </form>
-</div> 
-</div>
+
+		<div class="rodape">
+		
+        <a href="curso.jsp" class="botao voltar">Voltar</a>
+        <input type="submit" value="Adicionar" class="botao1">
+        
+		</div>
+		
+		
+	</div> 
+
 
 <script>
   window.addEventListener("DOMContentLoaded", () => {
@@ -98,7 +111,5 @@
     }
   });
 </script>
-
 </body>
-
 </html>

@@ -9,8 +9,7 @@
 </head>
 
 <body>
-
-    <div class="container_cantoesquerdo">
+    <div class="container">
         <img src="../imagens/9883213.png" alt="Logo">
         <h1>Cadastrar Nova Disciplina</h1>
 
@@ -31,12 +30,12 @@
                     type="text" 
                     name="nome" 
                     placeholder="Nome" 
-                    class="caixa" 
+                    class="caixa1" 
                     required
                 >
-            </div>
 
-            <div class="form-group">
+
+
                 <input 
                     type="text" 
                     name="cod_disciplina" 
@@ -47,9 +46,9 @@
                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                     inputmode="numeric"
                 >
-            </div>
 
-            <div class="form-group">
+
+
                 <input 
                     type="text" 
                     name="media_necessaria" 
@@ -61,14 +60,15 @@
                     inputmode="numeric"
                 >
             </div>
-
+            
             <div class="rodape">
                 <input type="submit" value="Adicionar" class="botao1">
-                <a href="disciplina.jsp" class="voltar">Voltar</a>
+                <a href="disciplina.jsp" class="botao voltar">Voltar</a>
             </div>
-
+            
         </form>
     </div>
+    
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
@@ -90,5 +90,6 @@
     }
   });
 </script>
+
 </body>
 </html>
