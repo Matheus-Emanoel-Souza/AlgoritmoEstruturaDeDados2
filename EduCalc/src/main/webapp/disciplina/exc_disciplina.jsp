@@ -24,8 +24,7 @@
             <% } %>
         </div>
 
-        <form name="frmDisciplina" action="<%=request.getContextPath()%>excluir_disciplina" method="post">
-            <div class="form-group">
+        <form  class="form-group" name="frmDisciplina" action="<%=request.getContextPath()%>/excluir_disciplina" method="post">
                 <input 
                     type="text" 
                     name="cod_disciplina" 
@@ -36,7 +35,6 @@
                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                     inputmode="numeric"
                 >
-            </div>
 
             <div class="rodape">
                 <a href="disciplina.jsp" class="botao voltar">Voltar</a>

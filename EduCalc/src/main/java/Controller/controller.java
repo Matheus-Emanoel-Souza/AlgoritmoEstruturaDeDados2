@@ -275,7 +275,9 @@ public class controller extends HttpServlet {
 	protected void exclui_aluno(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
 		Aluno excluido = new Aluno();
-		excluido.setMatriculaAluno(Integer.parseInt(request.getParameter("matricula")));
+		
+		int mat = Integer.parseInt(request.getParameter("matricula"));
+		excluido.setMatriculaAluno(mat);
 		
 		//testar impressao do indice
 		//System.out.println(excluido.IndiceAluno(excluido, ListaAlunos));
@@ -284,9 +286,14 @@ public class controller extends HttpServlet {
 		if(ListaAlunos.getIndice(a->a.getMatriculaAluno() == excluido.getMatriculaAluno()) != -1) {
 			
 			//exclui aluno e limpa suas matriculas em cursos
-			No<Alunos> no = ListaAlunos.getHead();
-			ListaAlunos.remover(a->a.getMatriculaAluno() == excluido.getMatriculaAluno());
-			ListaCursos.remover(a->a.getMatricCurso()== excluido.getMatriculaAluno());			
+
+			/*
+			 * ListaAlunos.remover(a->a.getMatriculaAluno() ==
+			 * excluido.getMatriculaAluno()); ListaCursos.remover(a->a.getMatricCurso()==
+			 * excluido.getMatriculaAluno());
+			 */		
+			ListaAlunos.removerTodos(a->a.getMatriculaAluno()==mat);
+			ListaCursos.removerTodos(a->a.getMatricCurso()==mat);
 			
 			//repetindo muito codigo desnecessário - (Excluir)
 			//ListaAlunos.SALVA("Alunos", caminhoBase, a->true, a->a.getMatriculaAluno()+";"+a.getNome()+";"+a.getIdade());
@@ -313,11 +320,17 @@ public class controller extends HttpServlet {
 		int cod_dici = Integer.parseInt(request.getParameter("cod_disciplina"));
 				
 			
-			
-			if(ListaDisciplinas.getIndice(a -> a.getCodDisciplina() == cod_dici) == -1) {
+			//retor -1 se não exister.
+			if(ListaDisciplinas.getIndice(a -> a.getCodDisciplina() == cod_dici) != -1) {
 				
-				ListaDisciplinas.remover(a->a.getCodDisciplina() == cod_dici);
-				ListaCursos.remover(a->a.getCodDisciplina() == cod_dici);
+				/*
+				 * ListaDisciplinas.remover(a->a.getCodDisciplina() == cod_dici);
+				 * ListaCursos.remover(a->a.getCodDisciplina() == cod_dici);
+				 */
+				
+				ListaDisciplinas.removerTodos(a->a.getCodDisciplina() == cod_dici);
+				ListaCursos.removerTodos(a->a.getCodDisciplina() == cod_dici);
+				
 				
 				salva();				
 			

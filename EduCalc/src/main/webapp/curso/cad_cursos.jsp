@@ -60,7 +60,7 @@
 	        name="nota1" 
 	        placeholder="Nota 1" 
 	        class="caixa2"
-	        maxlength="2"  
+	        maxlength="4"  
 	        min="0" 
 	        max="10" 
 	        required
@@ -71,7 +71,7 @@
 	        name="nota2" 
 	        placeholder="Nota 2" 
 	        class="caixa2"
-	        maxlength="2"  
+	        maxlength="4"  
 	        min="0" 
 	        max="10" 
 	        required

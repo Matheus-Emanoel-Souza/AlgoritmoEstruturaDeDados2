@@ -178,6 +178,38 @@ public class ListaDuplamenteEncadeada<T> {
 	    }
 	}
 
+	public void removerTodos(Predicate<T> condicao) {
+	    No<T> no = this.head;
+
+	    while (no != null) {
+	        No<T> proximo = no.getProximo();
+
+	        if (condicao.test(no.getConteudo())) {
+	            if (no == head) {
+	                head = no.getProximo();
+	                if (head != null) {
+	                    head.setAnterior(null);
+	                } else {
+	                    tail = null;
+	                }
+	            } else if (no == tail) {
+	                tail = no.getAnterior();
+	                if (tail != null) {
+	                    tail.setProximo(null);
+	                }
+	            } else {
+	                no.getAnterior().setProximo(no.getProximo());
+	                no.getProximo().setAnterior(no.getAnterior());
+	            }
+
+	            tamanho--;
+	        }
+
+	        no = proximo;
+	    }
+	}
+
+	
 	public String gerarRelatorio(
 	        Predicate<T> filtro,
 	        Function<T, String> formato) {

@@ -1,6 +1,6 @@
 1;Mecânica dos Solidos;5.0
 201;Estruturas de Dados;6.0
 304;Eletrônica Analógica;5.5
-601;Segurança da Informação;7.0
 3;Fenomenos;5.0
 100;Algebra;9.0
+700;equitacao;9.0
