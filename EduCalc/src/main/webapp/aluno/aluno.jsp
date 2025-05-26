@@ -9,7 +9,8 @@
 </head>
 
 	<body>
-		<div  class="container">		
+		<div  class="container">
+			<img src="../imagens/Aluno.jpg" alt="Logo"> 		
 			<h2>Alunos</h2>
 			<a href="cad_aluno.jsp" class="botao1">Cadastrar</a><br>
 			<a href="exc_aluno.jsp" class="botao1">Excluir</a><br>

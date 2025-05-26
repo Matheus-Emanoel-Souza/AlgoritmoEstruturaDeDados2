@@ -16,6 +16,7 @@
 
         <!-- 1. Lista de alunos -->
         <fieldset>
+        
             <legend>Lista de Alunos</legend>
             <input type="checkbox" name="relatorio" value="listaAlunos"> Gerar Lista de Alunos <br>
 

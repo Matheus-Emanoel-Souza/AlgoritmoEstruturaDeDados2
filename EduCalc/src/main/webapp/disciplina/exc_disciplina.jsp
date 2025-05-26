@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Excluir Aluno</title>
-    <link rel="icon" href="<%=request.getContextPath()%>/imagens/9883213.png">
+    <link rel="icon" href="<%=request.getContextPath()%>/imagens/caderno_com_x.jpg">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 </head>
 
 <body>
 
-    <div class="container_cantoesquerdo">
-        <img src="<%=request.getContextPath()%>/imagens/9883213.png" alt="Logo">
+    <div class="container">
+        <img src="<%=request.getContextPath()%>/imagens/caderno_com_x.jpg" alt="Logo">
         <h1>Excluir</h1>
 
         <div class="mensagem">
@@ -39,8 +39,8 @@
             </div>
 
             <div class="rodape">
-                <input type="submit" value="Excluir" class="botao1">
-                <a href="disciplina.jsp" class="voltar">Voltar</a>
+                <a href="disciplina.jsp" class="botao voltar">Voltar</a>
+                <input type="submit" value="Excluir" class="botao salvar">              
             </div>
         </form>
     </div>

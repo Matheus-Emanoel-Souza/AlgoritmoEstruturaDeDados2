@@ -38,7 +38,7 @@
 	        name="mat_aluno" 
 	        placeholder="Matricula do Aluno" 
 	        maxlength="5" 
-	        class="caixa1" 
+	        class="caixa2" 
 	        required 
 	        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
 	        inputmode="numeric"
@@ -47,7 +47,7 @@
 	    <input 
 	        type="text" 
 	        name="cod_disciplina" 
-	        placeholder="Código da disciplina" 
+	        placeholder="Código" 
 	        maxlength="3" 
 	        class="caixa2" 
 	        required 
@@ -77,19 +77,16 @@
 	        required
 	    />
     </div>
-</form>
-
-		<div class="rodape">
+    
+    		<div class="rodape">
 		
         <a href="curso.jsp" class="botao voltar">Voltar</a>
-        <input type="submit" value="Adicionar" class="botao1">
+        <input type="submit" value="Adicionar" class="botao salvar">
         
 		</div>
 		
-		
+</form>
 	</div> 
-
-
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
@@ -99,7 +96,7 @@
       erro.textContent = "❌ Erro: Matrícula já cadastrada!";
       erro.style.color = "red";
       erro.style.fontWeight = "bold";
-      document.querySelector(".container_cantoesquerdo").prepend(erro);
+      document.querySelector(".container").prepend(erro);
     }
 
     if (params.has("sucesso")) {
@@ -107,7 +104,7 @@
       sucesso.textContent = "✅ Aluno cadastrado com sucesso!";
       sucesso.style.color = "green";
       sucesso.style.fontWeight = "bold";
-      document.querySelector(".container_cantoesquerdo").prepend(sucesso);
+      document.querySelector(".container").prepend(sucesso);
     }
   });
 </script>

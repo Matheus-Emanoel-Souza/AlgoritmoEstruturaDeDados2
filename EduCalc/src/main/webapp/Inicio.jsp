@@ -12,13 +12,15 @@
 <body>
 
 <div class="container">
-
-	<div class="centraliza"><h1>Inicio do programa!</h1><br></div>
+	<h1 style="border-bottom: 2px solid black; padding-bottom: 5px;">MENU</h1><br>
+	
   	<a href="aluno" class="botao1">Aluno</a><br>
   	<a href="disciplina" class="botao1">Disciplina</a><br>
   	<a href="curso" class="botao1">Curso</a><br>
-  	<!--  
+  	  
+  	  <!--
   	<a href="relatorio" class="botao1">Relatório</a>
+  	
   	<a href="Sair" class="botao voltar">Sair</a>
   	-->
   	

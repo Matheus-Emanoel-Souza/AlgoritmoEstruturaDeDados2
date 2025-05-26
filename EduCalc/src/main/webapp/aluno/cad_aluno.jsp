@@ -10,7 +10,7 @@
 
 <body>
     <div class="container">    
-        <img src="../imagens/9883213.png" alt="Logo">      
+        <img src="../imagens/Aluno.jpg" alt="Logo">      
         <h1>Cadastrar Novo Aluno</h1>
         <div class="mensagem">
             <% if (request.getParameter("sucesso") != null) { %>
@@ -37,7 +37,7 @@
         name="matricula" 
         placeholder="Matrícula" 
         class="caixa2" 
-        maxlength="6" 
+        maxlength="5" 
         required 
         oninput="this.value = this.value.replace(/[^0-9]/g, '')"
         inputmode="numeric"
@@ -48,7 +48,7 @@
         name="idade" 
         placeholder="Idade" 
         class="caixa2" 
-        maxlength="3" 
+        maxlength="2" 
         required 
         oninput="this.value = this.value.replace(/[^0-9]/g, '')"
         inputmode="numeric"

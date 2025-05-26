@@ -16,27 +16,6 @@
   --cor-titulo: #000000;
 }
 
-.form-group{
-  max-width: 100%;
-
-  padding: 20px;
-  background-color: var(--cor-fundo);
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  flex-direction: column;
-  margin: 0 auto;
-  display: flex;
-  align-items: center; 
-  
-  display: flex;
-        flex-direction: column;
-        max-width: 3000px;
-}
-
-.h2{
-	margin: 0 auto;
-}
-    
 body {
   margin: 0;
   padding: 0;
@@ -48,18 +27,52 @@ body {
   justify-content: center;
 }
 
-
 .container {
-  max-width: 100%;
-  padding: 120px;
+  padding: 60px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  max-width: 600px; /* 👈 controle de largura */
+  width: 100%;
+}
+.form-group {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px;
+  background-color: var(--cor-fundo);
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bot_menu{
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	
 }
 
+.rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #eee;
+}
+
+.h2{
+	margin: 0 auto;
+	text-align: center;
+  	width: 100%;
+}
 
 .centraliza {
   text-align: center;
@@ -67,12 +80,13 @@ body {
 
 h1 {
   color: var(--cor-titulo);
+  font-size: 48px;
 }
 
 img {
-  width: 200px;
-  height: auto;
-  margin-bottom: 20px;
+  	width: 30%;
+    align-items: center;
+    height: 30%;
 }
 
 input {
@@ -91,7 +105,7 @@ input.caixa2 {
   background-color: #f0f0f0;
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  max-width: 300px;
+  max-width: 350px;
   font-family: monospace;
   letter-spacing: 2px;
   text-align: center;
@@ -110,19 +124,7 @@ input.caixa2 {
   text-align: center;
 }
 
-
-.rodape {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  /*background-color: var(--cor-fundo);*/
-  border-radius: 8px;
-  width: 100%; /* ocupa toda a largura do pai */
-
-}
-
-.botao1 {
+/* .botao1 {
   display: block;
   margin: 8px;
   padding: 15px 20px;
@@ -137,6 +139,17 @@ input.caixa2 {
   color: white;
   border: none;
   background-color: var(--cor-opcao);
+} */
+.botao1 {
+  text-align: center;
+  display: block; /* Garante que se comporte como bloco */
+  width: 200px; /* Opcional pra dar tamanho padrão */
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
 }
 
 .botao1:hover {

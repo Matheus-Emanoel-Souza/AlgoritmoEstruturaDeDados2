@@ -43,6 +43,17 @@ public class Disciplina {
     public void setNotaMinima(float notaMinima) {
         NotaMinima = notaMinima;
     }
+    
+    public int qtd_alunos(ListaDuplamenteEncadeada<Curso> ListaCursos) {
+    	int qtd=0;
+    	No<Curso> no= ListaCursos.getHead();
+    	while(no!=null) {
+    		if(no.getConteudo().getCodDisciplina() == CodDisciplina) {
+    			qtd++;
+    		}
+    	}
+    	return qtd;
+    }
 
 	/*
 	 * //validação de objeto para lista. public int getIndice(Disciplina disc,
@@ -54,21 +65,18 @@ public class Disciplina {
 	 * percorre = percorre.getProximo(); } return -1; }
 	 */
     
-    //buscar nome da disciplina
-    public Disciplina disciplinaporcodigo( int CodDisciplina, ListaDuplamenteEncadeada<Disciplina> listaDisciplina) {
-    	Disciplina achada = new Disciplina();
-    	No<Disciplina> per = listaDisciplina.getHead();
-    	while(per != null) {
-    		if(per.getConteudo().getCodDisciplina() == CodDisciplina) {
-    			achada.setNomeDisciplina(per.getConteudo().getNomeDisciplina()); 
-    			achada.setCodDisciplina(CodDisciplina);
-    			achada.setNotaMinima(per.getConteudo().getNotaMinima());
-    			return achada;
-    		}
-    		per = per.getProximo();
-    	}
-    	return achada;
-    }
+	/*
+	 * //buscar nome da disciplina public Disciplina disciplinaporcodigo( int
+	 * CodDisciplina, ListaDuplamenteEncadeada<Disciplina> listaDisciplina) {
+	 * Disciplina achada = new Disciplina(); No<Disciplina> per =
+	 * listaDisciplina.getHead(); while(per != null) {
+	 * if(per.getConteudo().getCodDisciplina() == CodDisciplina) {
+	 * achada.setNomeDisciplina(per.getConteudo().getNomeDisciplina());
+	 * achada.setCodDisciplina(CodDisciplina);
+	 * achada.setNotaMinima(per.getConteudo().getNotaMinima()); return achada; } per
+	 * = per.getProximo(); } return achada; }
+	 */
+    
     //funcao remover disciplina da lista.
     public void RemoverDisciplina(int cod_disciplina, ListaDuplamenteEncadeada<Disciplina> listaDeDisciplina) {
         No<Disciplina> no = listaDeDisciplina.getHead();

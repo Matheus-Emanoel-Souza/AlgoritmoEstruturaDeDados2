@@ -22,6 +22,7 @@ ListaDuplamenteEncadeada<Aluno> ListaAlunos = (ListaDuplamenteEncadeada<Aluno>) 
 <body>
 
     <div class="container">
+    <img src="<%=request.getContextPath()%>/imagens/Visualizar.jpg" alt="Logo">
     <div class="mensagem">
 <%--             <% if (request.getParameter("sucesso") != null) { %> --%>
 <!--                 <p class="sucesso">✅ Aluno excluído com sucesso!</p> -->
@@ -33,12 +34,12 @@ ListaDuplamenteEncadeada<Aluno> ListaAlunos = (ListaDuplamenteEncadeada<Aluno>) 
         </div>
         <h1>Buscar Aluno</h1>
 
-        <form action="buscar_aluno" method="get">
+        <form action="buscar_aluno" method="get" class="form-group">
             <input 
                 type="text" 
                 name="matricula" 
-                placeholder="Digite a matrícula"
-                class="caixa1" 
+                placeholder="matrícula"
+                class="caixa2" 
                 required
             >
    		<div class="rodape">

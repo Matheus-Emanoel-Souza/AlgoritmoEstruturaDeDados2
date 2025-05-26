@@ -33,18 +33,18 @@
         </div>
         <h1>Visualizar Curso</h1>
 
-        <form action="buscar_curso" method="get">
+        <form class="form-group" action="buscar_curso" method="get">
             <input 
                 type="text" 
                 name="mat" 
-                placeholder="Matrícula do Aluno"
+                placeholder="Matrícula"
                 class="caixa1" 
                 required
             >
             <input 
                 type="text" 
                 name="cod_disciplina" 
-                placeholder="Codigo da Disciplina"
+                placeholder="Codigo"
                 class="caixa1"  
                 required
             >

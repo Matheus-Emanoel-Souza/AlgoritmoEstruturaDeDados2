@@ -18,6 +18,7 @@
 <body>
 
     <div class="container">
+    <img src="<%=request.getContextPath()%>/imagens/Visualizar.jpg" alt="Logo">
     <div class="mensagem">
 <%--             <% if (request.getParameter("sucesso") != null) { %> --%>
 <!--                 <p class="sucesso">✅ Aluno excluído com sucesso!</p> -->
@@ -29,11 +30,11 @@
         </div>
         <h1>Buscar Disciplina</h1>
 
-        <form action="buscar_disciplina" method="get">
+        <form class="form-group" action="buscar_disciplina" method="get">
             <input 
                 type="text" 
                 name="cod_disciplina" 
-                placeholder="Código da disciplina"
+                placeholder="Código"
                 class="caixa1" 
                 required
             >

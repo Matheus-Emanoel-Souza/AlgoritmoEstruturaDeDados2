@@ -10,7 +10,7 @@
 
 <body>
 
-    <div class="container_cantoesquerdo">
+    <div class="container">
         <img src="<%=request.getContextPath()%>/imagens/9883213.png" alt="Logo">
         <h1>Excluir</h1>
 
@@ -31,19 +31,18 @@
                     name="matricula" 
                     placeholder="Matrícula" 
                     class="caixa2" 
-                    maxlength="6" 
+                    maxlength="5" 
                     required 
                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                     inputmode="numeric"
                 >
-            </div>
-            <div class="form-group">
+            
                 <input 
                     type="text" 
                     name="cod_disciplina" 
-                    placeholder="cod. disciplina" 
+                    placeholder="codigo" 
                     class="caixa2" 
-                    maxlength="6" 
+                    maxlength="3" 
                     required 
                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                     inputmode="numeric"
@@ -51,8 +50,8 @@
             </div>
 
             <div class="rodape">
-                <input type="submit" value="Excluir" class="botao1">
-                <a href="curso.jsp" class="voltar">Voltar</a>
+            	<a href="curso.jsp" class="botao voltar">Voltar</a>
+                <input type="submit" value="Excluir" class="botao salvar">               
             </div>
         </form>
     </div>

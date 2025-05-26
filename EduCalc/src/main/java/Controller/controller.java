@@ -10,11 +10,11 @@ import model.Aluno;
 import model.Curso;
 import model.Disciplina;
 import util.Exibir;
-import util.PreencheLista;
 
 import java.io.IOException;
 
 import ClassPrimaria.ListaDuplamenteEncadeada;
+import ClassPrimaria.No;
 
 
 
@@ -128,22 +128,12 @@ public class controller extends HttpServlet {
 	}
 
 	protected void inicio(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {		
-		System.out.println("Entrou no metodo: 'inicio' ");
-		//Carregar as listas.
-		if(ListaAlunos.getTamanho() == 0 && ListaDisciplinas.getTamanho() ==0 && ListaCursos.getTamanho() == 0) {
-			PreencheLista.MontaListaAluno(ListaAlunos, CaminhoAlunos);
-			PreencheLista.MontaListaDisciplina(ListaDisciplinas, CaminhoDisciplinas);
-			PreencheLista.MontaListaCurso(ListaDisciplinas, ListaAlunos, ListaCursos, CaminhoCursos);
-		}else {
-			System.out.println("Listas não foram carregadas!!");
-		}
-		//Teste para ver se as listas estão duplicando
-		//exibicao.exibirNomeAlunosDeLista(ListaAlunos);
-		//Exibir.exibirNomeDisciplinaDaLista(ListaDisciplinas);
-		//Exibir.exibirNomeAlunosDeLista(ListaAlunos);
-		//Exibir.exibirCursos(ListaCursos);
-		//exibicao.exibirCursos(ListaCursos);
+			throws ServletException, IOException {
+		
+		System.out.println("class:Controller - Entrou no metodo: 'inicio' ");
+					
+		Carregar();
+
 		response.sendRedirect("Inicio.jsp");
 	}
 	
@@ -290,12 +280,18 @@ public class controller extends HttpServlet {
 		//testar impressao do indice
 		//System.out.println(excluido.IndiceAluno(excluido, ListaAlunos));
 		
-		//excluido.IndiceAluno(excluido, ListaAlunos) != -1
+		//se o aluno não existir na lista, retorna -1, logo para excluir ele deve existir.
 		if(ListaAlunos.getIndice(a->a.getMatriculaAluno() == excluido.getMatriculaAluno()) != -1) {
+			
+			//exclui aluno e limpa suas matriculas em cursos
+			No<Alunos> no = ListaAlunos.getHead();
 			ListaAlunos.remover(a->a.getMatriculaAluno() == excluido.getMatriculaAluno());
+			ListaCursos.remover(a->a.getMatricCurso()== excluido.getMatriculaAluno());			
 			
-			ListaAlunos.SALVA("Alunos", caminhoBase, a->true, a->a.getMatriculaAluno()+";"+a.getNome()+";"+a.getIdade());
+			//repetindo muito codigo desnecessário - (Excluir)
+			//ListaAlunos.SALVA("Alunos", caminhoBase, a->true, a->a.getMatriculaAluno()+";"+a.getNome()+";"+a.getIdade());
 			
+			salva();
 			
 			System.out.println("Aluno Removido com sucesso!");
 			request.setAttribute("mensagem", "Aluno Removido com sucesso!");
@@ -311,22 +307,19 @@ public class controller extends HttpServlet {
 	}
 	protected void exclui_disciplina(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
-		int cod_dici = Integer.parseInt(request.getParameter("cod_disciplina"));
 		
-//		
-//		Disciplina disci = new Disciplina();
-//		disci.setCodDisciplina(cod_dici);
-//		
-//		
-		//testar impressao do indice
-		//System.out.println(excluido.IndiceAluno(excluido, ListaAlunos));				
-			
-		//disci.getIndice(disci, ListaDisciplinas) != -1
-			if(ListaDisciplinas.getIndice(a -> a.getCodDisciplina() == cod_dici) == -1) {
-				//disci.RemoverDisciplina(cod_dici, ListaDisciplinas);
-				ListaDisciplinas.remover(a->a.getCodDisciplina() == cod_dici);
+		System.out.println("Entrou no metodo: 'exclui_disciplina'");
+		
+		int cod_dici = Integer.parseInt(request.getParameter("cod_disciplina"));
 				
-				ListaDisciplinas.SALVA("Disciplinas", caminhoBase, a->true, a->a.getCodDisciplina()+";"+a.getNomeDisciplina()+";"+a.getNotaMinima());				
+			
+			
+			if(ListaDisciplinas.getIndice(a -> a.getCodDisciplina() == cod_dici) == -1) {
+				
+				ListaDisciplinas.remover(a->a.getCodDisciplina() == cod_dici);
+				ListaCursos.remover(a->a.getCodDisciplina() == cod_dici);
+				
+				salva();				
 			
 			System.out.println("Disciplina Removido com sucesso!");
 			request.setAttribute("mensagem", "Disciplina Removido com sucesso!");
@@ -373,7 +366,6 @@ public class controller extends HttpServlet {
 		
 		 //String outra = Achado.constroi_cursos_aluno(Achado, ListaCursos, ListaDisciplinas);
 		 String cursosdoaluno = ListaCursos.gerarRelatorio(
-				ListaCursos,
 			    curso -> (curso.getMatricCurso() == mat),
 			    curso -> {
 			        StringBuilder sb = new StringBuilder();
@@ -444,7 +436,6 @@ public class controller extends HttpServlet {
 			
 			//String outra = Achado.constroi_cursos_aluno(Achado, ListaCursos, ListaDisciplinas);
 			 String alunosnadisciplina = ListaCursos.gerarRelatorio(
-					ListaCursos,
 				    curso -> (curso.getCodDisciplina() == mat),
 				    curso -> {
 				        StringBuilder sb = new StringBuilder();
@@ -502,7 +493,7 @@ public class controller extends HttpServlet {
 		{
 			System.out.println("Erro, curso não existe!!");
 			request.setAttribute("erro", "Curso Não cadastrada!");
-			response.sendRedirect("visu_disciplina.jsp?erro=1");
+			request.getRequestDispatcher("visu_curso.jsp").forward(request, response);
 		}
 		
 		
@@ -535,6 +526,70 @@ public class controller extends HttpServlet {
 		
 		ListaCursos.SALVA("Cursos", caminhoBase, a->true, a->a.getMatricCurso()+";"+a.getCodDisciplina()+";"+a.getNota1()+";"+a.getNota2());
 		
+	}
+	public void Carregar() {
+		//jeito novo de montar listas - metodo generico
+		ListaAlunos.preencherSeVazia(CaminhoAlunos, linha->
+		{
+			String[] dados = linha.split(";");
+			
+			if(dados.length == 3) 
+			{
+				
+				int cod = Integer.parseInt(dados[0]);
+				String nome = dados[1];
+				int idade = Integer.parseInt(dados[2]);
+				if(ListaAlunos.getIndice(a->a.getMatriculaAluno()==cod) == -1) {
+					return new Aluno(cod,nome,idade);
+				}else
+				{
+					System.out.println("Classe:ListaDuplamenteEncadeada, Metodo:PreencherDeArquivo, Tentativa de inserção de dados com dupla Identificação.(Aluno)");
+				}
+			}
+			
+			return null;
+		});
+		
+		ListaDisciplinas.preencherSeVazia(CaminhoDisciplinas, linha->
+		{
+			String[] dados = linha.split(";");
+			
+			if(dados.length == 3) 
+			{
+				int cod = Integer.parseInt(dados[0]);
+				String nome = dados[1];
+				float notaCorte = Float.parseFloat(dados[2]);
+				if(ListaDisciplinas.getIndice(a->a.getCodDisciplina()==cod) == -1) {
+					return new Disciplina(cod,nome,notaCorte);	
+				}else
+				{
+					System.out.println("Classe:ListaDuplamenteEncadeada, Metodo:PreencherDeArquivo, Tentativa de inserção de dados com dupla Identificação.(Disciplian)");
+				}
+				
+			}
+			return null;
+		});
+		
+		ListaCursos.preencherSeVazia(CaminhoCursos, linha ->
+		{
+			String[] dados = linha.split(";");
+			
+			int mat = Integer.parseInt(dados[0]);
+			int cod = Integer.parseInt(dados[1]);
+			float n1 = Float.parseFloat(dados[2]);
+			float n2 = Float.parseFloat(dados[3]);
+			
+			if(ListaAlunos.getIndice(a->a.getMatriculaAluno()==mat) != -1
+				&& ListaDisciplinas.getIndice(a->a.getCodDisciplina()==cod)!= -1) 
+			{
+				return new Curso(mat,cod,n1,n2);
+				
+			}else
+			{
+				System.out.println("Classe:ListaDuplamenteEncadeada, Metodo:PreencherDeArquivo, Tentativa de inserção de dados com dupla Identificação.(Curso)");
+			}
+			return null;
+		});
 	}
 	
 	

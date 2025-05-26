@@ -1,3 +1,4 @@
+100;jose;12
 10001;João Silva;20
 10002;Maria Oliveira;22
 10003;Pedro Santos;21
@@ -19,3 +20,5 @@
 10019;Tatiane Ferreira;22
 10020;Leonardo Santos;23
 1;jose;21
+22;Augusto;22
+65;josesvaldo;10

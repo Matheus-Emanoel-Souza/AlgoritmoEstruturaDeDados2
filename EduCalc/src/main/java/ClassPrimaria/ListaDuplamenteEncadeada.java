@@ -1,8 +1,10 @@
 package ClassPrimaria;
 
 import java.util.function.Predicate;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.function.Function;
@@ -177,26 +179,26 @@ public class ListaDuplamenteEncadeada<T> {
 	}
 
 	public String gerarRelatorio(
-	        ListaDuplamenteEncadeada<T> lista,
 	        Predicate<T> filtro,
 	        Function<T, String> formato) {
-	    
+
 	    StringBuilder relatorio = new StringBuilder();
-	    No<T> no = lista.getHead();
+	    No<T> no = this.getHead();
 
 	    while (no != null) {
 	        T elemento = no.getConteudo();
-	        
+
 	        if (filtro.test(elemento)) {
 	            relatorio.append(formato.apply(elemento));
 	            relatorio.append("\n-------------------------------------------------------------\n");
 	        }
-	        
+
 	        no = no.getProximo();
 	    }
 
 	    return relatorio.toString();
 	}
+
 	
 	public void SALVA(
 			String nomeArquivo,
@@ -254,4 +256,32 @@ public class ListaDuplamenteEncadeada<T> {
 		}
 		return null;
 	}
+	
+	public void preencherDeArquivo(String caminho, Function<String, T> funcaoCriadora) {
+	    try (BufferedReader br = new BufferedReader(new FileReader(caminho))) {
+	        String linha;
+	        while ((linha = br.readLine()) != null) {
+	            T objeto = funcaoCriadora.apply(linha);
+	            if (objeto != null) {
+	                addFirst(objeto);
+	            }
+	        }
+	        System.out.println("Arquivo carregado com sucesso.");
+	    } catch (IOException e) {
+	        System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	}
+	
+	public void preencherSeVazia(String caminho, Function<String, T> funcaoCriadora) {
+	    if (getTamanho() == 0) {
+	        preencherDeArquivo(caminho, funcaoCriadora);
+	    } else {
+	        System.out.println("Lista já está carregada. Nenhuma ação foi realizada.");
+	    }
+	}
+
+	
+
+
 }

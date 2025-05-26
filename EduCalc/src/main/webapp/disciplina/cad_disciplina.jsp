@@ -39,7 +39,7 @@
                 <input 
                     type="text" 
                     name="cod_disciplina" 
-                    placeholder="cod_disciplina" 
+                    placeholder="código" 
                     class="caixa2" 
                     maxlength="6" 
                     required 
@@ -52,7 +52,7 @@
                 <input 
                     type="text" 
                     name="media_necessaria" 
-                    placeholder="Media Necessaria" 
+                    placeholder="Nota" 
                     class="caixa2" 
                     maxlength="2" 
                     required 
@@ -62,8 +62,8 @@
             </div>
             
             <div class="rodape">
-                <input type="submit" value="Adicionar" class="botao1">
-                <a href="disciplina.jsp" class="botao voltar">Voltar</a>
+             	<a href="disciplina.jsp" class="botao voltar">Voltar</a>
+                <input type="submit" value="Adicionar" class="botao salvar">
             </div>
             
         </form>

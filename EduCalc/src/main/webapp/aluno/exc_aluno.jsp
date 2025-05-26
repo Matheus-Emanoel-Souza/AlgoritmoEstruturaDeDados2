@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-        <img src="<%=request.getContextPath()%>/imagens/9883213.png" alt="Logo">
+        <img src="<%=request.getContextPath()%>/imagens/Excluir_Aluno.jpg" alt="Logo">
         <h1>Excluir</h1>
 
         <div class="mensagem">
@@ -40,7 +40,7 @@
             </div>  
             <div class="rodape">
         		<a href="aluno.jsp" class="botao voltar">Voltar</a>
-                <input type="submit" value="Excluir" class="botao1">
+                <input type="submit" value="Excluir" class="botao salvar">
                 
          </div>         
         </form>

@@ -15,7 +15,7 @@
 <a href="cad_cursos.jsp" class="botao1">Cadastrar</a><br>
 <a href="exc_curso.jsp" class="botao1">Excluir</a><br>
 <a href="visu_curso.jsp" class="botao1">Visualizar</a><br>
-<a href="../Inicio.jsp" class="botao voltar">Voltar ao menu</a>
+<a href="../Inicio.jsp" class="botao voltar">Voltar</a>
 
 </div>
 </body>

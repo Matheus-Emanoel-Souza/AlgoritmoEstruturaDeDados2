@@ -1,4 +1,4 @@
-12;Algoritmo e estrutura de dados;10.0
-201;Estruturas de Dados;6.0
-304;Eletrônica Analógica;5.5
 601;Segurança da Informação;7.0
+304;Eletrônica Analógica;5.5
+201;Estruturas de Dados;6.0
+1;Mecânica dos Solidos;5.0
