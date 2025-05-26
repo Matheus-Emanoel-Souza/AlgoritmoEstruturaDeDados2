@@ -17,10 +17,11 @@
   	<a href="aluno" class="botao1">Aluno</a><br>
   	<a href="disciplina" class="botao1">Disciplina</a><br>
   	<a href="curso" class="botao1">Curso</a><br>
-  	<a href="relatorio" class="botao1">Montar Relatório</a>
-	<a href="salvar" class="botao1">SALVAR!!</a>
-
+  	<!--  
+  	<a href="relatorio" class="botao1">Relatório</a>
+  	<a href="Sair" class="botao voltar">Sair</a>
+  	-->
+  	
 </div>
-
 </body>
 </html>

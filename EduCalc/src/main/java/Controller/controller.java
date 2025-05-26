@@ -22,21 +22,24 @@ import ClassPrimaria.ListaDuplamenteEncadeada;
 @WebServlet({ 
 	//controladores
     "/controller", 
-    "/main", 
+    "/main",
+    
     //camadas 1
     "/aluno",
     "/disciplina",
     "/curso", 
-    "/relatorio",
-    "/salvar",  
+    "/sair",  
+    
     //Camadas de criação
     "/cria_aluno",
     "/cria_disciplina",
     "/cria_curso",
+    
     //camadas de exclusão
     "/excluir_aluno",
     "/excluir_disciplina",
     "/excluir_curso",
+    
     //camadas de busca
     "/aluno/buscar_aluno",
     "/disciplina/buscar_disciplina",
@@ -59,9 +62,6 @@ public class controller extends HttpServlet {
 	String CaminhoDisciplinas = caminhoBase + "Disciplinas.txt";
 	String CaminhoCursos = caminhoBase + "Cursos.txt";
 	String CaminhoRelatorio = caminhoBase + "Relatorio.txt";
-
-
-	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -92,9 +92,12 @@ public class controller extends HttpServlet {
 		if(action.equals("/curso/buscar_curso")) {
 			Visualiza_curso(request, response);
 		}
-		if(action.equals("/salvar")) {
-	    	salvar_listas(request,response);
-	    }
+		/*Valhei miseralvelmente!!!
+		 * if(action.equals("/sair")) { Fechar(request, response); }
+		 */
+		/*Posso Excluir!!
+		 * if(action.equals("/salvar")) { salvar_listas(request,response); }
+		 */
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -124,10 +127,9 @@ public class controller extends HttpServlet {
 	    
 	}
 
-	@SuppressWarnings({ "static-access" })
 	protected void inicio(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {		
-		System.out.println("Entrou no metodo inicio!!");
+		System.out.println("Entrou no metodo: 'inicio' ");
 		//Carregar as listas.
 		if(ListaAlunos.getTamanho() == 0 && ListaDisciplinas.getTamanho() ==0 && ListaCursos.getTamanho() == 0) {
 			PreencheLista.MontaListaAluno(ListaAlunos, CaminhoAlunos);
@@ -149,12 +151,15 @@ public class controller extends HttpServlet {
 	protected void aba_aluno(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.sendRedirect("aluno/aluno.jsp");
 	}
+	
 	protected void aba_disciplina(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.sendRedirect("disciplina/disciplina.jsp");
 	}
+	
 	protected void aba_curso(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.sendRedirect("curso/curso.jsp");
 	}
+	
 	//ABAS DE CRUD
 	protected void cria_aluno(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
@@ -172,6 +177,9 @@ public class controller extends HttpServlet {
 		
 		if(ListaAlunos.getIndice(a -> a.getMatriculaAluno() == novoAluno.getMatriculaAluno()) == -1) {
 			ListaAlunos.add(novoAluno);
+			
+			ListaAlunos.SALVA("Alunos", caminhoBase, a->true, a->a.getMatriculaAluno()+";"+a.getNome()+";"+a.getIdade());
+			
 			System.out.println(novoAluno.getNome()+" cadastrado com sucesso!");
 			System.out.println("Matricula:"+novoAluno.getMatriculaAluno());
 			request.setAttribute("mensagem", novoAluno.getNome()+"cadastrado com sucesso!");
@@ -183,6 +191,7 @@ public class controller extends HttpServlet {
 			response.sendRedirect("aluno/cad_aluno.jsp?erro=1");
 		}
 	}
+	
 	protected void cria_disciplina(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
 		
@@ -200,6 +209,10 @@ public class controller extends HttpServlet {
 		//novadisciplina.getIndice(novadisciplina, ListaDisciplinas) == -1
 		if(ListaDisciplinas.getIndice(a -> a.getCodDisciplina() == novadisciplina.getCodDisciplina()) == -1 ) {
 			ListaDisciplinas.add(novadisciplina);
+			
+			ListaDisciplinas.SALVA("Disciplinas", caminhoBase, a->true, a->a.getCodDisciplina()+";"+a.getNomeDisciplina()+";"+a.getNotaMinima());
+			
+			
 			System.out.println("Disciplina:"+novadisciplina.getNomeDisciplina()+" Inserida com sucesso!!");
 			request.setAttribute("mensagem", "Disciplina:"+novadisciplina.getNomeDisciplina()+" Inserida com sucesso!!");
 			response.sendRedirect("disciplina/cad_disciplina.jsp?sucesso=1");
@@ -212,6 +225,7 @@ public class controller extends HttpServlet {
 		}
 		
 	}
+	
 	protected void cria_curso(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
 		
@@ -234,6 +248,10 @@ public class controller extends HttpServlet {
 			
 			Curso curso = new Curso(matricula_aluno,codigo_disciplina,Nota1,Nota2);
 			ListaCursos.add(curso);
+			
+			ListaCursos.SALVA("Cursos", caminhoBase, a->true, a->a.getMatricCurso()+";"+a.getCodDisciplina()+";"+a.getNota1()+";"+a.getNota2());
+			
+			
 			System.out.println("Curso cadastrado com sucesso!!!");
 			request.setAttribute("mensagem", "Curso Inserida com sucesso!!");
 			response.sendRedirect("curso/cad_cursos.jsp?sucesso=1");
@@ -263,6 +281,7 @@ public class controller extends HttpServlet {
 			
 		}			
 	}		
+	
 	protected void exclui_aluno(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
 		Aluno excluido = new Aluno();
@@ -274,6 +293,10 @@ public class controller extends HttpServlet {
 		//excluido.IndiceAluno(excluido, ListaAlunos) != -1
 		if(ListaAlunos.getIndice(a->a.getMatriculaAluno() == excluido.getMatriculaAluno()) != -1) {
 			ListaAlunos.remover(a->a.getMatriculaAluno() == excluido.getMatriculaAluno());
+			
+			ListaAlunos.SALVA("Alunos", caminhoBase, a->true, a->a.getMatriculaAluno()+";"+a.getNome()+";"+a.getIdade());
+			
+			
 			System.out.println("Aluno Removido com sucesso!");
 			request.setAttribute("mensagem", "Aluno Removido com sucesso!");
 			response.sendRedirect("aluno/exc_aluno.jsp?sucesso=1");
@@ -282,7 +305,9 @@ public class controller extends HttpServlet {
 			System.out.println("Erro! Matricula Não cadastrada!");
 			request.setAttribute("erro", "Matrícula Não cadastrada!");
 			response.sendRedirect("aluno/exc_aluno.jsp?erro=1");
-		}	
+		}
+		
+		
 	}
 	protected void exclui_disciplina(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
@@ -300,6 +325,8 @@ public class controller extends HttpServlet {
 			if(ListaDisciplinas.getIndice(a -> a.getCodDisciplina() == cod_dici) == -1) {
 				//disci.RemoverDisciplina(cod_dici, ListaDisciplinas);
 				ListaDisciplinas.remover(a->a.getCodDisciplina() == cod_dici);
+				
+				ListaDisciplinas.SALVA("Disciplinas", caminhoBase, a->true, a->a.getCodDisciplina()+";"+a.getNomeDisciplina()+";"+a.getNotaMinima());				
 			
 			System.out.println("Disciplina Removido com sucesso!");
 			request.setAttribute("mensagem", "Disciplina Removido com sucesso!");
@@ -320,6 +347,11 @@ public class controller extends HttpServlet {
 		
 		if(indice != -1) {
 			ListaCursos.remover(a->a.getCodDisciplina()==cod_dic && a.getMatricCurso()==cod_mat);
+			
+			ListaAlunos.SALVA("Alunos", caminhoBase, a->true, a->a.getMatriculaAluno()+";"+a.getNome()+";"+a.getIdade());
+			ListaDisciplinas.SALVA("Disciplinas", caminhoBase, a->true, a->a.getCodDisciplina()+";"+a.getNomeDisciplina()+";"+a.getNotaMinima());
+			ListaCursos.SALVA("Cursos", caminhoBase, a->true, a->a.getMatricCurso()+";"+a.getCodDisciplina()+";"+a.getNota1()+";"+a.getNota2());
+			
 			response.sendRedirect("curso/exc_cursos.jsp?sucesso=1");
 		}else
 		{
@@ -476,13 +508,34 @@ public class controller extends HttpServlet {
 		
 	}
 	//salvar_listas
-	protected void salvar_listas(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-	IOException {				
-		System.out.println("Entrou no metodo salvar listas!!!");
+	/* Estava complicando as coisas fáceis como de costume!
+	 * protected void salvar_listas(HttpServletRequest request, HttpServletResponse
+	 * response) throws ServletException, IOException {
+	 * System.out.println("Entrou no metodo salvar listas!!!");
+	 * ListaAlunos.SALVA("Alunos", caminhoBase, a->true,
+	 * a->a.getMatriculaAluno()+";"+a.getNome()+";"+a.getIdade());
+	 * 
+	 * ListaDisciplinas.SALVA("Disciplinas", caminhoBase, a->true,
+	 * a->a.getCodDisciplina()+";"+a.getNomeDisciplina()+";"+a.getNotaMinima());
+	 * 
+	 * ListaCursos.SALVA("Cursos", caminhoBase, a->true,
+	 * a->a.getMatricCurso()+";"+a.getCodDisciplina()+";"+a.getNota1()+";"+a.
+	 * getNota2());
+	 * 
+	 * 
+	 * response.sendRedirect("Inicio.jsp");
+	 * 
+	 * }
+	 */
+	
+	public void salva() {
 		ListaAlunos.SALVA("Alunos", caminhoBase, a->true, a->a.getMatriculaAluno()+";"+a.getNome()+";"+a.getIdade());
+		
 		ListaDisciplinas.SALVA("Disciplinas", caminhoBase, a->true, a->a.getCodDisciplina()+";"+a.getNomeDisciplina()+";"+a.getNotaMinima());
+		
 		ListaCursos.SALVA("Cursos", caminhoBase, a->true, a->a.getMatricCurso()+";"+a.getCodDisciplina()+";"+a.getNota1()+";"+a.getNota2());
-		response.sendRedirect("Inicio.jsp");					 
-
+		
 	}
-	}
+	
+	
+}

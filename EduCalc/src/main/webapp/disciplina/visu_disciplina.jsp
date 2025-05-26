@@ -52,7 +52,7 @@
                 <p><strong>Nome:</strong> <%= disciplina.getNomeDisciplina() %></p>
                 <p><strong>Média necessária:</strong> <%= disciplina.getNotaMinima() %></p>
 
-                <p><strong>Cursos:</strong></p>
+                <p><strong>Alunos matriculados:</strong></p>
 				<pre><%= request.getAttribute("Alunoscursos") %></pre>
             </div>
 
