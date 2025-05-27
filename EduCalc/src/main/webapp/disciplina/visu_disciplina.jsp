@@ -1,69 +1,74 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="model.Aluno, model.Curso,model.Disciplina, ClassPrimaria.ListaDuplamenteEncadeada" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <%@ page import="model.Aluno, model.Curso,model.Disciplina, ClassPrimaria.ListaDuplamenteEncadeada" %>
 
-<%
-    Disciplina disciplina = (Disciplina) request.getAttribute("Disciplina");
-    
-    
-%>
+        <% Disciplina disciplina=(Disciplina) request.getAttribute("Disciplina"); %>
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Buscar Disciplina</title>
-    
-    <link rel="stylesheet" href="../style.css">
-</head>
-<body>
+            <!DOCTYPE html>
+            <html lang="pt-br">
 
-    <div class="container">
-    <img src="<%=request.getContextPath()%>/imagens/Visualizar.jpg" alt="Logo">
-    <div class="mensagem">
-<%--             <% if (request.getParameter("sucesso") != null) { %> --%>
-<!--                 <p class="sucesso">✅ Aluno excluído com sucesso!</p> -->
-<%--             <% } %> --%>
+            <head>
+                <meta charset="UTF-8">
+                <title>Buscar Disciplina</title>
 
-            <% if (request.getParameter("erro") != null) { %>
-                <p class="erro">❌ Erro: Matrícula não encontrada!</p>
-            <% } %>
-        </div>
-        <h1>Buscar Disciplina</h1>
+                <link rel="stylesheet" href="../style.css">
+            </head>
 
-        <form class="form-group" action="buscar_disciplina" method="get">
-            <input 
-                type="text" 
-                name="cod_disciplina" 
-                placeholder="Código"
-                class="caixa1" 
-                required
-            >
-            <div class="rodape">
-            <a href="disciplina.jsp" class="botao voltar">Voltar</a>
-            <input type="submit" value="Buscar" class="botao salvar">
-            
-            </div>            
-        </form>
+            <body>
 
-        <% if (disciplina != null) { %>
-        
-            <div class="dados-disciplina">
-                <h2>Informações da Disciplina</h2>
-                <p><strong>Código:</strong> <%= disciplina.getCodDisciplina() %></p>
-                <p><strong>Nome:</strong> <%= disciplina.getNomeDisciplina() %></p>
-                <p><strong>Média necessária:</strong> <%= disciplina.getNotaMinima() %></p>
+                <div class="container">
+                    <div class="imagem">
+                        <img src="../imagens/paginainicial.png" alt="Imagem">
+                    </div>
+                    <div class="conteudo">
+                        <div class="mensagem">
+                            <%-- <% if (request.getParameter("sucesso") !=null) { %> --%>
+                                <!--                 <p class="sucesso">✅ Aluno excluído com sucesso!</p> -->
+                                <%-- <% } %> --%>
 
-                <p><strong>Alunos matriculados:</strong></p>
-				<pre><%= request.getAttribute("Alunoscursos") %></pre>
-            </div>
+                                    <% if (request.getParameter("erro") !=null) { %>
+                                        <p class="erro">❌ Erro: Matrícula não encontrada!</p>
+                                        <% } %>
+                        </div>
+                        <h1>Buscar disciplina</h1>
 
-        <% } else if (request.getParameter("Cod_disciplina") != null) { %>
+                        <form action="buscar_disciplina" method="get">
+                            <input type="text" name="cod_disciplina" placeholder="Código da disciplina" class="caixa1"
+                                required>
+                            <div class="rodape">
+                                <a href="disciplina.jsp" class="botao voltar">Voltar</a>
+                                <input type="submit" value="Buscar" class="botao1">
 
-            <p style="color:red;">❌ Disciplina não encontrado!</p>
+                            </div>
+                        </form>
 
-        <% } %>
+                        <% if (disciplina !=null) { %>
 
-    </div>
+                            <div class="dados-disciplina">
+                                <h2>Informações da Disciplina</h2>
+                                <p><strong>Código:</strong>
+                                    <%= disciplina.getCodDisciplina() %>
+                                </p>
+                                <p><strong>Nome:</strong>
+                                    <%= disciplina.getNomeDisciplina() %>
+                                </p>
+                                <p><strong>Média necessária:</strong>
+                                    <%= disciplina.getNotaMinima() %>
+                                </p>
 
-</body>
-</html>
+                                <p><strong>Cursos:</strong></p>
+                                <pre><%= request.getAttribute("Alunoscursos") %></pre>
+                            </div>
+
+                            <% } else if (request.getParameter("Cod_disciplina") !=null) { %>
+
+                                <p style="color:red;">❌ Disciplina não encontrado!</p>
+
+                                <% } %>
+
+                    </div>
+                </div>
+
+
+            </body>
+
+            </html>

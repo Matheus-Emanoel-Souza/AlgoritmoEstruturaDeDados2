@@ -1,22 +1,25 @@
-1;jose;21
-10020;Leonardo Santos;23
-10019;Tatiane Ferreira;22
-10018;Gustavo Silva;24
-10017;Daniela Lima;20
-10016;Camila Barbosa;23
-10015;André Mendes;22
-10014;Juliana Oliveira;21
-10013;Fernando Costa;23
-10012;Cláudia Gomes;24
-10011;Rafael Ferreira;25
-10010;Gabriela Martins;22
-10009;Ricardo Rocha;23
-10008;Fernanda Alves;21
-10007;Lucas Lima;20
-10006;Beatriz Costa;22
-10005;Carlos Pereira;24
-10004;Ana Souza;23
-10003;Pedro Santos;21
-10002;Maria Oliveira;22
-10001;João Silva;20
 100;jose;12
+10001;João Silva;20
+10002;Maria Oliveira;22
+10003;Pedro Santos;21
+10004;Ana Souza;23
+10005;Carlos Pereira;24
+10006;Beatriz Costa;22
+10007;Lucas Lima;20
+10008;Fernanda Alves;21
+10009;Ricardo Rocha;23
+10010;Gabriela Martins;22
+10011;Rafael Ferreira;25
+10012;Cláudia Gomes;24
+10013;Fernando Costa;23
+10014;Juliana Oliveira;21
+10015;André Mendes;22
+10016;Camila Barbosa;23
+10017;Daniela Lima;20
+10018;Gustavo Silva;24
+10019;Tatiane Ferreira;22
+10020;Leonardo Santos;23
+1;jose;21
+22;Augusto;22
+65;josesvaldo;10
+8888;Alex;22

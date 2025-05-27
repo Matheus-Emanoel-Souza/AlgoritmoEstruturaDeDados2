@@ -1,70 +1,70 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Excluir Aluno</title>
-    <link rel="icon" href="<%=request.getContextPath()%>/imagens/caderno_com_x.jpg">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
-</head>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <!DOCTYPE html>
+    <html lang="pt-br">
 
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Excluir Aluno</title>
+        <link rel="icon" href="<%=request.getContextPath()%>/imagens/9883213.png">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
+    </head>
 
-    <div class="container">
-        <img src="<%=request.getContextPath()%>/imagens/caderno_com_x.jpg" alt="Logo">
-        <h1>Excluir</h1>
+    <body>
 
-        <div class="mensagem">
-            <% if (request.getParameter("sucesso") != null) { %>
-                <p class="sucesso">✅ Disciplina excluído com sucesso!</p>
-            <% } %>
+        <div class="container">
+            <div class="imagem">
+                <img src="../imagens/paginainicial.png" alt="Imagem">
+            </div>
+            <div class="conteudo">
+                <h1>Excluir</h1>
 
-            <% if (request.getParameter("erro") != null) { %>
-                <p class="erro">❌ Erro: Disciplina não encontrada!</p>
-            <% } %>
+                <div class="mensagem">
+                    <% if (request.getParameter("sucesso") !=null) { %>
+                        <p class="sucesso">✅ Disciplina excluído com sucesso!</p>
+                        <% } %>
+
+                            <% if (request.getParameter("erro") !=null) { %>
+                                <p class="erro">❌ Erro: Disciplina não encontrada!</p>
+                                <% } %>
+                </div>
+
+                <form name="frmDisciplina" action="<%=request.getContextPath()%>excluir_disciplina" method="post">
+                    <div class="form-group">
+                        <input type="text" name="cod_disciplina" placeholder="Matrícula" class="caixa2" maxlength="6"
+                            required oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric">
+                    </div>
+
+                    <div class="rodape">
+                        <a href="disciplina.jsp" class="botao voltar">Voltar</a>
+                        <input type="submit" value="Excluir" class="excluir">
+                    </div>
+                </form>
+            </div>
         </div>
 
-        <form  class="form-group" name="frmDisciplina" action="<%=request.getContextPath()%>/excluir_disciplina" method="post">
-                <input 
-                    type="text" 
-                    name="cod_disciplina" 
-                    placeholder="Matrícula" 
-                    class="caixa2" 
-                    maxlength="6" 
-                    required 
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                    inputmode="numeric"
-                >
 
-            <div class="rodape">
-                <a href="disciplina.jsp" class="botao voltar">Voltar</a>
-                <input type="submit" value="Excluir" class="botao salvar">              
-            </div>
-        </form>
-    </div>
+        <%-- <script src="<%=request.getContextPath()%>/scripts/vali_aluno.js"></script> --%>
+            <script>
+                window.addEventListener("DOMContentLoaded", () => {
+                    const params = new URLSearchParams(window.location.search);
 
+                    if (params.has("erro")) {
+                        const erro = document.createElement("p");
+                        erro.textContent = "❌ Erro: Matrícula não cadastrada!";
+                        erro.style.color = "red";
+                        erro.style.fontWeight = "bold";
+                        document.querySelector(".container_cantoesquerdo").prepend(erro);
+                    }
 
-<%-- <script src="<%=request.getContextPath()%>/scripts/vali_aluno.js"></script>  --%>
-    <script>
-  window.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(window.location.search);
+                    if (params.has("sucesso")) {
+                        const sucesso = document.createElement("p");
+                        sucesso.textContent = "✅ Aluno removido com sucesso!";
+                        sucesso.style.color = "green";
+                        sucesso.style.fontWeight = "bold";
+                        document.querySelector(".container_cantoesquerdo").prepend(sucesso);
+                    }
+                });
+            </script>
+    </body>
 
-    if (params.has("erro")) {
-      const erro = document.createElement("p");
-      erro.textContent = "❌ Erro: Matrícula não cadastrada!";
-      erro.style.color = "red";
-      erro.style.fontWeight = "bold";
-      document.querySelector(".container_cantoesquerdo").prepend(erro);
-    }
-
-    if (params.has("sucesso")) {
-      const sucesso = document.createElement("p");
-      sucesso.textContent = "✅ Aluno removido com sucesso!";
-      sucesso.style.color = "green";
-      sucesso.style.fontWeight = "bold";
-      document.querySelector(".container_cantoesquerdo").prepend(sucesso);
-    }
-  });
-</script>
-</body>
-</html>
+    </html>
