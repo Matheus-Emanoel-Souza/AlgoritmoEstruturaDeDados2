@@ -59,7 +59,7 @@ body {
 
 .imagem img {
   width: 100%;
-  height: auto;
+  height: 300px;
   border-radius: 8px;
   background-color: #fff;
 }
