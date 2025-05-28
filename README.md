@@ -38,4 +38,4 @@ Clique com o botão direito no servidor e selecione Start.
 ### 👨‍💻 Desenvolvido por
 Matheus Emanoel G. Souza.        
 Renan Teles Dos Santos.        
-Valentyna De Souza.
+Valentyna De Sousa.
