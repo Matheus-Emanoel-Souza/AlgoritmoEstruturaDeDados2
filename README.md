@@ -36,4 +36,6 @@ Adicione seu projeto na lista da direita (Configured) e clique em Finish.
 Clique com o botão direito no servidor e selecione Start.
 
 ### 👨‍💻 Desenvolvido por
-Matheus Emanoel G. Souza
+Matheus Emanoel G. Souza.        
+Renan Teles Dos Santos.        
+Valentyna De Souza.
